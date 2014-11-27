@@ -1,0 +1,60 @@
+#Pumgrana_Plugin #PG_ListLinks li{
+	margin-right: 5px;
+	margin-left: 5px;
+	border-bottom: 1px solid #d8d9da;
+}
+
+#Pumgrana_Plugin #PG_ListLinks li:hover {
+	background-color: #d8d9da;
+}
+
+#PG_LA_Title{
+	color: #636363;
+}
+
+#Pumgrana_Plugin #PG_ListLinks {
+	margin-left: 0px;
+}
+
+#Pumgrana_Plugin {
+	background-color: #f9f9f9;
+	font-family: PT Sans;
+	margin: 0px;
+}
+
+#Pumgrana_Plugin a {
+	color: #636363;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+#PG_RefreshButton {
+	margin: 0px;
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+
+.PG_title_text_la {	
+	font-size: 1.1em;
+}
+
+.PG_text_la {	
+	font-size: 0.8em;
+}
+
+.PG_EachLink {
+	margin: 0px;
+}
+#PG_SearchArticles {
+	
+}
+
+.Pumgrana_ResearchDiv {
+	margin: 5px;
+}
+
+#ImageLoading {
+	position : absolute;
+	top: 50%;
+	right: 42%;
+}
