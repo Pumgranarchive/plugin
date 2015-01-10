@@ -13,9 +13,8 @@
 	"content_scripts": [
     {
       "matches": ["<all_urls>"],
-	  "css": ["jquery-ui.min.css"],
-      "js": ["jquery-1.9.1.js", "jquery-ui.min.js", "Insert_Extension.js"],
-	  "run_at": "document_start"
+	  "css": ["css/Plugin.css"],
+      "js": ["jquery-1.9.1.js", "Insert_Extension.js"]
     }
   ],
 	
@@ -31,6 +30,7 @@
   },
   
   "web_accessible_resources": [
-	"Loading_Plugin.gif"
+    "Loading_Plugin.gif",
+    "RefreshButtonIcon.png"
   ]
 }

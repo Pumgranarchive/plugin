@@ -14,5 +14,15 @@ chrome.runtime.onMessage.addListener(
 			sendResponse(items);
 		});
 	}
+	else if (request.method === 'DisplayNbLinks')
+	{
+		var NbLinks = request.data.length;
+		if (NbLinks >= 100)
+			chrome.browserAction.setBadgeText({text: request.data.length.toString() + '+'});
+		else
+			chrome.browserAction.setBadgeText({text: request.data.length.toString()});
+
+		sendResponse();
+	}
 	return true;
 });
