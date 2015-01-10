@@ -74,7 +74,7 @@ function getLinkedUrl(url)
 	$('#PG_RefreshButton').prop('disabled', true);
 	$('#PG_DisplayError').css('display', 'none');
 	$('#ImageLoading').css('display', 'inline-block');
-	
+
 	var url = PG_UrlAPI_ToUse + '/api/link/list_from_content/' + encodeURIComponent(PG_CurrentUrlVisited);
 	$.get(url, function (Json_links)
 		{
@@ -108,7 +108,7 @@ function setPluginCss()
 	Pumgrana_Plugin.css('height', '100%');
 	Pumgrana_Plugin.css('display', 'none');
 	Pumgrana_Plugin.css('overflow', 'auto');
-	
+
 	$('#ImageLoading').css('display', 'inline-block');
 
 	//$('#PG_RefreshButton').css('background-image', 'url("' + chrome.extension.getURL('RefreshButtonIcon.png') + '")');
@@ -124,7 +124,7 @@ function setWebPageCss()
 	Web_Page.css('transform-origin', '0 0');
 	Web_Page.css('transition-timing-function', 'ease-in-out');
 	Web_Page.css('transition-duration', PG_AnimationTime);
-	
+
 	Web_Page.on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function(event){
 		if(event.target === event.currentTarget) /* The callback will be fired for every child element that transits as well. */
 		{
@@ -132,7 +132,7 @@ function setWebPageCss()
 			{
 				togglePlugin();
 			}
-		} 
+		}
 	});
 }
 
