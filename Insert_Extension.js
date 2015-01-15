@@ -1,6 +1,6 @@
 var PG_AnimationTime = '250ms';
 var PG_scale = 0.8;
-var PG_UrlAPI_ToUse = 'http://b01.pumgrana.com';
+var PG_UrlAPI_ToUse = 'http://54.149.198.164';
 var PG_CurrentUrlVisited;
 var PG_NbCharSummaryDisplayed = 123;
 var PG_EaseString = 'easeInOutQuart';
@@ -137,6 +137,7 @@ function setWebPageCss()
 }
 
 $(document).ready(function () {
+	alert('Injected!');
 PG_CurrentUrlVisited = window.location.href;
 if ($('#Web_Page').length === 0)
 {
@@ -150,7 +151,7 @@ if ($('#Web_Page').length === 0)
 									<button id="PG_RefreshButton" type="button" aria-label="Right Align" class="PG_Button" style="background-image: url(' + PG_URLRefreshPage + ');">\
 										</button>\
 								</div>\
-									<button id="PG_ToWebGUI" type="button" aria-label="Right Align" class="PG_Button" ><img src="https://cdn2.iconfinder.com/data/icons/3_Minicons-Free-_Pack/46/road.png" /></button>\
+									<button id="PG_ToWebGUI" type="button" aria-label="Right Align" class="PG_Button" ><img src="' + chrome.extension.getURL('StormToWebGui.png') + '" /></button>\
 								<img id="ImageLoading" alt="Loading Data" src="' + chrome.extension.getURL('Loading_Plugin.gif') + '"/>\
 								<h3 id="PG_DisplayError">Failed to get linked articles</h3>\
 								<ul id="PG_ListLinks">\

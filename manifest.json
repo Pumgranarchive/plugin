@@ -12,7 +12,8 @@
 	
 	"content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["http://*/*"],
+      "exclude_matches": ["*://mail.google.com/*", "https://*.google.com/"],
 	  "css": ["css/Plugin.css"],
       "js": ["jquery-1.9.1.js", "Insert_Extension.js"]
     }
@@ -21,7 +22,7 @@
 	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 	
 	 "permissions": [ "tabs",
-    "https://*/*","http://*/*", "activeTab", "storage"
+    "activeTab", "storage"
 	],
 	
 	"browser_action": {
@@ -31,6 +32,7 @@
   
   "web_accessible_resources": [
     "Loading_Plugin.gif",
-    "RefreshButtonIcon.png"
+    "RefreshButtonIcon.png",
+    "StormToWebGui.png"
   ]
 }
