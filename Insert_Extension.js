@@ -114,7 +114,7 @@ function setPluginCss()
 	//$('#PG_RefreshButton').css('background-image', 'url("' + chrome.extension.getURL('RefreshButtonIcon.png') + '")');
 
 	$('#PG_ToWebGUI').click(function() {
-		$(location).attr('href','http://b01.pumgrana.com/view/' + encodeURIComponent(window.location.href));
+		$(location).attr('href',PG_UrlAPI_ToUse + '/view/' + encodeURIComponent(window.location.href));
 	});
 }
 
@@ -137,7 +137,6 @@ function setWebPageCss()
 }
 
 $(document).ready(function () {
-	alert('Injected!');
 PG_CurrentUrlVisited = window.location.href;
 if ($('#Web_Page').length === 0)
 {
