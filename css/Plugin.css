@@ -1,7 +1,11 @@
 #Pumgrana_Plugin #PG_ListLinks li{
 	margin-right: 5px;
 	margin-left: 5px;
-	border-bottom: 1px solid #d8d9da;
+}
+
+#Pumgrana_Plugin #PG_ListLinks li:hover {
+    background-color: #d8d9da;
+    border-radius: 5px;
 }
 
 #PG_DisplayError {
@@ -12,12 +16,9 @@
 	text-align: center;
 }
 
-#Pumgrana_Plugin #PG_ListLinks li:hover {
-	background-color: #d8d9da;
-}
-
 #Pumgrana_Plugin #PG_ListLinks {
 	margin-left: 0px;
+    overflow-x: hidden;
 }
 
 #Pumgrana_Plugin {
@@ -39,6 +40,12 @@
 
 .PG_text_la {
 	font-size: 0.8em;
+    line-height: 1.2em;
+}
+
+.PG_sep {
+    border-bottom: 1px solid #d8d9da;
+    margin: 10px;
 }
 
 .PG_EachLink {
@@ -113,4 +120,9 @@
 	border-radius: 5px;
 	float: right;
 	margin-top: -32px;
+}
+
+.PG_Uri {
+    overflow-x: hidden;
+    color: red;
 }

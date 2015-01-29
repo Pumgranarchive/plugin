@@ -1,6 +1,6 @@
 var PG_AnimationTime = '250ms';
 var PG_scale = 0.8;
-var PG_UrlAPI_ToUse = 'http://54.149.198.164';
+var PG_UrlAPI_ToUse = 'http://54.69.150.141';
 var PG_CurrentUrlVisited;
 var PG_NbCharSummaryDisplayed = 123;
 var PG_EaseString = 'easeInOutQuart';
@@ -47,7 +47,7 @@ function BuildPluginPage(data)
 			{
 				each.content_summary = each.content_summary.substring(0, PG_NbCharSummaryDisplayed);
 			}
-			htmlToAdd += "<li><a class=\"PG_EachLink\" href=\"" + each.content_uri + "\" target=\"blank_\">" + '<p class="PG_title_text_la"><strong>' + each.content_title + '</strong><p class="PG_text_la">' + each.content_summary + '</p>' + "</a></li>";
+			htmlToAdd += "<li><a class=\"PG_EachLink\" href=\"" + each.content_uri + "\" target=\"blank_\">" + '<div class="PG_title_text_la"><strong>' + each.content_title + '</strong><div class="PG_Uri">' + each.content_uri + '</div><div class="PG_text_la">' + each.content_summary + '</div>' + "</a></li><div class=\"PG_sep\"></div>";
 		}
 		$("#PG_ListLinks").html(htmlToAdd);
 		links_current = links;
