@@ -40,8 +40,8 @@ module Pumgrana {
             return this.DoAjaxCall('link/from_content/', uri).links;
         }
 
-        public GetLinksFromResearch(input: string) : DataModel.Link[] {
-            return this.DoAjaxCall('link/from_research/', input).links;
+        public GetLinksFromResearch(uri: string, input: string) : DataModel.Link[] {
+            return this.DoAjaxCall('link/from_research/' + encodeURIComponent(uri), input).links;
         }
     }
 }
