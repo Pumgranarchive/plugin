@@ -21,27 +21,33 @@ module Pumgrana {
             links: Link[]
         }
     }
-    export class API {
-        private NetworkInterface: XMLHttpRequest;
-        constructor ()
+
+    export module API
+    {
+        function DoAjaxCall(prefix: string, param: string): DataModel.LinkedContent
         {
-            this.NetworkInterface = new XMLHttpRequest();
-        }
-        private DoAjaxCall(prefix: string, param: string): DataModel.LinkedContent {
+            var NetworkInterface: XMLHttpRequest = new XMLHttpRequest();
 
-            this.NetworkInterface.open('GET', 'http://api.pumgrana.com/' + prefix, false);
-            this.NetworkInterface.send(encodeURIComponent(param));
+            NetworkInterface.open('GET', 'http://52.26.76.243/' + prefix + encodeURIComponent(param), false);
+            NetworkInterface.send();
 
-            if (this.NetworkInterface.status === 200) {
-                return JSON.parse(this.NetworkInterface.responseText);
+            if (NetworkInterface.status === 200)
+            {
+                return JSON.parse(NetworkInterface.responseText);
             }
         }
-        public GetLinksFromContent(uri: string): DataModel.Link[] {
-            return this.DoAjaxCall('link/from_content/', uri).links;
+
+        export function GetLinksFromContent(uri: string): DataModel.Link[] {
+            return DoAjaxCall('link/from_content/', uri).links;
         }
 
-        public GetLinksFromResearch(uri: string, input: string) : DataModel.Link[] {
-            return this.DoAjaxCall('link/from_research/' + encodeURIComponent(uri), input).links;
+        export function GetLinksFromResearch(uri: string, input: string) : DataModel.Link[] {
+            return DoAjaxCall('link/from_research/' + encodeURIComponent(uri), input).links;
         }
     }
+}
+
+var Linked_content: Pumgrana.DataModel.Link[] = Pumgrana.API.GetLinksFromContent('http://fr.wikipedia.org/wiki/Anima:_Beyond_Fantasy');
+for (var l in Linked_content) {
+    console.log(l.link_uri);
 }
