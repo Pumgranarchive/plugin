@@ -1,0 +1,11 @@
+/**
+ * Typography
+ *
+ */
+
+& *{
+	-webkit-font-smoothing: antialiased !important;
+	line-height: $base-line-height !important;
+	font-family: $base-font-family !important;
+	text-rendering: initial !important;
+}
