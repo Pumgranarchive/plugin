@@ -12,6 +12,7 @@ class Plugin{
         this.isActive = false;
         this.isBuilt = false;
         this.dispatcher();
+        this.getData();
     }
 
 
@@ -23,11 +24,6 @@ class Plugin{
      */  
     dispatcher(){
 
-        // Click on .Toogle
-        Sprint('.Pumgrana .Toogle').on('click', function(){
-            this.toogle();
-            console.log('click');
-        });
 
     }
 
@@ -159,6 +155,18 @@ class Plugin{
         Sprint(`.${this.plugin}`).addClass('.is-hidden');
     }
 
+
+
+
+    /**
+     * Get data 
+     *
+     */ 
+    getData(){
+        console.log(Pumgrana.API.GetLinksFromContent(window.location));
+    }
+
+
 }
  
-var Pumgrana = new Plugin();
+var PumgranaPlugin = new Plugin();

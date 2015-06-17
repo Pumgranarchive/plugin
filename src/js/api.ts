@@ -38,12 +38,12 @@ module Pumgrana {
         }
 
         export function GetLinksFromContent(uri: string): DataModel.Link[] {
-            return DoAjaxCall('link/from_content/', uri).links;
+            return DoAjaxCall('linkedcontent/from_content/', uri).links;
         }
 
 
         export function GetLinksFromResearch(uri: string, input: string) : DataModel.Link[] {
-            return DoAjaxCall('link/from_research/' + encodeURIComponent(uri), input).links;
+            return DoAjaxCall('linkedcontent/search/' + encodeURIComponent(uri), input).links;
         }
     }
 }
