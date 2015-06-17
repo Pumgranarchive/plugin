@@ -38,7 +38,6 @@ var autoprefixer = require('gulp-autoprefixer'),
     pxtorem = require('gulp-pxtorem'),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
-    stripline = require('gulp-strip-line'),
     typescript = require('gulp-typescript'),
     uglify = require('gulp-uglify'),
     useref = require('gulp-useref'),
@@ -169,7 +168,6 @@ gulp.task('js', function () {
           debug: true
       }))
       .on('error', gutil.log)
-      .pipe(stripline())
       .pipe(gulp.dest(buildDir + jsDir))
       .pipe(reload({stream: true}));
 });
