@@ -1,30 +1,17 @@
 class Plugin{
- 
+
 
     /**
      * Constructor
      *
-     */   
+     */
     constructor(){
         this.$overlay = 'Website_overlay';
         this.$plugin = 'Pumgrana';
         this.width = 400;
         this.isActive = false;
         this.isBuilt = false;
-        this.dispatcher();
         this.getData();
-    }
-
-
-
-
-    /**
-     * Dispatcher
-     *
-     */  
-    dispatcher(){
-
-
     }
 
 
@@ -33,7 +20,7 @@ class Plugin{
      * Build
      *
      * @with sprintjs
-     */  
+     */
     build(){
         Sprint('body').prepend(`<div class="${this.$overlay}"></div>`);
         Sprint('body').append(`
@@ -67,7 +54,7 @@ class Plugin{
                             <span class="Item_tag">Tag 1</span>
                             <span class="Item_tag">Tag 2</span>
                             <span class="Item_tag">Tag 3</span>
-                        </a> 
+                        </a>
                     </div>
                     <div class="Footer">
                         <a class="Footer_viewBookmarks -active" href="#/pumpgrana/all" title="View all your bookmarks">
@@ -81,8 +68,11 @@ class Plugin{
                 </div>
             </div>
         `);
-    }
 
+        Sprint('.Toogle').on('click', () => {
+            this.toogle('plugin')
+        });
+    }
 
 
 
@@ -90,19 +80,18 @@ class Plugin{
      * Toogle
      *
      * @with velocity and sprint
-     */ 
+     */
     toogle(origin = null){
 
         if(origin == 'chromebar'){
             if(!this.isBuilt){
                 this.build();
                 this.isBuilt = true;
-            }   
+            }
             else{
                 this.hide();
             }
         }
-
 
         if(!this.isActive){
             Sprint('body, html').addClass('-pugmrana-active');
@@ -150,7 +139,7 @@ class Plugin{
     /**
      * Hide
      *
-     */ 
+     */
     hide(){
         Sprint(`.${this.plugin}`).addClass('.is-hidden');
     }
@@ -159,14 +148,14 @@ class Plugin{
 
 
     /**
-     * Get data 
+     * Get data
      *
-     */ 
+     */
     getData(){
         console.log(Pumgrana.API.GetLinksFromContent(window.location));
     }
 
 
 }
- 
+
 var PumgranaPlugin = new Plugin();
