@@ -21,9 +21,8 @@
  */
 
 var autoprefixer = require('gulp-autoprefixer'),
-    babelify = require('babelify'),
+    babel = require('gulp-babel'),
     base64 = require('gulp-base64'),
-    browserify = require('gulp-browserify'),
     browserSync = require('browser-sync'),
     clean = require('gulp-rimraf'),
     cssbeautify = require('gulp-cssbeautify'),
@@ -80,7 +79,7 @@ var prefix = {
  */
 
 var srcDir =  __dirname + '/src/';
-var buildDir = './build/';
+var buildDir =  __dirname + '/build/';
 var distDir = __dirname + '/dist/';
 
 var cssDir = 'css/';
@@ -139,7 +138,7 @@ gulp.task('sass', function(){
        })
        .pipe(base64({
            extensions: ['svg', 'png', 'jpg'],
-           maxImageSize: 100*1024, // bytes 
+           maxImageSize: 100*1024, // bytes
        }))
        .pipe(autoprefixer(prefix))
        .pipe(minifyCSS({keepSpecialComments: 0}))
@@ -157,15 +156,14 @@ gulp.task('sass', function(){
 /**
  * Compile ES6+ syntax in ES5
  *
- * @with babelify and gulp-gutil
+ * @with gulp-babel and gulp-gutil
  * @return js
  */
 
 gulp.task('js', function () {
    gulp.src([srcDir + jsDir + '*.js'])
-      .pipe(browserify({
-          transform: ['babelify'],
-          debug: true
+      .pipe(babel({
+        stage: 0,
       }))
       .on('error', gutil.log)
       .pipe(gulp.dest(buildDir + jsDir))
@@ -178,18 +176,18 @@ gulp.task('js', function () {
 
 
 /**
- * Typescript 
+ * Typescript
  *
  * @with typescript
  * @return js
  */
 
 gulp.task('typescript', function () {
-   gulp.src([srcDir + jsDir + 'api.ts'])
+   gulp.src([srcDir + jsDir + '*.ts'])
       .pipe(typescript())
       .on('error', gutil.log)
       .pipe(gulp.dest(buildDir + jsDir))
-      .pipe(reload({stream: true}));      
+      .pipe(reload({stream: true}));
 });
 
 
@@ -250,7 +248,7 @@ gulp.task('html', function(){
 gulp.task('vendors', function(){
    gulp.src(srcDir + 'vendors/**')
       .pipe(gulp.dest(buildDir + 'vendors/'))
-      .pipe(reload({stream: true})); 
+      .pipe(reload({stream: true}));
 });
 
 
@@ -269,7 +267,7 @@ gulp.task('vendors', function(){
 gulp.task('json', function(){
    gulp.src(srcDir + '*.json')
       .pipe(gulp.dest(buildDir))
-      .pipe(reload({stream: true})); 
+      .pipe(reload({stream: true}));
 });
 
 
@@ -307,7 +305,7 @@ gulp.task('dev', ['clean-build'], function(){
   watch(srcDir + imgDir + '**', function(){
     gulp.start('img');
   });
-  watch(srcDir + jsDir + '**.js', function(){
+  watch(srcDir + jsDir + '*.js', function(){
     gulp.start('js');
   });
   watch(srcDir + sassDir + '**/*.scss', function(){
@@ -322,7 +320,7 @@ gulp.task('dev', ['clean-build'], function(){
   watch(srcDir + '*.json', function(){
     gulp.start('json');
   });
-  watch(srcDir + jsDir + 'api.ts', function(){
+  watch(srcDir + jsDir + '*.ts', function(){
     gulp.start('typescript');
   });
 
@@ -340,7 +338,7 @@ gulp.task('dev', ['clean-build'], function(){
 /**
  * Fonts
  *
- * @with otf2ttf gulp-ttf2woff gulp-base64 gulp-minify-css 
+ * @with otf2ttf gulp-ttf2woff gulp-base64 gulp-minify-css
  * @return fonts in base64 encode
  */
 
@@ -349,13 +347,13 @@ gulp.task('fonts', function () {
    // otf to ttf
    gulp.src(srcDir + 'fonts/**/*.otf')
       .pipe(otf2ttf())
-      .pipe(gulp.dest(srcDir + 'fonts/')); 
+      .pipe(gulp.dest(srcDir + 'fonts/'));
 
    // ttf to woff
    gulp.src(srcDir + 'fonts/**/*.ttf')
       .pipe(ttf2woff())
-      .pipe(gulp.dest(srcDir + 'fonts/'));    
-   
+      .pipe(gulp.dest(srcDir + 'fonts/'));
+
    // base64 fonts
    gulp.src([srcDir + fontsDir + 'ttf.css', srcDir + fontsDir + 'woff.css'])
       .pipe(base64({
@@ -400,16 +398,16 @@ gulp.task('clean-dist', function () {
 /**
  * Generate dist folder
  *
- * @with  gulp-useref gulp-if gulp-base64 
+ * @with  gulp-useref gulp-if gulp-base64
  */
 
 var assets = useref.assets();
 
 gulp.task('dist', ['clean-dist'], function(){
-   
+
    gulp.src(buildDir + imgDir + '**')
       .pipe(gulp.dest(distDir + imgDir));
-     
+
    gulp.src(buildDir + '*.html')
        .pipe(assets)
        .pipe(gulpif('*.css', minifyCSS({keepSpecialComments: 0})))
@@ -453,13 +451,13 @@ gulp.task('zip', ['dist'], function () {
 
 /* **********************************
 
-      _____       _       
-     / ____|     | |      
-    | |  __ _   _| |_ __  
-    | | |_ |  | | | |  _ \ 
+      _____       _
+     / ____|     | |
+    | |  __ _   _| |_ __
+    | | |_ |  | | | |  _ \
     | |__| | |_| | | |_) |
      \_____|\__,_|_|  __/  .
-                   | |    
-                   |_|    
-                   
+                   | |
+                   |_|
+
 ********************************** */
