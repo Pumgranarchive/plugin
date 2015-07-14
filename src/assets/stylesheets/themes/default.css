@@ -1,0 +1,31 @@
+/**
+ * Colors
+ *
+ */
+
+$primaryColor-white    : #fae6e6;
+$primaryColor-light    : #fab4b4;
+$primaryColor          : #f94a4d;
+
+$secondaryColor-white  : #f9f9f9;
+$secondaryColor-light  : #ebebeb;
+$secondaryColor        : #d2d2d2;
+$secondaryColor-medium : #b0b0b0;
+$secondaryColor-dark   : #636363;
+$secondaryColor-black  : #323232;
+
+
+/* .. */
+
+
+$backgroundColor       : $secondaryColor-white;
+$textColor             : $secondaryColor-dark;
+
+
+
+
+/**
+ * Fonts
+ *
+ */
+$fontFamily            : 'PT Sans';
