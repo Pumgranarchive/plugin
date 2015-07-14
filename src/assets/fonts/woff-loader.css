@@ -1,0 +1,22 @@
+/**
+ * PT Sans Regular
+ *
+ */
+@font-face {
+    font-family: 'PT Sans';
+    src: url(PT-Sans/PT-Sans-Regular.woff) format('woff');
+    font-style: normal;
+    font-weight: normal;
+}
+
+
+/**
+ * PT Sans Bold
+ *
+ */
+@font-face {
+    font-family: 'PT Sans';
+    src: url(PT-Sans/PT-Sans-Bold.woff) format('woff');
+    font-style: normal;
+    font-weight: 700;
+}
