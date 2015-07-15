@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { Connector } from 'react-redux';
+import { connect } from 'react-redux';
 import * as LinkActions from "actions/LinkActions";
 import Header from 'Header/';
 import Resultats from 'Resultats/';
 
+@connect(state => ({
+    links: state.links
+}))
+
 export default class PumgranaApp extends Component{
+
 
     /**
      * Initialize state
@@ -13,8 +18,7 @@ export default class PumgranaApp extends Component{
      */
     state = {
         page: {},
-        items: []
-    };
+    }
 
 
 
@@ -23,14 +27,17 @@ export default class PumgranaApp extends Component{
      *
      * @return JSX
      */
-    render(){
-        let {page, items} = this.state;
+
+    render() {
+        const { page } = this.state;
+        const { links, dispatch } = this.props;
+        const actions = bindActionCreators(LinkActions, dispatch);
 
         return (
             <div className="Pumgrana">
                 <Header page={page} />
-                <Resultats items={items} />
+                <Resultats items={links} />
             </div>
-        )
+        );
     }
 }

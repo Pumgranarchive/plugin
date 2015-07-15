@@ -12,7 +12,7 @@ export default class SearchBar extends Component{
         handleSearch: React.PropTypes.func.isRequired
     }
 
-
+    
 
     /**
      * On change event
