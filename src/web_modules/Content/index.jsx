@@ -4,18 +4,20 @@ import SearchBar from '../SearchBar/';
 import './index.css';
 import ctx from 'classnames';
 
-export default class Resultats extends Component{
+export default class Content extends Component{
 
     /**
      * Props
      *
      */
     static defaultProps = {
-        items: false
+        data: [],
+        bookmarkItem: function(){}
     }
 
     static propTypes = {
-        items: React.PropTypes.array.isRequired
+        data: React.PropTypes.array.isRequired,
+        bookmarkItem: React.PropTypes.func.isRequired
     }
 
 
@@ -67,7 +69,7 @@ export default class Resultats extends Component{
      *
      */
     render(){
-        let {items} = this.props;
+        let {data, bookmarkItem} = this.props;
         let {search, loading} = this.state;
 
         return (
@@ -76,14 +78,18 @@ export default class Resultats extends Component{
                    {((search == '') ? 'Related content' : `Resulats for "${search}"`)}
                 </h1>
                 <SearchBar handleSearch={::this.handleSearch} />
-                {items.map((item, i) => { return (
+                {data.map((item, i) => { return (
                     <div>
-                        <Item key={i} item={item} />
+                        <Item bookmarkItem={ bookmarkItem } key={i} item={item} />
                     </div>
                 );})}
-                <button onClick={::this.loadMore} className={ctx("Resultats_loadMore",{
-                    "is-active": loading
-                })}>{ (loading ? 'Loading ...' : 'Load more') }</button>
+                <button
+                    onClick={::this.loadMore}
+                    className={ctx("Resultats_loadMore",{
+                        "is-active": loading
+                    })}>
+                    { (loading ? 'Loading ...' : 'Load more') }
+                </button>
             </div>
         );
     }

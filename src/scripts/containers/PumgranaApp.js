@@ -1,43 +1,23 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as LinkActions from "actions/LinkActions";
-import Header from 'Header/';
-import Resultats from 'Resultats/';
+import * as LinkActions from "actions/ResultatActions";
+import Container from 'Container/';
 
-@connect(state => ({
-    links: state.links
-}))
-
+@connect(state => ({ data: state.data }))
 export default class PumgranaApp extends Component{
-
-
-    /**
-     * Initialize state
-     *
-     */
-    state = {
-        page: {},
-    }
-
-
 
     /**
      * Render
      *
      * @return JSX
      */
-
     render() {
-        const { page } = this.state;
-        const { links, dispatch } = this.props;
+        const { data, dispatch } = this.props;
         const actions = bindActionCreators(LinkActions, dispatch);
-
+        
         return (
-            <div className="Pumgrana">
-                <Header page={page} />
-                <Resultats items={links} />
-            </div>
+            <Container actions={actions} data={ data } />
         );
     }
 }
