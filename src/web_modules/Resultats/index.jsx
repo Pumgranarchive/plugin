@@ -11,13 +11,11 @@ export default class Resultats extends Component{
      *
      */
     static defaultProps = {
-        items: false,
-        scroll: false
+        items: false
     }
 
     static propTypes = {
-        items: React.PropTypes.array.isRequired,
-        scroll: React.PropTypes.bool.isRequired
+        items: React.PropTypes.array.isRequired
     }
 
 
@@ -69,7 +67,7 @@ export default class Resultats extends Component{
      *
      */
     render(){
-        let {items, scroll} = this.props;
+        let {items} = this.props;
         let {search, loading} = this.state;
 
         return (
@@ -77,7 +75,7 @@ export default class Resultats extends Component{
                 <h1 className="Resultats_title">
                    {((search == '') ? 'Related content' : `Resulats for "${search}"`)}
                 </h1>
-                <SearchBar scroll={scroll} handleSearch={::this.handleSearch} />
+                <SearchBar handleSearch={::this.handleSearch} />
                 {items.map((item, i) => { return (
                     <div>
                         <Item key={i} item={item} />

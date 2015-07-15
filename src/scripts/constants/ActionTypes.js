@@ -1,0 +1,1 @@
+export const BOOKMARK_LINK = 'BOOKMARK_LINK';

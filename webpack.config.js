@@ -24,7 +24,13 @@ module.exports = {
     },
     resolve: {
         extensions: ['', '.js', '.jsx', '.css', 'ts'],
-        modulesDirectories: ['src/web_modules', 'node_modules', 'src/assets', 'src/scripts']
+        modulesDirectories: [
+            'src/web_modules',
+            'node_modules',
+            'src/assets',
+            'src/scripts',
+            'src/scripts/containers'
+        ]
     },
     module: {
         loaders: [{
