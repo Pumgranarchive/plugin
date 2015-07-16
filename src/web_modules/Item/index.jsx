@@ -21,23 +21,6 @@ export default class Item extends Component{
 
 
     /**
-     * Initialize state
-     *
-     */
-    state = {
-        id: this.props.item.id,
-        title: this.props.item.title,
-        description: this.props.item.description,
-        tags: this.props.item.tags,
-        website: this.props.item.website,
-        link: this.props.item.link,
-        visited: this.props.item.visited,
-        bookmarked: this.props.item.bookmarked,
-    }
-
-
-
-    /**
      * Handle visited
      *
      */
@@ -54,7 +37,7 @@ export default class Item extends Component{
      *
      */
     handleBookmark(){
-        this.props.bookmarkItem(this.state.id);
+        this.props.bookmarkItem(this.props.item.id);
     }
 
 
@@ -63,7 +46,7 @@ export default class Item extends Component{
      *
      */
     render(){
-        let {visited, link, bookmarked, website, title, description, tags} = this.state;
+        let {visited, link, bookmarked, website, title, description, tags} = this.props.item;
 
         return (
             <div

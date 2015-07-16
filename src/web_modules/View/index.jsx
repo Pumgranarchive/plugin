@@ -8,9 +8,10 @@ export default class View extends Component{
      * Props
      *
      */
-    static defaultProps = { data: {}, actions: {} }
+    static defaultProps = { page: {}, related_content: {}, actions: {} }
     static propTypes = {
-        data: React.PropTypes.object.isRequired,
+        page: React.PropTypes.object.isRequired,
+        related_content: React.PropTypes.object.isRequired,
         actions: React.PropTypes.object.isRequired
     }
 
@@ -21,14 +22,14 @@ export default class View extends Component{
      *
      */
     render(){
-        let {data, actions} = this.props;
-
+        let {page, related_content, actions} = this.props;
+        
         return (
             <div>
                 <Header
-                    page={ data.page } />
+                    page={ page } />
                 <Content
-                    data={ data.related_content }
+                    related_content= { related_content }
                     bookmarkItem={ actions.bookmarkItem } />
             </div>
         );

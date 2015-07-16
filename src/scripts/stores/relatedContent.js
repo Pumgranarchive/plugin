@@ -1,0 +1,47 @@
+import { BOOKMARK_ITEM } from 'constants/ActionTypes';
+
+var initialState = [{
+        id: 0,
+        title: 'Title 1',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue consectetur ante hendrerit ...',
+        website: 'website.com',
+        url: 'http://website.com/article',
+        tags: ['tag 1', 'tag1'],
+        bookmarked: false,
+        visited: false,
+        page_id: 0
+    }, {
+        id: 1,
+        title: 'Title 2',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue consectetur ante hendrerit ...',
+        website: 'website.com',
+        url: 'http://website.com/article',
+        tags: ['tag 1', 'tag1'],
+        bookmarked: false,
+        visited: false,
+        page_id: 0
+    }, {
+        id: 2,
+        title: 'Title 3',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue consectetur ante hendrerit ...',
+        website: 'website.com',
+        url: 'http://website.com/article',
+        tags: ['tag 1', 'tag1'],
+        bookmarked: true,
+        visited: false,
+        page_id: 0
+    }
+];
+
+export default function related_content(state = initialState, action){
+    switch(action.type){
+        case BOOKMARK_ITEM :
+            return state.map(item =>
+                item.id == action.id ?
+                    { ...item, bookmarked: !item.bookmarked } :
+                    item
+            );
+        default:
+            return state;
+    }
+}

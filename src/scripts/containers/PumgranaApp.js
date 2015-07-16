@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as LinkActions from "actions/ResultatActions";
 import Container from 'Container/';
 
-@connect(state => ({ data: state.data }))
+@connect(state => ({ pages: state.pages, related_content: state.related_content }))
 export default class PumgranaApp extends Component{
 
     /**
@@ -13,11 +13,11 @@ export default class PumgranaApp extends Component{
      * @return JSX
      */
     render() {
-        const { data, dispatch } = this.props;
+        const { pages, related_content, dispatch } = this.props;
         const actions = bindActionCreators(LinkActions, dispatch);
-        
+
         return (
-            <Container actions={actions} data={ data } />
+            <Container actions={actions} pages={ pages } related_content={ related_content } />
         );
     }
 }
