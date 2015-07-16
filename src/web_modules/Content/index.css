@@ -11,6 +11,8 @@
     padding-top:24px;
     background: white;
     border: 1px solid $secondaryColor-light;
+    margin-bottom: calc($footer-height * 1.5);
+    border-radius: 3px;
 
     &_title{
     	margin-bottom: 20px;

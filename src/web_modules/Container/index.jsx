@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import View from 'View/';
+import Footer from 'Footer/';
 import './index.css';
 
 export default class Container extends Component{
@@ -47,6 +48,7 @@ export default class Container extends Component{
                               actions={ actions } />
                     );
                 })}
+                <Footer />
             </div>
         );
     }

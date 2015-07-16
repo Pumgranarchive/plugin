@@ -6,3 +6,10 @@ export function bookmarkItem(id){
         id
     }
 }
+
+export function visitItem(id){
+    return {
+        type: types.VISIT_ITEM,
+        id
+    }
+}

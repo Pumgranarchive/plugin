@@ -12,12 +12,14 @@ export default class Content extends Component{
      */
     static defaultProps = {
         related_content: [],
-        bookmarkItem: function(){}
+        bookmarkItem: function(){},
+        visitItem: function(){}
     }
 
     static propTypes = {
         related_content: React.PropTypes.array.isRequired,
-        bookmarkItem: React.PropTypes.func.isRequired
+        bookmarkItem: React.PropTypes.func.isRequired,
+        visitItem: React.PropTypes.func.isRequired
     }
 
 
@@ -69,7 +71,7 @@ export default class Content extends Component{
      *
      */
     render(){
-        let {related_content, bookmarkItem} = this.props;
+        let {related_content, bookmarkItem, visitItem} = this.props;
         let {search, loading} = this.state;
 
         return (
@@ -80,7 +82,7 @@ export default class Content extends Component{
                 <SearchBar handleSearch={::this.handleSearch} />
                 {related_content.map((item, i) => { return (
                     <div>
-                        <Item bookmarkItem={ bookmarkItem } key={i} item={item} />
+                        <Item bookmarkItem={ bookmarkItem } visitItem={ visitItem } key={i} item={item} />
                     </div>
                 );})}
                 <button

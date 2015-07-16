@@ -23,14 +23,15 @@ export default class View extends Component{
      */
     render(){
         let {page, related_content, actions} = this.props;
-        
+
         return (
             <div>
                 <Header
                     page={ page } />
                 <Content
                     related_content= { related_content }
-                    bookmarkItem={ actions.bookmarkItem } />
+                    bookmarkItem={ actions.bookmarkItem }
+                    visitItem =  { actions.visitItem } />
             </div>
         );
     }

@@ -1,0 +1,59 @@
+/**
+ * Footer Component Style
+ *
+ */
+
+@import 'core';
+
+.Footer{
+	position: fixed;
+	border-box: box-sizing;
+	height: $footer-height;
+	width: calc($container-width - 22px);
+	bottom:0;
+    margin-left: calc($container-padding * -1);
+    background-color: $backgroundColor;
+    opacity: .9;
+	border-top: 1px solid #ebebeb;
+
+	&_website{
+		position: absolute;
+		right: 24px;	top: 14px;
+		width: 100px;	height: 26px;
+		background: url('./../../assets/images/logo.svg');
+        opacity: .8;
+
+        &:hover{
+            opacity: 1;
+        }
+	}
+
+	&_viewBookmarks{
+		display: block;
+        width: 32px;    height: 32px;
+		border-radius: 50%;
+		border: 1px solid #d2d2d2;
+		margin-top: 13px;
+		margin-left: 19px;
+		display: flex;
+
+		svg{
+			margin: auto;
+		}
+
+		&.-active{
+			border-color: $primaryColor;
+			background: $primaryColor-white;
+
+			svg path{
+				stroke: $primaryColor;
+				fill: $primaryColor-light;
+			}
+
+			&:hover, &:focus{
+				border-color: $primaryColor;
+				background: $primaryColor-light;
+			}
+		}
+	}
+}

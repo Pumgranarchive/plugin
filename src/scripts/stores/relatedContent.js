@@ -1,4 +1,4 @@
-import { BOOKMARK_ITEM } from 'constants/ActionTypes';
+import { BOOKMARK_ITEM, VISIT_ITEM } from 'constants/ActionTypes';
 
 var initialState = [{
         id: 0,
@@ -37,10 +37,18 @@ export default function related_content(state = initialState, action){
     switch(action.type){
         case BOOKMARK_ITEM :
             return state.map(item =>
-                item.id == action.id ?
+                item.id === action.id ?
                     { ...item, bookmarked: !item.bookmarked } :
                     item
             );
+
+        case VISIT_ITEM:
+            return state.map(item =>
+                item.id === action.id ?
+                    { ...item, visited: true } :
+                    item
+            );
+
         default:
             return state;
     }
