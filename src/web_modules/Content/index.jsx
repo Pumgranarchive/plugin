@@ -4,20 +4,22 @@ import SearchBar from '../SearchBar/';
 import './index.css';
 import ctx from 'classnames';
 
-export default class Resultats extends Component{
+export default class Content extends Component{
 
     /**
      * Props
      *
      */
     static defaultProps = {
-        items: false,
-        scroll: false
+        related_content: [],
+        bookmarkItem: function(){},
+        visitItem: function(){}
     }
 
     static propTypes = {
-        items: React.PropTypes.array.isRequired,
-        scroll: React.PropTypes.bool.isRequired
+        related_content: React.PropTypes.array.isRequired,
+        bookmarkItem: React.PropTypes.func.isRequired,
+        visitItem: React.PropTypes.func.isRequired
     }
 
 
@@ -48,7 +50,7 @@ export default class Resultats extends Component{
     /**
      * Load more (event)
      *
-     * @return setState()
+     * @return setState() with object in param
      */
     loadMore(){
         this.setState({
@@ -67,9 +69,10 @@ export default class Resultats extends Component{
     /**
      * Render
      *
+     * @return JSX
      */
     render(){
-        let {items, scroll} = this.props;
+        let {related_content, bookmarkItem, visitItem} = this.props;
         let {search, loading} = this.state;
 
         return (
@@ -77,15 +80,19 @@ export default class Resultats extends Component{
                 <h1 className="Resultats_title">
                    {((search == '') ? 'Related content' : `Resulats for "${search}"`)}
                 </h1>
-                <SearchBar scroll={scroll} handleSearch={::this.handleSearch} />
-                {items.map((item, i) => { return (
+                <SearchBar handleSearch={::this.handleSearch} />
+                {related_content.map((item, i) => { return (
                     <div>
-                        <Item key={i} item={item} />
+                        <Item bookmarkItem={ bookmarkItem } visitItem={ visitItem } key={i} item={item} />
                     </div>
                 );})}
-                <button onClick={::this.loadMore} className={ctx("Resultats_loadMore",{
-                    "is-active": loading
-                })}>{ (loading ? 'Loading ...' : 'Load more') }</button>
+                <button
+                    onClick={::this.loadMore}
+                    className={ctx("Resultats_loadMore",{
+                        "is-active": loading
+                    })}>
+                    { (loading ? 'Loading ...' : 'Load more') }
+                </button>
             </div>
         );
     }

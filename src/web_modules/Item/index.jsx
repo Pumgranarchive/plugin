@@ -9,27 +9,15 @@ export default class Item extends Component{
      *
      */
     static defaultProps = {
-        item: {}
+        item: {},
+        bookmarkItem: function(){},
+        visitItem: function(){}
     }
 
     static propTypes = {
-        item: React.PropTypes.object.isRequired
-    }
-
-
-
-    /**
-     * Initialize state
-     *
-     */
-    state = {
-        title: this.props.item.title,
-        summary: this.props.item.summary,
-        tags: this.props.item.tags,
-        url: this.props.item.url,
-        link: this.props.item.link,
-        visited: this.props.item.visited,
-        bookmarked: this.props.item.bookmarked,
+        item: React.PropTypes.object.isRequired,
+        bookmarkItem: React.PropTypes.func.isRequired,
+        visitItem: React.PropTypes.func.isRequired
     }
 
 
@@ -39,9 +27,7 @@ export default class Item extends Component{
      *
      */
     handleVisite(){
-        this.setState({
-            visited: true
-        })
+        this.props.visitItem(this.props.item.id);
     }
 
 
@@ -51,9 +37,7 @@ export default class Item extends Component{
      *
      */
     handleBookmark(){
-        this.setState({
-            bookmarked: !this.state.bookmarked
-        })
+        this.props.bookmarkItem(this.props.item.id);
     }
 
 
@@ -62,7 +46,7 @@ export default class Item extends Component{
      *
      */
     render(){
-        let {visited, link, bookmarked, url, title, summary, tags} = this.state;
+        let {visited, link, bookmarked, website, title, description, tags} = this.props.item;
 
         return (
             <div
@@ -79,9 +63,9 @@ export default class Item extends Component{
                     <path d="M3.437 1h8.126L14 3.45V19l-4.063-3.273L5.875 19V3.45L3.437 1 1 3.45V9.18h4.875" stroke="#DCDCDC" fill="#FFFFFF" strokeLinecap="round" strokeLinejoin="round" fillRule="evenodd"/>
                 </svg>
                 <div onClick={this.handleVisite.bind(this)}>
-                    <span className="Item_url">{ url }</span>
+                    <span className="Item_url">{ website }</span>
                     <h2 className="Item_title">{ title }</h2>
-                    <p className="Item_description">{ summary }</p>
+                    <p className="Item_description">{ description }</p>
                     { tags.map((tag, i) => { return (
                         <span className="Item_tag">{ tag }</span>
                     );}) }

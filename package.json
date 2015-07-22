@@ -34,7 +34,11 @@
     "postcss-pxtorem": "^2.3.0",
     "postcss-simple-vars": "^0.3.0",
     "react-hot-loader": "^1.2.7",
+<<<<<<< HEAD
     "sass-loader": "^1.0.2",
+=======
+    "redux-devtools": "^0.1.0",
+>>>>>>> origin/redux
     "style-loader": "^0.12.3",
     "typescript-loader": "^1.1.3",
     "webpack": "^1.9.6",
@@ -42,6 +46,8 @@
   },
   "dependencies": {
     "classnames": "^2.1.3",
-    "react": "^0.13.0"
+    "react": "^0.13.0",
+    "react-redux": "^0.2.1",
+    "redux": "^1.0.0-rc"
   }
 }
