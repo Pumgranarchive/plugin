@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
+import './index.scss';
 import ctx from 'classnames';
-import './index.css';
 
 export default class Footer{
 

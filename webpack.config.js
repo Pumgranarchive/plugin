@@ -1,6 +1,5 @@
 var path = require('path'),
     webpack = require('webpack'),
-    pxtorem = require('postcss-pxtorem'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     NyanProgressPlugin = require('nyan-progress-webpack-plugin');
 
@@ -23,7 +22,7 @@ module.exports = {
         publicPath: '/__build__/'
     },
     resolve: {
-        extensions: ['', '.js', '.jsx', '.css', 'ts'],
+        extensions: ['', '.js', '.jsx', '.scss', 'ts'],
         modulesDirectories: [
             'src/web_modules',
             'node_modules',
@@ -41,8 +40,12 @@ module.exports = {
             test: /\.ts$/,
             loader: 'typescript-loader'
         },{
-            test: /\.scss$/,
-            loader: ExtractTextPlugin.extract('style', 'css!postcss!cssnext!sass')
+            test: /\.(scss|css)$/,
+            loader: ExtractTextPlugin.extract('style', 'css!postcss!sass?outputStyle=expanded&' +
+                      'includePaths[]=' +
+                        (path.resolve(__dirname, './src/assets/fonts/')) + '&' +
+                      'includePaths[]=' +
+                        (path.resolve(__dirname, './src/assets/stylesheets/')))
         },{
             test: /.*\.(gif|png|jpe?g|svg)$/i,
             loaders: [
@@ -60,24 +63,17 @@ module.exports = {
         new NyanProgressPlugin(),
         new ExtractTextPlugin('style.css', {disable: true})
     ],
-    cssnext: {
-        browsers: 'last 2 versions',
-        import: {
-            path: ['./src/assets/stylesheets/', './src/assets/fonts/']
-        },
-        url: {
-            basePath: ['./src/assets/images/']
-        }
-    },
     postcss : function(){
-        return [require('postcss-nested'), require('postcss-simple-vars'), require('postcss-map'), pxtorem({
-            media_query: true,
-            prop_white_list: ['font-size', 'line-height', 'letter-spacing', 'margin',
-                'margin-top', 'margin-right', 'margin-bottom', 'margin-left', 'padding',
-                'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'width',
-                'height', 'top', 'left', 'bottom', 'right', 'border-radius', 'border',
-                'border-top', 'border-right', 'border-bottom', 'border-left', 'max-width',
-                'max-height', 'background-size', 'background-position', 'transform']
+        var pxtorem = require('postcss-pxtorem');
+        return [
+            pxtorem({
+                media_query: true,
+                prop_white_list: ['font-size', 'line-height', 'letter-spacing', 'margin',
+                    'margin-top', 'margin-right', 'margin-bottom', 'margin-left', 'padding',
+                    'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'width',
+                    'height', 'top', 'left', 'bottom', 'right', 'border-radius', 'border',
+                    'border-top', 'border-right', 'border-bottom', 'border-left', 'max-width',
+                    'max-height', 'background-size', 'background-position', 'transform']
         })];
     }
 

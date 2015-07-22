@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
+import './index.scss';
 import Item from './../Item/';
 import SearchBar from '../SearchBar/';
-import './index.css';
 import ctx from 'classnames';
 
 export default class Content extends Component{

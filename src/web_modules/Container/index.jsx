@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
+import './index.scss';
 import View from 'View/';
 import Footer from 'Footer/';
-import './index.css';
 
 export default class Container extends Component{
 
