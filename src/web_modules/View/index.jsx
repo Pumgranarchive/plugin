@@ -20,6 +20,7 @@ export default class View extends Component{
     /**
      * Render
      *
+     * @return JSX
      */
     render(){
         let {page, related_content, actions} = this.props;

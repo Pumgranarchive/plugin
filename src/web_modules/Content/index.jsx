@@ -50,7 +50,7 @@ export default class Content extends Component{
     /**
      * Load more (event)
      *
-     * @return setState()
+     * @return setState() with object in param
      */
     loadMore(){
         this.setState({
@@ -69,6 +69,7 @@ export default class Content extends Component{
     /**
      * Render
      *
+     * @return JSX
      */
     render(){
         let {related_content, bookmarkItem, visitItem} = this.props;

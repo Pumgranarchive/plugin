@@ -48,7 +48,7 @@ export default class Container extends Component{
                               actions={ actions } />
                     );
                 })}
-                <Footer />
+                <Footer related_content={ related_content } />
             </div>
         );
     }

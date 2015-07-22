@@ -58,7 +58,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         new NyanProgressPlugin(),
-        new ExtractTextPlugin('style.css',{disable: true})
+        new ExtractTextPlugin('style.css', {disable: true})
     ],
     cssnext: {
         browsers: 'last 2 versions',
