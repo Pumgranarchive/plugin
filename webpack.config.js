@@ -35,8 +35,8 @@ module.exports = {
             test: /\.ts$/,
             loader: 'typescript-loader'
         },{
-            test: /\.css$/,
-            loader: ExtractTextPlugin.extract('style', 'css!postcss!cssnext')
+            test: /\.scss$/,
+            loader: ExtractTextPlugin.extract('style', 'css!postcss!cssnext!sass')
         },{
             test: /.*\.(gif|png|jpe?g|svg)$/i,
             loaders: [

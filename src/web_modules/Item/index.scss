@@ -24,9 +24,9 @@
 	display: block;
 	position:relative;
 	box-sizing: border-box;
-	width: calc(100% + $extraSize * 2);
-	left: calc(-1 * $extraSize);
-	padding: calc($extraSize * .9) $extraSize;
+	width: 100% + $extraSize * 2;
+	left: -1 * $extraSize;
+	padding: ($extraSize * .9) $extraSize;
 	text-decoration: none;
 	color: $secondaryColor-dark;
     cursor: pointer;
@@ -84,8 +84,8 @@
 	&_title{
 		font-weight: 700;
 		font-size: 19px;
-		margin-top: 3px;
-		margin-bottom: 7px;
+		margin-top: 5px;
+		margin-bottom: 3px;
 	}
 
 	&_description{
@@ -120,7 +120,7 @@
 			}
 
 			&_tag{
-				/*border-color: rgba($primary-color, .7);*/
+				border-color: rgba($primaryColor, .9);
 				opacity: .4;
 			}
 		}
@@ -133,7 +133,7 @@
 			}
 
 			&_tag{
-				/*border-color: $primary-color;*/
+				border-color: $primaryColor;
 				opacity: 1;
 			}
 		}

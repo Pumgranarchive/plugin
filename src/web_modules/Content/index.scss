@@ -1,0 +1,40 @@
+/**
+ * Resultats style component
+ *
+ */
+
+@import 'core';
+
+.Resultats{
+    margin-top: 35px;
+    padding: $resultats-padding;
+    padding-top:24px;
+    background: white;
+    border: 1px solid $secondaryColor-light;
+    margin-bottom: $footer-height * 1.5;
+    border-radius: 3px;
+
+    &_title{
+    	margin-bottom: 20px;
+    	color: $primaryColor;
+    	font-weight: 700;
+    	font-size: 19px;
+    }
+
+    &_loadMore{
+        display: block;
+        position: static;
+        margin: auto;
+        background: $primaryColor;
+        color: white;
+        font-size: 14px;
+        padding: 10px 70px 11px;
+        margin-top: 20px;
+        border-radius: 2px;
+        cursor: pointer;
+
+        &:hover, &.is-active{
+            opacity: .8;
+        }
+    }
+}
