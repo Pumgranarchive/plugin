@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import './index.scss';
 import Item from './../Item/';
-import SearchBar from '../SearchBar/';
 import ctx from 'classnames';
 
-export default class Content extends Component{
+export default class List extends Component{
 
     /**
      * Props
@@ -80,7 +79,6 @@ export default class Content extends Component{
                 <h1 className="Resultats_title">
                    {((search == '') ? 'Related content' : `Resulats for "${search}"`)}
                 </h1>
-                <SearchBar handleSearch={::this.handleSearch} />
                 {related_content.map((item, i) => { return (
                     <div>
                         <Item bookmarkItem={ bookmarkItem } visitItem={ visitItem } key={i} item={item} />

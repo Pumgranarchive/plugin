@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import './style.scss';
 import Header from 'Header/';
-import Content from 'Content/';
+import SearchBar from 'SearchBar/';
+import List from 'List/';
 
 export default class View extends Component{
 
@@ -18,6 +20,15 @@ export default class View extends Component{
 
 
     /**
+     * Search
+     *
+     */
+    handleSearch(){
+        return true;
+    }
+
+
+    /**
      * Render
      *
      * @return JSX
@@ -26,13 +37,17 @@ export default class View extends Component{
         let {page, related_content, actions} = this.props;
 
         return (
-            <div>
+            <div className="View">
                 <Header
                     page={ page } />
-                <Content
-                    related_content= { related_content }
-                    bookmarkItem={ actions.bookmarkItem }
-                    visitItem =  { actions.visitItem } />
+                <div className="View_content">
+                    <h1>Related content</h1>
+                    <SearchBar handleSearch={::this.handleSearch} />
+                    <List
+                        related_content= { related_content }
+                        bookmarkItem={ actions.bookmarkItem }
+                        visitItem =  { actions.visitItem } />
+                </div>
             </div>
         );
     }
