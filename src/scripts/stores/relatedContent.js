@@ -30,6 +30,36 @@ var initialState = [{
         bookmarked: true,
         visited: false,
         page_id: 0
+    },{
+        id: 3,
+        title: 'Title 1',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue consectetur ante hendrerit ...',
+        website: 'website.com',
+        url: 'http://website.com/article',
+        tags: ['tag 1', 'tag1'],
+        bookmarked: false,
+        visited: false,
+        page_id: 1
+    }, {
+        id: 4,
+        title: 'Title 2',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue consectetur ante hendrerit ...',
+        website: 'website.com',
+        url: 'http://website.com/article',
+        tags: ['tag 1', 'tag1'],
+        bookmarked: false,
+        visited: false,
+        page_id: 1
+    }, {
+        id: 5,
+        title: 'Title 1',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue consectetur ante hendrerit ...',
+        website: 'website.com',
+        url: 'http://website.com/article',
+        tags: ['tag 1', 'tag1'],
+        bookmarked: false,
+        visited: false,
+        page_id: 2
     }
 ];
 

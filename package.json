@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "...",
   "scripts": {
-    "start": "node server.js",
+    "start": "env UV_THREADPOOL_SIZE=100 node server.js",
     "lint": "eslint src"
   },
   "repository": {

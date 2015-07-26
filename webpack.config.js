@@ -45,8 +45,10 @@ module.exports = {
                       'includePaths[]=' +
                         (path.resolve(__dirname, './src/assets/fonts/')) + '&' +
                       'includePaths[]=' +
-                        (path.resolve(__dirname, './src/assets/stylesheets/')))
-        },{
+                        (path.resolve(__dirname, './src/assets/stylesheets/')) + '&' +
+                      'includePaths[]=' +
+                        (path.resolve(__dirname, './src/assets/images/'))
+        )},{
             test: /.*\.(gif|png|jpe?g|svg)$/i,
             loaders: [
               'file?hash=sha512&digest=hex&name=[hash].[ext]',

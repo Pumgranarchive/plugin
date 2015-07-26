@@ -5,27 +5,25 @@
 
 @import 'core';
 
-.SearchBar{
-    margin: 0 0 10px;
+.SearchBar {
+    margin: 22px 0 10px;
     width: 100%;
-	padding: 12px 11px;
-	box-sizing: border-box;
-	background: linear-gradient(to top, white, $secondaryColor-white);
-	border: 1px solid $secondaryColor-light;
-	border-radius: 4px;
-	font-family: $text-fontFamily;
-	font-size: 14px;
-	/*color: $font-color;*/
-	box-shadow: 0 0 0 black;
-	height: inherit;
+    padding: 12px 11px;
+    box-sizing: border-box;
+    background: linear-gradient(to top, white, $secondaryColor-white);
+    border: 1px solid $secondaryColor-light;
+    border-radius: 4px;
+    font-family: $text-fontFamily;
+    font-size: 14px;
+    box-shadow: 0 0 0 black;
+    height: inherit;
 
-	&::placeholder{
-		/*color: lighten($font-color, 20%);*/
-	}
+    &::placeholder {
+        color: lighten($text-color, 20%);
+    }
 
-	&:focus{
-		border: 1px solid #e1e1e1;
-		background: mix(white, #f9f9f9, 90%);
-	}
-
+    &:focus {
+        border: 1px solid #e1e1e1;
+        background: mix(white, #f9f9f9, 90%);
+    }
 }

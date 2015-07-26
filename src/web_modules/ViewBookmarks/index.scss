@@ -1,0 +1,15 @@
+/**
+ * View bookmarks Component Style
+ *
+ * @extend .View
+ */
+
+ @import 'core';
+
+.ViewBookmarks{
+    left: 66.666%;
+
+    &.is-showed{
+        left: 33.333%;
+    }
+}

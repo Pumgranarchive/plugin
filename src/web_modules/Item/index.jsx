@@ -54,7 +54,7 @@ export default class Item extends Component{
                     'is-visited': visited
                 })}
                 href={ link }>
-                <svg onClick={this.handleBookmark.bind(this)} className={
+                <svg onClick={ ::this.handleBookmark } className={
                     ctx('Item_bookmark', {
                         'is-active': bookmarked
                     })
@@ -62,7 +62,7 @@ export default class Item extends Component{
                     <title>View all your bookmarks</title>
                     <path d="M3.437 1h8.126L14 3.45V19l-4.063-3.273L5.875 19V3.45L3.437 1 1 3.45V9.18h4.875" stroke="#DCDCDC" fill="#FFFFFF" strokeLinecap="round" strokeLinejoin="round" fillRule="evenodd"/>
                 </svg>
-                <div onClick={this.handleVisite.bind(this)}>
+                <div onClick={ ::this.handleVisite }>
                     <span className="Item_url">{ website }</span>
                     <h2 className="Item_title">{ title }</h2>
                     <p className="Item_description">{ description }</p>

@@ -1,4 +1,4 @@
-﻿// Links_from_content param: uri, response: linked_content
+// Links_from_content param: uri, response: linked_content
 //{ "status":200, "links":[{ "link_uri": 9457, ”content_uri”:65432,"content_title": "Zimbabwe", "content_summary": "my summary" }, { "link__uri": 5, ”content_uri”:143957,"content_title": "Paris”,"content_summary":"my summary"}]}
 
 //Links_from_research param: content_uri, research, response: linked_content
@@ -21,27 +21,29 @@ module Pumgrana {
             links: Link[]
         }
     }
-    export class API {
-        private NetworkInterface: XMLHttpRequest;
-        constructor ()
+
+    export module API
+    {
+        function DoAjaxCall(prefix: string, param: string): DataModel.LinkedContent
         {
-            this.NetworkInterface = new XMLHttpRequest();
-        }
-        private DoAjaxCall(prefix: string, param: string): DataModel.LinkedContent {
+            var NetworkInterface: XMLHttpRequest = new XMLHttpRequest();
 
-            this.NetworkInterface.open('GET', 'http://api.pumgrana.com/' + prefix, false);
-            this.NetworkInterface.send(encodeURIComponent(param));
+            NetworkInterface.open('GET', 'http://52.26.76.243/' + prefix + encodeURIComponent(param), false);
+            NetworkInterface.send();
 
-            if (this.NetworkInterface.status === 200) {
-                return JSON.parse(this.NetworkInterface.responseText);
+            if (NetworkInterface.status === 200)
+            {
+                return JSON.parse(NetworkInterface.responseText);
             }
         }
-        public GetLinksFromContent(uri: string): DataModel.Link[] {
-            return this.DoAjaxCall('link/from_content/', uri).links;
+
+        export function GetLinksFromContent(uri: string): DataModel.Link[] {
+            return DoAjaxCall('linkedcontent/from_content/', uri).links;
         }
 
-        public GetLinksFromResearch(input: string) : DataModel.Link[] {
-            return this.DoAjaxCall('link/from_research/', input).links;
+
+        export function GetLinksFromResearch(uri: string, input: string) : DataModel.Link[] {
+            return DoAjaxCall('linkedcontent/search/' + encodeURIComponent(uri), input).links;
         }
     }
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './index.scss';
 import Item from './../Item/';
+import SearchBar from '../SearchBar/';
 import ctx from 'classnames';
 
 export default class List extends Component{
@@ -12,13 +13,15 @@ export default class List extends Component{
     static defaultProps = {
         related_content: [],
         bookmarkItem: function(){},
-        visitItem: function(){}
+        visitItem: function(){},
+        loadMore: false
     }
 
     static propTypes = {
         related_content: React.PropTypes.array.isRequired,
         bookmarkItem: React.PropTypes.func.isRequired,
-        visitItem: React.PropTypes.func.isRequired
+        visitItem: React.PropTypes.func.isRequired,
+        loadMore: React.PropTypes.bool.isRequired
     }
 
 
@@ -28,20 +31,7 @@ export default class List extends Component{
      *
      */
     state = {
-        search: '',
-    }
-
-
-
-    /**
-     * Handle search (event)
-     *
-     * @return setState()
-     */
-    handleSearch(search){
-        return this.setState({
-            search: search
-        });
+        loading: false
     }
 
 
@@ -71,26 +61,41 @@ export default class List extends Component{
      * @return JSX
      */
     render(){
-        let {related_content, bookmarkItem, visitItem} = this.props;
-        let {search, loading} = this.state;
+        let {related_content, bookmarkItem, visitItem, loadMore} = this.props;
+        let {loading} = this.state;
 
-        return (
-            <div className="Resultats">
-                <h1 className="Resultats_title">
-                   {((search == '') ? 'Related content' : `Resulats for "${search}"`)}
-                </h1>
-                {related_content.map((item, i) => { return (
-                    <div>
-                        <Item bookmarkItem={ bookmarkItem } visitItem={ visitItem } key={i} item={item} />
-                    </div>
-                );})}
+        // Render "Load more ..."
+        let loader;
+        if(loadMore){
+            loader = (
                 <button
                     onClick={::this.loadMore}
-                    className={ctx("Resultats_loadMore",{
+                    className={ctx("List_loadMore",{
                         "is-active": loading
                     })}>
                     { (loading ? 'Loading ...' : 'Load more') }
                 </button>
+            );
+        }
+
+        // Render related_content
+        if(related_content.length == 0){
+            related_content = (<div className="List-empty">No resultats found</div>)
+        }
+        else{
+            related_content = related_content.map((item, i) => {
+                return (
+                    <div>
+                        <Item bookmarkItem={ bookmarkItem } visitItem={ visitItem } key={i} item={item} />
+                    </div>
+                );
+            })
+        }
+
+        return (
+            <div className="List">
+                { related_content }
+                { loader }
             </div>
         );
     }

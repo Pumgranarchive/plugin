@@ -5,8 +5,15 @@
 
 @import 'core';
 
-.Resultats{
-    &_loadMore{
+.List {
+    margin-top: 8px;
+
+    &-empty{
+        margin-top: 14px;
+        padding-bottom: 10px;
+    }
+
+    &_loadMore {
         display: block;
         position: static;
         margin: auto;
@@ -18,8 +25,9 @@
         border-radius: 2px;
         cursor: pointer;
 
-        &:hover, &:focus, &.is-active{
-            opacity: .8;
+        &:hover,
+        &.is-active {
+            opacity: 0.8;
         }
     }
 }

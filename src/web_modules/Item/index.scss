@@ -5,137 +5,147 @@
 
 @import 'core';
 
-
-.Item{
+.Item {
     /* Settings */
-
-    $extraSize : 6%;
+    $extraSize: 6%;
 
     /* Hack for hover */
-	&:before{
-		content: "";
-		display: block;
-		height: 100%;
-		width: 10%;
-		margin-left: -10%;
-		position: absolute;
-	}
+    &:before {
+        content: "";
+        display: block;
+        height: 100%;
+        width: 10%;
+        margin-left: -10%;
+        position: absolute;
+    }
 
-	display: block;
-	position:relative;
-	box-sizing: border-box;
-	width: 100% + $extraSize * 2;
-	left: -1 * $extraSize;
-	padding: ($extraSize * .9) $extraSize;
-	text-decoration: none;
-	color: $secondaryColor-dark;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    width: 100% + $extraSize * 2;
+    left: -1 * $extraSize;
+    padding: ($extraSize * .9) $extraSize;
+    text-decoration: none;
+    color: $secondaryColor-dark;
     cursor: pointer;
 
-	& + &{
-		margin-top: 2px;
-	}
+    & + & {
+        margin-top: 2px;
+    }
 
-	&:hover, &:focus{
-		background: $secondaryColor-white;
-	}
+    &:hover,
+    &:focus {
+        background: $secondaryColor-white;
+    }
 
-	&_bookmark{
-		opacity:0;
-		position: absolute;
-		margin-left: -36px;
-		margin-top: 2px;
+    &_bookmark {
+        opacity: 0;
+        position: absolute;
+        margin-left: -36px;
+        margin-top: 2px;
 
-		&.is-active{
-			opacity: 1;
+        &.is-active {
+            opacity: 1;
 
-			path{
-				stroke: #D2D2D2;
-				fill: #EBEBEB;
-			}
-		}
-	}
+            path {
+                stroke: #d2d2d2;
+                fill: #ebebeb;
+            }
+        }
+    }
 
-	&:hover, &:focus{
-		.Item_bookmark{
-			opacity: 1;
+    &:hover,
+    &:focus {
+        .Item_bookmark {
+            opacity: 1;
 
-			&:hover, &:focus{ path{
-				stroke: #C0C0C0;
-			}}
+            &:hover,
+            &:focus {
+                path {
+                    stroke: #c0c0c0;
+                }
+            }
 
-			&.is-active{
-				path{
-					stroke: #BDBDBD;
-				}
+            &.is-active {
+                path {
+                    stroke: #bdbdbd;
+                }
 
-				&:hover, &:focus{ path{
-					stroke: #A4A4A4;
-				}}
-			}
-		}
-	}
+                &:hover,
+                &:focus {
+                    path {
+                        stroke: #a4a4a4;
+                    }
+                }
+            }
+        }
+    }
 
-	&_url{
-		font-size: 13px;
-		font-weight: 400;
-		color: #CBCACA;
-	}
+    &_url {
+        font-size: 13px;
+        font-weight: 400;
+        color: #cbcaca;
+    }
 
-	&_title{
-		font-weight: 700;
-		font-size: 19px;
-		margin-top: 5px;
-		margin-bottom: 3px;
-	}
+    &_title {
+        font-weight: 700;
+        font-size: 19px;
+        margin-top: 5px;
+        margin-bottom: 3px;
+    }
 
-	&_description{
-		font-size: 14px;
-		margin-top: 0;
-		margin-bottom: 10px;
-	}
+    &_description {
+        font-size: 14px;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
 
-	&_tag{
-		display: inline-block;
-		margin-right: 3px;
-		padding: 3px 7px 4px;
-		border: 1px solid $primaryColor;
-		border-radius: 3px;
-		color: $primaryColor;
-		font-size: 12px;
-		margin-bottom: 5px;
+    &_tag {
+        display: inline-block;
+        margin-right: 3px;
+        padding: 3px 7px 4px;
+        border: 1px solid $primaryColor;
+        border-radius: 3px;
+        color: $primaryColor;
+        font-size: 12px;
+        margin-bottom: 5px;
 
-        & + &{
+        & + & {
             margin-left: 4px;
         }
 
-		&:hover{
-			background:  $primaryColor-white;
-		}
-	}
+        &:hover {
+            background: $primaryColor-white;
+        }
+    }
 
-	&.is-visited{
-		.Item{
-			&_url, &_title, &_description{
-				opacity: .4;
-			}
+    &.is-visited {
+        .Item {
+            &_url,
+            &_title,
+            &_description {
+                opacity: 0.4;
+            }
 
-			&_tag{
-				border-color: rgba($primaryColor, .9);
-				opacity: .4;
-			}
-		}
-	}
+            &_tag {
+                border-color: rgba($primaryColor, .9);
+                opacity: 0.4;
+            }
+        }
+    }
 
-	&.is-visited:hover{
-		.Item{
-			&_url, &_title, &_description{
-				opacity: 1;
-			}
+    &.is-visited:hover {
+        .Item {
+            &_url,
+            &_title,
+            &_description {
+                opacity: 1;
+            }
 
-			&_tag{
-				border-color: $primaryColor;
-				opacity: 1;
-			}
-		}
-	}
+            &_tag {
+                border-color: $primaryColor;
+                opacity: 1;
+            }
+        }
+    }
 }

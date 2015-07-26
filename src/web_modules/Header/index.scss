@@ -7,9 +7,10 @@
 
 .Header{
 	position: relative;
+	margin-bottom: 32px;
 
-	&_back{
-		display: block;
+	&_back, &_next{
+		display: none;
 		position: absolute;
 		top: 12px;
 		width: 11px;	height: 20px;
@@ -19,9 +20,14 @@
 			opacity: .6;
 		}
 
-		&.-first{
-			display:none;
+		&.is-active{
+			display:block;
 		}
+	}
+
+	&_next{
+		right: 20px;
+		transform: rotate(180deg);
 	}
 
 	&_url, &_title{
