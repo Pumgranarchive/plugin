@@ -17,4 +17,4 @@ $ npm install                   # Install Node.js components listed in ./package
 $ npm start                     # or : env UV_THREADPOOL_SIZE=100 node server.js
 ```
 
-This will start a lightweight development server with webpack.
+This will start a lightweight development server with webpack : **http://localhost:3000**.
