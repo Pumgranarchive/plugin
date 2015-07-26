@@ -62,8 +62,6 @@ export default class View extends Component{
         let {page, related_content, actions, position, lastPageId, goTo} = this.props;
         let {search} = this.state;
 
-        console.log(position);
-
         return (
             <div className={`View View-${position}`}>
                 <Header

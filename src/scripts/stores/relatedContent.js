@@ -1,4 +1,5 @@
 import { BOOKMARK_ITEM, VISIT_ITEM } from 'constants/ActionTypes';
+import API from 'utils/api.ts';
 
 var initialState = [{
         id: 0,
@@ -63,6 +64,7 @@ var initialState = [{
     }
 ];
 
+// export default function related_content(state = API.API.GetLinksFromContent(), action){
 export default function related_content(state = initialState, action){
     switch(action.type){
         case BOOKMARK_ITEM :
