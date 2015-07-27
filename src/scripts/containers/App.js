@@ -15,6 +15,9 @@ export default class App{
      * @return JSX
      */
     render(){
+        let {show} = this.props;
+        console.log(show);
+
         return(
             <Provider store={store}>
                 {() =>

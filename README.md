@@ -25,6 +25,8 @@ This will start a lightweight development server with webpack : **http://localho
 $ npm run build                # or: env UV_THREADPOOL_SIZE=100 webpack --production
 ```
 
+## Chrome
+
 ### Build the chrome extension
 
 ```shell

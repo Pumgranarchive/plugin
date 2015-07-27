@@ -22,9 +22,12 @@
     background: $background-color;
     border-left: 5px solid $primaryColor;
     color: $text-color;
-    line-height: 21px;
-    text-align: left;
-    *{font-family: $text-fontFamily!important;}
+
+    *{
+        font-family: $text-fontFamily!important;
+        text-align: left;
+        line-height: 21px;
+    }
 
     & &_views {
         position: relative;

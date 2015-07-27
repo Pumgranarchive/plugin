@@ -5,14 +5,18 @@ var path = require('path'),
 
 var production = process.argv.indexOf("--production") > -1;
 var chrome = process.argv.indexOf("chrome") > -1;
-var outputPath = '__build__';
-var outputPublicPath = '/__build__/';
-if(chrome){
-    outputPath = 'chrome_extension';
-    outputPublicPath = '';
+var entryFiles = [
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
+    './src/index'
+];
+var jsLoaders = ['react-hot', 'babel'];
+if(production){
+    entryFiles = [
+        './src/index'
+    ];
+    jsLoaders = ['babel'];
 }
-
-console.log(outputPublicPath);
 
 module.exports = {
     server: {
@@ -21,16 +25,11 @@ module.exports = {
         hot: true,
         historyApiFallback: true,
     },
-    devtool: 'eval',
-    entry: [
-        'webpack-dev-server/client?http://localhost:3000',
-        'webpack/hot/only-dev-server',
-        './src/index'
-    ],
+    entry: entryFiles,
     output: {
-        path: path.join(__dirname, outputPath),
+        path: chrome ? path.join(__dirname, 'chrome_extension') : path.join(__dirname, '__build__'),
         filename: 'app.js',
-        publicPath: outputPublicPath
+        publicPath: chrome ? '' : '/__build__/'
     },
     resolve: {
         extensions: ['', '.js', '.jsx', '.scss', 'ts'],
@@ -45,7 +44,7 @@ module.exports = {
     module: {
         loaders: [{
             test: /\.jsx?$/,
-            loaders: ['react-hot', 'babel'],
+            loaders: jsLoaders,
             include: path.join(__dirname, 'src')
         },{
             test: /\.ts$/,
@@ -71,11 +70,17 @@ module.exports = {
         }]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
         new NyanProgressPlugin(),
-        new ExtractTextPlugin('style.css', {disable: !production})
-    ],
+        new ExtractTextPlugin('style.css', {disable: !production}),
+        new webpack.DefinePlugin({
+           __PROD__: production
+         }),
+    ].concat(
+        production ? [] : [
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NoErrorsPlugin()
+        ]
+    ),
     postcss : function(){
         var autoprefixer = require('autoprefixer-core');
         return [

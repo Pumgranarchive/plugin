@@ -4,8 +4,8 @@
   "description": "...",
   "scripts": {
     "start": "env UV_THREADPOOL_SIZE=100 node server.js",
-    "build": "env UV_THREADPOOL_SIZE=100 webpack --production",
-    "build chrome": "env UV_THREADPOOL_SIZE=100 webpack --production-chrome",
+    "build": "env UV_THREADPOOL_SIZE=100 BABEL_ENV=production webpack --production ",
+    "build chrome": "env UV_THREADPOOL_SIZE=100 webpack  --production BABEL_ENV=production",
     "lint": "eslint __build__"
   },
   "repository": {
