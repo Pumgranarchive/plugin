@@ -19,19 +19,19 @@ $ npm start                     # or: env UV_THREADPOOL_SIZE=100 node server.js
 
 This will start a lightweight development server with webpack : **http://localhost:3000**.
 
-### How to build ?
+### How to build (production mode) ?
 
 ```shell
 $ npm run build                # or: env UV_THREADPOOL_SIZE=100 webpack --production
 ```
 
-### How to build the chrome extension ?
+### Build the chrome extension
 
 ```shell
 $ npm run build chrome
 ```
 
-### Load the extension in chrome ?
+### Load the extension in chrome
 * Visit chrome://extensions in your browser.
 * Ensure that the Developer mode checkbox in the top right-hand corner is checked.
 * Click Load unpacked extension… to pop up a file-selection dialog.
