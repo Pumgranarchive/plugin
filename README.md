@@ -11,10 +11,28 @@ $ cd plugin
 $ npm install                   # Install Node.js components listed in ./package.json
 ```
 
-### How to use
+### How to use ?
 
 ```shell
-$ npm start                     # or : env UV_THREADPOOL_SIZE=100 node server.js
+$ npm start                     # or: env UV_THREADPOOL_SIZE=100 node server.js
 ```
 
 This will start a lightweight development server with webpack : **http://localhost:3000**.
+
+### How to build ?
+
+```shell
+$ npm run build                # or: env UV_THREADPOOL_SIZE=100 webpack --production
+```
+
+### How to build the chrome extension ?
+
+```shell
+$ npm run build chrome
+```
+
+### Load the extension in chrome ?
+* Visit chrome://extensions in your browser.
+* Ensure that the Developer mode checkbox in the top right-hand corner is checked.
+* Click Load unpacked extension… to pop up a file-selection dialog.
+* Navigate to the directory in which your extension files live: `./chrome_extension/`
