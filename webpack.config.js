@@ -76,7 +76,13 @@ module.exports = {
            __PROD__: production
          }),
     ].concat(
-        production ? [] : [
+        production ? [
+            new webpack.optimize.UglifyJsPlugin({
+              compress: {
+                warnings: false,
+              },
+            }),
+        ] : [
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NoErrorsPlugin()
         ]

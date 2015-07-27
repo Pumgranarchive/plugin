@@ -17,13 +17,14 @@ $ npm install                   # Install Node.js components listed in ./package
 $ npm start                     # or: env UV_THREADPOOL_SIZE=100 node server.js
 ```
 
-This will start a lightweight development server with webpack : **http://localhost:3000**.
+This will start a lightweight development server (webpack dev server) on **http://localhost:3000** (with live hot reloading).
 
 ### How to build (production mode) ?
 
 ```shell
 $ npm run build                # or: env UV_THREADPOOL_SIZE=100 webpack --production
 ```
+(think to delete the comments of line 6 of the html file to see all styles of the pumgrana app.)
 
 ## Chrome
 
