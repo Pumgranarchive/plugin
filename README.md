@@ -11,7 +11,7 @@ $ cd plugin
 $ npm install                   # Install Node.js components listed in ./package.json
 ```
 
-### How to use ?
+### How to use (dev mode) ?
 
 ```shell
 $ npm start                     # or: env UV_THREADPOOL_SIZE=100 node server.js
