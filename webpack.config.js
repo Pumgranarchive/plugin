@@ -3,6 +3,17 @@ var path = require('path'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     NyanProgressPlugin = require('nyan-progress-webpack-plugin');
 
+var production = process.argv.indexOf("--production") > -1;
+var chrome = process.argv.indexOf("chrome") > -1;
+var outputPath = '__build__';
+var outputPublicPath = '/__build__/';
+if(chrome){
+    outputPath = 'chrome_extension';
+    outputPublicPath = '';
+}
+
+console.log(outputPublicPath);
+
 module.exports = {
     server: {
         port: 3000,
@@ -17,9 +28,9 @@ module.exports = {
         './src/index'
     ],
     output: {
-        path: path.join(__dirname, '__build__'),
-        filename: 'index.js',
-        publicPath: '/__build__/'
+        path: path.join(__dirname, outputPath),
+        filename: 'app.js',
+        publicPath: outputPublicPath
     },
     resolve: {
         extensions: ['', '.js', '.jsx', '.scss', 'ts'],
@@ -51,32 +62,25 @@ module.exports = {
         )},{
             test: /.*\.(gif|png|jpe?g|svg)$/i,
             loaders: [
-              'file?hash=sha512&digest=hex&name=[hash].[ext]',
+              'url?limit=10000&name=[name]-[sha512:hash:base64:7].[ext]',
               'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
             ]
         },{
             test: /.*\.(ttf|woff)$/i,
-            loader: 'file'
+            loader: 'url?name=[name].[ext]'
         }]
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         new NyanProgressPlugin(),
-        new ExtractTextPlugin('style.css', {disable: true})
+        new ExtractTextPlugin('style.css', {disable: !production})
     ],
     postcss : function(){
-        var pxtorem = require('postcss-pxtorem');
+        var autoprefixer = require('autoprefixer-core');
         return [
-            pxtorem({
-                media_query: true,
-                prop_white_list: ['font-size', 'line-height', 'letter-spacing', 'margin',
-                    'margin-top', 'margin-right', 'margin-bottom', 'margin-left', 'padding',
-                    'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'width',
-                    'height', 'top', 'left', 'bottom', 'right', 'border-radius', 'border',
-                    'border-top', 'border-right', 'border-bottom', 'border-left', 'max-width',
-                    'max-height', 'background-size', 'background-position', 'transform']
-        })];
+            autoprefixer({ browsers: ['last 2 versions'] })
+        ];
     }
 
 };

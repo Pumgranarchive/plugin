@@ -1,7 +1,7 @@
 /**
  * Console log
  *
- * @return this
+ * @return this in console.log
  */
 export function log(){
     console.log(this);

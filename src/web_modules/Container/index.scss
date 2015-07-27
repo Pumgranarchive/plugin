@@ -6,9 +6,13 @@
 @import 'core';
 
 .Pumgrana {
+    // Import reset
+    @import 'base/reset';
+
+    // Style component
     position: fixed;
-    z-index: 0;
-    /* 2147483647;*/
+    z-index: 2147483647;
+    /* 2147483647 */
     top: 0;
     right: 0;
     overflow: hidden;
@@ -20,9 +24,9 @@
     color: $text-color;
     line-height: 21px;
     text-align: left;
-    font-family: $text-fontFamily;
+    *{font-family: $text-fontFamily!important;}
 
-    &_views {
+    & &_views {
         position: relative;
         width: 300%;
         margin-left: -100%;
