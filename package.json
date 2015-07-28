@@ -32,6 +32,7 @@
     "imagemin": "^3.2.0",
     "node-sass": "^3.2.0",
     "nyan-progress-webpack-plugin": "^1.0.0",
+    "postcss-loader": "^0.5.1",
     "react-hot-loader": "^1.2.7",
     "redux-devtools": "^0.1.0",
     "sass-loader": "^1.0.2",
