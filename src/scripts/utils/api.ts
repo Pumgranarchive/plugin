@@ -26,7 +26,9 @@ export module API{
     {
         var NetworkInterface: XMLHttpRequest = new XMLHttpRequest();
 
-        NetworkInterface.open('GET', 'http://52.26.76.243/' + prefix + encodeURIComponent(param), false);
+	var Url: string  = 'http://api.pumgrana.com/' + prefix + encodeURIComponent(param);
+	
+        NetworkInterface.open('GET', Url, false);
         NetworkInterface.send();
 
         if (NetworkInterface.status === 200)

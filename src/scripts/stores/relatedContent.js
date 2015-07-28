@@ -1,7 +1,29 @@
 import { BOOKMARK_ITEM, VISIT_ITEM } from 'constants/ActionTypes';
 import API from 'utils/api.ts';
 
-var initialState = [{
+var APIData = API.API.GetLinksFromContent(window.location.href);
+
+var PluginData = [];
+if (APIData && APIData.length > 0)
+{
+    for (var i = 0 ; i < APIData.length ; i++)
+    {
+	PluginData.push(
+	    {
+		id: 0,
+		title: APIData[i].content_title,
+		description: APIData[i].content_summary,
+		website: 'mywebsite.com',
+		url: APIData[i].content_uri,
+		tags: ['tag1', 'tag2'],
+		bookmarked: false,
+		visited: false,
+		page_id: 0
+	    });
+    }
+}
+
+/* var initialState = [{
         id: 0,
         title: 'Title 1',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue consectetur ante hendrerit ...',
@@ -62,10 +84,10 @@ var initialState = [{
         visited: false,
         page_id: 2
     }
-];
+];*/
 
 // export default function related_content(state = API.API.GetLinksFromContent(), action){
-export default function related_content(state = initialState, action){
+export default function related_content(state = PluginData, action){
     switch(action.type){
         case BOOKMARK_ITEM :
             return state.map(item =>
