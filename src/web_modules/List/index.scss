@@ -5,21 +5,15 @@
 
 @import 'core';
 
-.Resultats{
-    margin-top: 35px;
-    padding: $resultats-padding;
-    padding-top:24px;
-    background: white;
-    border: 1px solid $secondaryColor-light;
+.Pumgrana .List {
+    margin-top: 8px;
 
-    &_title{
-    	margin-bottom: 20px;
-    	color: $primaryColor;
-    	font-weight: 700;
-    	font-size: 19px;
+    &-empty{
+        margin-top: 14px;
+        padding-bottom: 10px;
     }
 
-    &_loadMore{
+    &_loadMore {
         display: block;
         position: static;
         margin: auto;
@@ -31,8 +25,9 @@
         border-radius: 2px;
         cursor: pointer;
 
-        &:hover, &.is-active{
-            opacity: .8;
+        &:hover,
+        &.is-active {
+            opacity: 0.8;
         }
     }
 }

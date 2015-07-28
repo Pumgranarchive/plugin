@@ -1,8 +1,22 @@
 var path = require('path'),
     webpack = require('webpack'),
-    pxtorem = require('postcss-pxtorem'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     NyanProgressPlugin = require('nyan-progress-webpack-plugin');
+
+var production = process.argv.indexOf("--production") > -1;
+var chrome = process.argv.indexOf("chrome") > -1;
+var entryFiles = [
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
+    './src/index'
+];
+var jsLoaders = ['react-hot', 'babel'];
+if(production){
+    entryFiles = [
+        './src/index'
+    ];
+    jsLoaders = ['babel'];
+}
 
 module.exports = {
     server: {
@@ -11,68 +25,73 @@ module.exports = {
         hot: true,
         historyApiFallback: true,
     },
-    devtool: 'eval',
-    entry: [
-        'webpack-dev-server/client?http://localhost:3000',
-        'webpack/hot/only-dev-server',
-        './src/index'
-    ],
+    entry: entryFiles,
     output: {
-        path: path.join(__dirname, '__build__'),
-        filename: 'index.js',
-        publicPath: '/__build__/'
+        path: chrome ? path.join(__dirname, 'chrome_extension') : path.join(__dirname, '__build__'),
+        filename: 'app.js',
+        publicPath: chrome ? '' : '/__build__/'
     },
     resolve: {
-        extensions: ['', '.js', '.jsx', '.css', 'ts'],
-        modulesDirectories: ['src/web_modules', 'node_modules', 'src/assets', 'src/scripts']
+        extensions: ['', '.js', '.jsx', '.scss', 'ts'],
+        modulesDirectories: [
+            'src/web_modules',
+            'node_modules',
+            'src/assets',
+            'src/scripts',
+            'src/scripts/containers'
+        ]
     },
     module: {
         loaders: [{
             test: /\.jsx?$/,
-            loaders: ['react-hot', 'babel'],
+            loaders: jsLoaders,
             include: path.join(__dirname, 'src')
         },{
             test: /\.ts$/,
-            loader: 'typescript-loader'
+            loader: 'awesome-typescript-loader'
         },{
-            test: /\.css$/,
-            loader: ExtractTextPlugin.extract('style', 'css!postcss!cssnext')
-        },{
+            test: /\.(scss|css)$/,
+            loader: ExtractTextPlugin.extract('style', 'css!postcss!sass?outputStyle=expanded&' +
+                      'includePaths[]=' +
+                        (path.resolve(__dirname, './src/assets/fonts/')) + '&' +
+                      'includePaths[]=' +
+                        (path.resolve(__dirname, './src/assets/stylesheets/')) + '&' +
+                      'includePaths[]=' +
+                        (path.resolve(__dirname, './src/assets/images/'))
+        )},{
             test: /.*\.(gif|png|jpe?g|svg)$/i,
             loaders: [
-              'file?hash=sha512&digest=hex&name=[hash].[ext]',
+              'url?limit=10000&name=[name]-[sha512:hash:base64:7].[ext]',
               'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
             ]
         },{
             test: /.*\.(ttf|woff)$/i,
-            loader: 'file'
+            loader: 'url?name=[name].[ext]'
         }]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
         new NyanProgressPlugin(),
-        new ExtractTextPlugin('style.css',{disable: true})
-    ],
-    cssnext: {
-        browsers: 'last 2 versions',
-        import: {
-            path: ['./src/assets/stylesheets/', './src/assets/fonts/']
-        },
-        url: {
-            basePath: ['./src/assets/images/']
-        }
-    },
+        new ExtractTextPlugin('style.css', {disable: !production}),
+        new webpack.DefinePlugin({
+           __PROD__: production
+         }),
+    ].concat(
+        production ? [
+            new webpack.optimize.UglifyJsPlugin({
+              compress: {
+                warnings: false,
+              },
+            }),
+        ] : [
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NoErrorsPlugin()
+        ]
+    ),
     postcss : function(){
-        return [require('postcss-nested'), require('postcss-simple-vars'), require('postcss-map'), pxtorem({
-            media_query: true,
-            prop_white_list: ['font-size', 'line-height', 'letter-spacing', 'margin',
-                'margin-top', 'margin-right', 'margin-bottom', 'margin-left', 'padding',
-                'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'width',
-                'height', 'top', 'left', 'bottom', 'right', 'border-radius', 'border',
-                'border-top', 'border-right', 'border-bottom', 'border-left', 'max-width',
-                'max-height', 'background-size', 'background-position', 'transform']
-        })];
+        var autoprefixer = require('autoprefixer-core');
+        return [
+            autoprefixer({ browsers: ['last 2 versions'] })
+        ];
     }
 
 };

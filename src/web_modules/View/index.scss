@@ -1,0 +1,41 @@
+/**
+ * View component style
+ *
+ */
+
+@import 'core';
+
+.Pumgrana .View {
+    display: inline-block;
+    position: absolute;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    vertical-align: top;
+    box-sizing: border-box;
+    width: 33.333%;
+    height: calc(100% - #{$footer-height});
+    padding: $container-padding $container-padding 0;
+    transition: left ease .6s;
+    background: $background-color;
+    box-shadow: 0 0 6px rgba(black, .3);
+
+    &_content {
+        padding: 24px $resultats-padding $resultats-padding;
+        background: white;
+        border: 1px solid $secondaryColor-light;
+        margin-bottom: $footer-height * .9;
+        border-radius: 3px;
+    }
+
+    &-before{
+        left:0;
+    }
+
+    &-current{
+        left: 33.333%;
+    }
+
+    &-after{
+        left: 66.666%;
+    }
+}

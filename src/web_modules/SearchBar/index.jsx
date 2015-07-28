@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './index.css';
+import './index.scss';
 
 export default class SearchBar extends Component{
 
@@ -7,12 +7,9 @@ export default class SearchBar extends Component{
      * Props
      *
      */
-    static defaultProps = {
-        scroll: false
-    }
 
     static propTypes = {
-        scroll: React.PropTypes.bool.isRequired
+        handleSearch: React.PropTypes.func.isRequired
     }
 
 
@@ -38,8 +35,6 @@ export default class SearchBar extends Component{
      * @return <html>
      */
     render(){
-        let {scroll, search} = this.props;
-
         return (
             <div className="SearchBar_container">
                 <input type="text" ref="searchBarInput" placeholder="Search..." className="SearchBar" onKeyDown={::this._onChange} />
