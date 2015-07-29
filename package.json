@@ -1,7 +1,7 @@
 {
   "name": "pumgrana-plugin",
-  "version": "1.0.0",
-  "description": "...",
+  "version": "0.1.0",
+  "description": "This extension allows you to add content to the Pumgrana website.",
   "scripts": {
     "start": "env UV_THREADPOOL_SIZE=100 node server.js",
     "build": "env UV_THREADPOOL_SIZE=100 BABEL_ENV=production webpack --production ",
