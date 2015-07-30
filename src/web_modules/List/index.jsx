@@ -56,47 +56,69 @@ export default class List extends Component{
 
 
     /**
-     * Render
+     * Render list
+     *
+     * @return JSX
+     */
+    renderList(){
+        let {related_content, bookmarkItem, visitItem} = this.props;
+
+        let list = related_content.map((item, i) => {
+            return (
+                <div>
+                    <Item bookmarkItem={ bookmarkItem } visitItem={ visitItem } key={i} item={item} />
+                </div>
+            );
+        });
+
+        return list;
+    }
+
+
+
+    /**
+     * Render load more
+     *
+     * @return JSX
+     */
+    renderLoadMore(){
+        let {loading} = this.state;
+
+        return (
+            <button
+                onClick={::this.loadMore}
+                className={ctx("List_loadMore",{
+                    "is-active": loading
+                })}>
+                { (loading ? 'Loading ...' : 'Load more') }
+            </button>
+        );
+    }
+
+
+
+    /**
+     * Render (general)
      *
      * @return JSX
      */
     render(){
-        let {related_content, bookmarkItem, visitItem, loadMore} = this.props;
-        let {loading} = this.state;
+        let {related_content} = this.props;
 
-        // Render "Load more ..."
-        let loader;
-        if(loadMore){
-            loader = (
-                <button
-                    onClick={::this.loadMore}
-                    className={ctx("List_loadMore",{
-                        "is-active": loading
-                    })}>
-                    { (loading ? 'Loading ...' : 'Load more') }
-                </button>
+        if(related_content.length == 0){
+            return (
+                <div className="List">
+                    {<div className="List-empty">No resultats found</div>}
+                </div>
             );
         }
-
-        // Render related_content
-        if(related_content.length == 0){
-            related_content = (<div className="List-empty">No resultats found</div>)
-        }
         else{
-            related_content = related_content.map((item, i) => {
-                return (
-                    <div>
-                        <Item bookmarkItem={ bookmarkItem } visitItem={ visitItem } key={i} item={item} />
-                    </div>
-                );
-            })
+            return (
+                <div className="List">
+                    {this.renderList()}
+                    {this.renderLoadMore()}
+                </div>
+            )
         }
-
-        return (
-            <div className="List">
-                { related_content }
-                { loader }
-            </div>
-        );
     }
 }

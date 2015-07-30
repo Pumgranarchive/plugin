@@ -22,12 +22,11 @@ export module API{
         }
     }
 
-    export function DoAjaxCall(prefix: string, param: string): DataModel.LinkedContent
+    export function doAjaxCall(prefix: string, param: string): DataModel.LinkedContent
     {
         var NetworkInterface: XMLHttpRequest = new XMLHttpRequest();
 
-	var Url: string  = 'http://api.pumgrana.com/' + prefix + encodeURIComponent(param);
-	
+	    var Url: string  = 'http://api.pumgrana.com/' + prefix + encodeURIComponent(param);
         NetworkInterface.open('GET', Url, false);
         NetworkInterface.send();
 
@@ -37,12 +36,12 @@ export module API{
         }
     }
 
-    export function GetLinksFromContent(uri: string): DataModel.Link[] {
-        return DoAjaxCall('linkedcontent/from_content/', uri).links;
+    export function getLinksFromContent(uri: string): DataModel.Link[] {
+        return doAjaxCall('linkedcontent/from_content/', uri).links;
     }
 
 
-    export function GetLinksFromResearch(uri: string, input: string) : DataModel.Link[] {
-        return DoAjaxCall('linkedcontent/search/' + encodeURIComponent(uri), input).links;
+    export function getLinksFromResearch(uri: string, input: string) : DataModel.Link[] {
+        return doAjaxCall('linkedcontent/search/' + encodeURIComponent(uri), input).links;
     }
 }
