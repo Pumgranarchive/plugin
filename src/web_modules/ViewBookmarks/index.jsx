@@ -9,9 +9,9 @@ export default class ViewBookmarks extends Component{
      * Props
      *
      */
-    static defaultProps = { related_content: {}, actions: {}, show: false }
+    static defaultProps = { related_content: [], actions: {}, show: false }
     static propTypes = {
-        related_content: React.PropTypes.object.isRequired,
+        related_content: React.PropTypes.array.isRequired,
         show: React.PropTypes.bool.isRequired,
         actions: React.PropTypes.object.isRequired
     }

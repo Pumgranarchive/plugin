@@ -85,7 +85,8 @@ export default class Container extends Component{
                                   lastPageId={ (pages.length - 1) }
                                   position={ position }
                                   goTo={ ::this.goTo }
-                                  actions={ actions } />
+                                  actions={ actions }
+                                  key={ i } />
                         );
                     })}
                     <ViewBookmarks

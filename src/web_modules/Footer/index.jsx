@@ -9,11 +9,11 @@ export default class Footer{
      *
      */
     static defaultProps = {
-        related_content: {},
+        related_content: [],
         goToBookmarks: function(){}
     }
     static propTypes = {
-        related_content: React.PropTypes.object.isRequired,
+        related_content: React.PropTypes.array.isRequired,
         goToBookmarks: React.PropTypes.func.isRequired
     }
 

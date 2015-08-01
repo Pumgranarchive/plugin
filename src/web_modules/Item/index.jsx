@@ -67,7 +67,7 @@ export default class Item extends Component{
                     <h2 className="Item_title">{ title }</h2>
                     <p className="Item_description">{ description }</p>
                     { tags.map((tag, i) => { return (
-                        <span className="Item_tag">{ tag }</span>
+                        <span className="Item_tag" key={ i }>{ tag }</span>
                     );}) }
                 </div>
             </div>

@@ -13,7 +13,7 @@ export default class View extends Component{
      */
     static defaultProps = {
         page: {},
-        related_content: {},
+        related_content: [],
         actions: {},
         position: 'current',
         lastPageId: 0,
@@ -21,7 +21,7 @@ export default class View extends Component{
     }
     static propTypes = {
         page: React.PropTypes.object.isRequired,
-        related_content: React.PropTypes.object.isRequired,
+        related_content: React.PropTypes.array.isRequired,
         actions: React.PropTypes.object.isRequired,
         position: React.PropTypes.string.isRequired,
         lastPageId: React.PropTypes.number.isRequired,

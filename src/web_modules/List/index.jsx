@@ -65,13 +65,13 @@ export default class List extends Component{
 
         let list = related_content.map((item, i) => {
             return (
-                <div>
-                    <Item bookmarkItem={ bookmarkItem } visitItem={ visitItem } key={i} item={item} />
-                </div>
+                <Item bookmarkItem={ bookmarkItem } visitItem={ visitItem } key={i} item={item} />
             );
         });
 
-        return list;
+        return (
+            <div>{ list }</div>
+        );
     }
 
 

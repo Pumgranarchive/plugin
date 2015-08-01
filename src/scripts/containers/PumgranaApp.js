@@ -14,9 +14,9 @@ export default class PumgranaApp extends Component{
      * Props
      *
      */
-    static defaultProps = { page: {}, related_content: [] }
+    static defaultProps = { pages: [], related_content: [] }
     static propTypes = {
-        page: React.PropTypes.object.isRequired,
+        pages: React.PropTypes.array.isRequired,
         related_content: React.PropTypes.array.isRequired
     }
 
