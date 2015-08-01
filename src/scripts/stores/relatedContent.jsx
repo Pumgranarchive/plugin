@@ -1,4 +1,5 @@
-import { BOOKMARK_ITEM, VISIT_ITEM } from 'constants/ActionTypes';
+import { handleActions } from 'redux-actions';
+import { BOOKMARK_RELATED_CONTENT, VISIT_RELATED_CONTENT } from 'constants/ActionTypes';
 import API from 'utils/api.ts';
 
 var APIData = API.API.getLinksFromContent(window.location.href);
@@ -32,23 +33,22 @@ if (APIData && APIData.length > 0){
     page_id: 0
 }];*/
 
-export default function related_content(state = initialState, action){
-    switch(action.type){
-        case BOOKMARK_ITEM :
-            return state.map(item =>
-                item.id === action.id ?
-                    { ...item, bookmarked: !item.bookmarked } :
-                    item
-            );
+const related_content = handleActions({
+    [BOOKMARK_RELATED_CONTENT]: (state, action) => (
+        state.map(item =>
+            item.id === action.id ?
+                { ...item, bookmarked: !item.bookmarked } :
+                item
+        )
+    ),
 
-        case VISIT_ITEM:
-            return state.map(item =>
-                item.id === action.id ?
-                    { ...item, visited: true } :
-                    item
-            );
+    [VISIT_RELATED_CONTENT]: (state, action) => (
+        state.map(item =>
+            item.id === action.id ?
+                { ...item, visited: true } :
+                item
+        )
+    )
+}, initialState);
 
-        default:
-            return state;
-    }
-}
+export default related_content;

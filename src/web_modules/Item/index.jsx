@@ -10,14 +10,14 @@ export default class Item extends Component{
      */
     static defaultProps = {
         item: {},
-        bookmarkItem: function(){},
-        visitItem: function(){}
+        bookmarkRelatedContent: function(){},
+        visitRelatedContent: function(){}
     }
 
     static propTypes = {
         item: React.PropTypes.object.isRequired,
-        bookmarkItem: React.PropTypes.func.isRequired,
-        visitItem: React.PropTypes.func.isRequired
+        bookmarkRelatedContent: React.PropTypes.func.isRequired,
+        visitRelatedContent: React.PropTypes.func.isRequired
     }
 
 
@@ -27,7 +27,7 @@ export default class Item extends Component{
      *
      */
     handleVisite(){
-        this.props.visitItem(this.props.item.id);
+        this.props.visitRelatedContent(this.props.item.id);
     }
 
 
@@ -37,7 +37,7 @@ export default class Item extends Component{
      *
      */
     handleBookmark(){
-        this.props.bookmarkItem(this.props.item.id);
+        this.props.bookmarkRelatedContent(this.props.item.id);
     }
 
 

@@ -75,8 +75,8 @@ export default class View extends Component{
                     <SearchBar handleSearch={::this.handleSearch} />
                     <List
                         related_content={ related_content }
-                        bookmarkItem={ actions.bookmarkItem }
-                        visitItem={ actions.visitItem }
+                        bookmarkRelatedContent={ actions.bookmarkRelatedContent }
+                        visitRelatedContent={ actions.visitRelatedContent }
                         loadMore={true} />
                 </div>
             </div>

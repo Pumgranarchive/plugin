@@ -12,15 +12,15 @@ export default class List extends Component{
      */
     static defaultProps = {
         related_content: [],
-        bookmarkItem: function(){},
-        visitItem: function(){},
+        bookmarkRelatedContent: function(){},
+        visitRelatedContent: function(){},
         loadMore: false
     }
 
     static propTypes = {
         related_content: React.PropTypes.array.isRequired,
-        bookmarkItem: React.PropTypes.func.isRequired,
-        visitItem: React.PropTypes.func.isRequired,
+        bookmarkRelatedContent: React.PropTypes.func.isRequired,
+        visitRelatedContent: React.PropTypes.func.isRequired,
         loadMore: React.PropTypes.bool.isRequired
     }
 
@@ -61,11 +61,11 @@ export default class List extends Component{
      * @return JSX
      */
     renderList(){
-        let {related_content, bookmarkItem, visitItem} = this.props;
+        let {related_content, bookmarkRelatedContent, visitRelatedContent} = this.props;
 
         let list = related_content.map((item, i) => {
             return (
-                <Item bookmarkItem={ bookmarkItem } visitItem={ visitItem } key={i} item={item} />
+                <Item bookmarkRelatedContent={ bookmarkRelatedContent } visitRelatedContent={ visitRelatedContent } key={i} item={item} />
             );
         });
 

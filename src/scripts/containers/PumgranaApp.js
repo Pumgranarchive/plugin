@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as LinkActions from "actions/ResultatActions";
+import * as LinkActions from "actions/RelatedContentActions";
 import Container from 'Container/';
 
 @connect(state => ({
