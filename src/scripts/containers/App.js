@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { createStore, combineReducers, compose } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import * as stores from 'stores/';
 import PumgranaApp from 'PumgranaApp';
+import promiseMiddleware from 'redux-promise';
 
-const reducer = combineReducers(stores);
-const store = createStore(reducer);
+const reducers = combineReducers(stores);
+const store = createStore(reducers);
+const storeWithMiddleware = applyMiddleware(promiseMiddleware)(store);
 
 export default class App{
 
