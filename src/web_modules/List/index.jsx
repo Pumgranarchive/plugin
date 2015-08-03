@@ -69,7 +69,6 @@ export default class List extends Component{
      */
     renderLoadMore(){
         let {page} = this.props;
-        console.log(page);
 
         return (
             <button
@@ -90,7 +89,7 @@ export default class List extends Component{
      * @return JSX
      */
     render(){
-        let {related_content} = this.props;
+        let {related_content, loadMore} = this.props;
 
         if(related_content.length == 0){
             return (
@@ -103,7 +102,7 @@ export default class List extends Component{
             return (
                 <div className="List">
                     {this.renderList()}
-                    {this.renderLoadMore()}
+                    { (loadMore ? this.renderLoadMore() : '') }
                 </div>
             )
         }
