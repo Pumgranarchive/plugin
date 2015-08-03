@@ -1,11 +1,10 @@
 {
   "name": "pumgrana-plugin",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "This extension allows you to add content to the Pumgrana website.",
   "scripts": {
-    "start": "env UV_THREADPOOL_SIZE=100 node server.js",
-    "build": "env UV_THREADPOOL_SIZE=100 BABEL_ENV=production webpack --production ",
-    "build chrome": "env UV_THREADPOOL_SIZE=100 webpack  --production BABEL_ENV=production",
+    "start": "env UV_THREADPOOL_SIZE=100 DEBUG=false NODE_ENV=DEV node server.js",
+    "build chrome": "env UV_THREADPOOL_SIZE=100 DEBUG=false NODE_ENV=CHROME webpack",
     "lint": "eslint __build__"
   },
   "repository": {

@@ -3,8 +3,11 @@ var path = require('path'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     NyanProgressPlugin = require('nyan-progress-webpack-plugin');
 
-var production = process.argv.indexOf("--production") > -1;
-var chrome = process.argv.indexOf("chrome") > -1;
+var debug = (process.env.DEBUG == 'true' ? true : false);
+var dev = (process.env.NODE_ENV == 'DEV' ? true : false);
+var production = (process.env.NODE_ENV == 'CHROME' ? true : false);
+var chrome = (production ? true : false);
+
 var entryFiles = [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
@@ -73,7 +76,9 @@ module.exports = {
         new NyanProgressPlugin(),
         new ExtractTextPlugin('style.css', {disable: !production}),
         new webpack.DefinePlugin({
-           __PROD__: production
+           __PROD__: production,
+           __DEBUG__: debug,
+           __DEV__: dev
          }),
     ].concat(
         production ? [
@@ -90,7 +95,7 @@ module.exports = {
     postcss : function(){
         var autoprefixer = require('autoprefixer-core');
         return [
-            autoprefixer({ browsers: ['last 2 versions'] })
+            autoprefixer({ browsers: ['last 10 Chrome versions'] })
         ];
     }
 
