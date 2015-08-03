@@ -7,7 +7,9 @@ export default class SearchBar extends Component{
      * Props
      *
      */
-
+    static defaultProps = {
+        handleSearch: function(){return true;}
+    }
     static propTypes = {
         handleSearch: React.PropTypes.func.isRequired
     }

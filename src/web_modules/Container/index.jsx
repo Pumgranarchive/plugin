@@ -10,11 +10,10 @@ export default class Container extends Component{
      * Props
      *
      */
-    static defaultProps = { pages: [], related_content: [], actions: {} }
+    static defaultProps = { pages: [], related_content: [] }
     static propTypes = {
         pages: React.PropTypes.array.isRequired,
-        related_content: React.PropTypes.array.isRequired,
-        actions: React.PropTypes.object.isRequired
+        related_content: React.PropTypes.array.isRequired
     }
 
 

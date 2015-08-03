@@ -12,26 +12,20 @@ export default class List extends Component{
      */
     static defaultProps = {
         related_content: [],
-        bookmarkRelatedContent: function(){},
-        visitRelatedContent: function(){},
+        page: {},
+        loadMoreRelatedContent: function(){return true},
+        bookmarkRelatedContent: function(){return true},
+        visitRelatedContent: function(){return true},
         loadMore: false
     }
 
     static propTypes = {
         related_content: React.PropTypes.array.isRequired,
+        page: React.PropTypes.object.isRequired,
+        loadMoreRelatedContent: React.PropTypes.func.isRequired,
         bookmarkRelatedContent: React.PropTypes.func.isRequired,
         visitRelatedContent: React.PropTypes.func.isRequired,
         loadMore: React.PropTypes.bool.isRequired
-    }
-
-
-
-    /**
-     * Initialize state
-     *
-     */
-    state = {
-        loading: false
     }
 
 
@@ -42,15 +36,7 @@ export default class List extends Component{
      * @return setState() with object in param
      */
     loadMore(){
-        this.setState({
-            loading: true
-        })
-
-        setTimeout(() => {
-            return this.setState({
-                loading: false
-            })
-        }, 3000);
+        this.props.loadMoreRelatedContent(this.props.page.id, this.props.page.url);
     }
 
 
@@ -82,15 +68,16 @@ export default class List extends Component{
      * @return JSX
      */
     renderLoadMore(){
-        let {loading} = this.state;
+        let {page} = this.props;
+        console.log(page);
 
         return (
             <button
                 onClick={::this.loadMore}
                 className={ctx("List_loadMore",{
-                    "is-active": loading
+                    "is-active": page.pendingData
                 })}>
-                { (loading ? 'Loading ...' : 'Load more') }
+                { (page.pendingData ? 'Loading ...' : 'Load more') }
             </button>
         );
     }

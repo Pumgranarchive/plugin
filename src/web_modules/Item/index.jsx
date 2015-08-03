@@ -27,7 +27,7 @@ export default class Item extends Component{
      *
      */
     handleVisite(){
-        this.props.visitRelatedContent(this.props.item.id);
+        this.props.visitRelatedContent(this.props.item.url);
     }
 
 
@@ -37,7 +37,7 @@ export default class Item extends Component{
      *
      */
     handleBookmark(){
-        this.props.bookmarkRelatedContent(this.props.item.id);
+        this.props.bookmarkRelatedContent(this.props.item.url);
     }
 
 

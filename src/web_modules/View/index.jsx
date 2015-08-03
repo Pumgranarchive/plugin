@@ -14,7 +14,6 @@ export default class View extends Component{
     static defaultProps = {
         page: {},
         related_content: [],
-        actions: {},
         position: 'current',
         lastPageId: 0,
         goTo: function(){}
@@ -22,7 +21,6 @@ export default class View extends Component{
     static propTypes = {
         page: React.PropTypes.object.isRequired,
         related_content: React.PropTypes.array.isRequired,
-        actions: React.PropTypes.object.isRequired,
         position: React.PropTypes.string.isRequired,
         lastPageId: React.PropTypes.number.isRequired,
         goTo: React.PropTypes.func.isRequired
@@ -36,6 +34,16 @@ export default class View extends Component{
      */
     state = {
         search: '',
+    }
+
+
+
+    /**
+     * Component will mount
+     *
+     */
+    componentWillMount(){
+        this.props.actions.getRelatedContent(this.props.page.id, this.props.page.url);
     }
 
 
@@ -74,10 +82,12 @@ export default class View extends Component{
                     </h1>
                     <SearchBar handleSearch={::this.handleSearch} />
                     <List
+                        page={ page }
                         related_content={ related_content }
+                        loadMoreRelatedContent={ actions.loadMoreRelatedContent }
                         bookmarkRelatedContent={ actions.bookmarkRelatedContent }
                         visitRelatedContent={ actions.visitRelatedContent }
-                        loadMore={true} />
+                        loadMore={ true } />
                 </div>
             </div>
         );
