@@ -44,8 +44,8 @@ export default class ViewBookmarks extends Component{
                                  item => item.bookmarked === true
                              )
                         }
-                        bookmarkItem={ actions.bookmarkItem }
-                        visitItem={ actions.visitItem }
+                        bookmarkRelatedContent={ actions.bookmarkRelatedContent }
+                        visitRelatedContent={ actions.visitRelatedContent }
                         loadMore={false} />
                 </div>
             </div>
