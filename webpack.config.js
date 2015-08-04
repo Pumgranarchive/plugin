@@ -64,7 +64,7 @@ module.exports = {
         )},{
             test: /.*\.(gif|png|jpe?g|svg)$/i,
             loaders: [
-              'url?limit=10000&name=[name]-[sha512:hash:base64:7].[ext]',
+              'url?limit=15000&name=[name]-[sha512:hash:base64:7].[ext]',
               'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
             ]
         },{
@@ -84,7 +84,7 @@ module.exports = {
         production ? [
             new webpack.optimize.UglifyJsPlugin({
               compress: {
-                warnings: false,
+                warnings: true,
               },
             }),
         ] : [
