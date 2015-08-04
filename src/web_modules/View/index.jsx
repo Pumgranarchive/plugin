@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ctx from 'classnames';
+import removeDuplicateContent from 'utils/removeDuplicateContent';
 import './index.scss';
 import Header from 'Header/';
 import SearchBar from 'SearchBar/';
@@ -83,9 +84,9 @@ export default class View extends Component{
                         resetSearch={::this.resetSearch} />
                     <List
                         page={ page }
-                        related_content={ related_content.filter(
+                        related_content={ removeDuplicateContent(related_content.filter(
                             item => item.searchFilter === page.searchFilter
-                        )}
+                        ))}
                         loadMoreRelatedContent={ actions.loadMoreRelatedContent }
                         bookmarkRelatedContent={ actions.bookmarkRelatedContent }
                         visitRelatedContent={ actions.visitRelatedContent }

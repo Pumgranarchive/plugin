@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ctx from 'classnames';
+import removeDuplicateContent from 'utils/removeDuplicateContent';
 import './index.scss';
 import List from 'List/';
 
@@ -31,9 +32,9 @@ export default class ViewBookmarks extends Component{
                     <h1>Bookmarks content</h1>
                     <List
                         related_content={
-                             related_content.filter(
+                             removeDuplicateContent(related_content.filter(
                                  item => item.bookmarked === true
-                             )
+                             ))
                         }
                         bookmarkRelatedContent={ actions.bookmarkRelatedContent }
                         visitRelatedContent={ actions.visitRelatedContent }
