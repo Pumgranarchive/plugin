@@ -24,7 +24,7 @@ This will start a lightweight development server (webpack dev server) on **http:
 ### Build the chrome extension
 
 ```shell
-$ npm run build chrome
+$ npm run chrome
 ```
 
 ### Load the extension in chrome
