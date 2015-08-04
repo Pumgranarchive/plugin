@@ -16,15 +16,6 @@ export default class ViewBookmarks extends Component{
     }
 
 
-
-    /**
-     * States
-     *
-     */
-    state = {
-    }
-
-
     /**
      * Render
      *
