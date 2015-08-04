@@ -36,7 +36,8 @@ export default class List extends Component{
      * @return setState() with object in param
      */
     loadMore(){
-        this.props.loadMoreRelatedContent(this.props.page.id, this.props.page.url);
+        let {loadMoreRelatedContent, page} = this.props;
+        loadMoreRelatedContent(page.id, page.url, page.searchFilter);
     }
 
 
@@ -74,9 +75,9 @@ export default class List extends Component{
             <button
                 onClick={::this.loadMore}
                 className={ctx("List_loadMore",{
-                    "is-active": page.pendingData
+                    "is-active": page.pendingLoadMoreData
                 })}>
-                { (page.pendingData ? 'Loading ...' : 'Load more') }
+                { (page.pendingLoadMoreData ? 'Loading ...' : 'Load more') }
             </button>
         );
     }

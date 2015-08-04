@@ -9,10 +9,26 @@ export function getRelatedContent(page_id, page_url) {
     }
 }
 
-export function loadMoreRelatedContent(page_id, page_url) {
+export function loadMoreRelatedContent(page_id, page_url, searchFilter) {
     return {
         types: [types.LOAD_MORE_RELATED_CONTENT_REQUEST, types.LOAD_MORE_RELATED_CONTENT_SUCCESS, types.LOAD_MORE_RELATED_CONTENT_ERROR],
-        promise: WebAPI.loadMoreRelatedContent(page_id, page_url),
+        promise: WebAPI.loadMoreRelatedContent(page_id, page_url, searchFilter),
+        page_id
+    }
+}
+
+export function searchRelatedContent(page_id, page_url, searchFilter) {
+    return {
+        types: [types.SEARCH_RELATED_CONTENT_REQUEST, types.SEARCH_RELATED_CONTENT_SUCCESS, types.SEARCH_RELATED_CONTENT_ERROR],
+        promise: WebAPI.searchRelatedContent(page_id, page_url, searchFilter),
+        page_id,
+        searchFilter
+    }
+}
+
+export function resetSearchRelatedContent(page_id, page_url) {
+    return {
+        type: types.RESET_SEARCH_RELATED_CONTENT,
         page_id
     }
 }

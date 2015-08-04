@@ -29,16 +29,6 @@ export default class View extends Component{
 
 
     /**
-     * Initialize state
-     *
-     */
-    state = {
-        search: '',
-    }
-
-
-
-    /**
      * Component will mount
      *
      */
@@ -51,12 +41,21 @@ export default class View extends Component{
     /**
      * Handle search (event)
      *
-     * @return setState()
      */
     handleSearch(search){
-        return this.setState({
-            search: search
-        });
+        this.props.actions.searchRelatedContent(this.props.page.id, this.props.page.url, search);
+    }
+
+
+
+    /**
+     * Reset search (event)
+     *
+     */
+    resetSearch(search){
+        if(this.props.page.searchFilter != ''){
+            this.props.actions.resetSearchRelatedContent(this.props.page.id, this.props.page.url);
+        }
     }
 
 
@@ -68,7 +67,6 @@ export default class View extends Component{
      */
     render(){
         let {page, related_content, actions, position, lastPageId, goTo} = this.props;
-        let {search} = this.state;
 
         return (
             <div className={`View View-${position}`}>
@@ -78,12 +76,16 @@ export default class View extends Component{
                     page={ page } />
                 <div className="View_content">
                     <h1>
-                       {((search == '') ? 'Related content' : `Resulats for "${search}"`)}
+                       {((page.searchFilter == '') ? 'Related content' : `Resulats for "${page.searchFilter}"`)}
                     </h1>
-                    <SearchBar handleSearch={::this.handleSearch} />
+                    <SearchBar
+                        handleSearch={::this.handleSearch}
+                        resetSearch={::this.resetSearch} />
                     <List
                         page={ page }
-                        related_content={ related_content }
+                        related_content={ related_content.filter(
+                            item => item.searchFilter === page.searchFilter
+                        )}
                         loadMoreRelatedContent={ actions.loadMoreRelatedContent }
                         bookmarkRelatedContent={ actions.bookmarkRelatedContent }
                         visitRelatedContent={ actions.visitRelatedContent }

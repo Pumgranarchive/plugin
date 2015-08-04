@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './index.scss';
+var timer;
 
 export default class SearchBar extends Component{
 
@@ -8,10 +9,12 @@ export default class SearchBar extends Component{
      *
      */
     static defaultProps = {
-        handleSearch: function(){return true;}
+        handleSearch: () => {return true},
+        resetSearch: () => {return true}
     }
     static propTypes = {
-        handleSearch: React.PropTypes.func.isRequired
+        handleSearch: React.PropTypes.func.isRequired,
+        resetSearch: React.PropTypes.func.isRequired
     }
 
 
@@ -21,12 +24,17 @@ export default class SearchBar extends Component{
      *
      */
     _onChange(){
+        let search = this.refs.searchBarInput.getDOMNode().value;
         clearTimeout(timer);
-        let timer = setTimeout(() => {
-            this.props.handleSearch(
-                this.refs.searchBarInput.getDOMNode().value
-            );
-        }, 1300);
+
+        if(search == ''){
+            this.props.resetSearch();
+        }
+        else{
+            timer = setTimeout(() => {
+                this.props.handleSearch(search);
+            }, 1300);
+        }
     }
 
 
@@ -39,7 +47,13 @@ export default class SearchBar extends Component{
     render(){
         return (
             <div className="SearchBar_container">
-                <input type="text" ref="searchBarInput" placeholder="Search..." className="SearchBar" onKeyDown={::this._onChange} />
+                <input
+                    type="text"
+                    ref="searchBarInput"
+                    placeholder="Search..."
+                    className="SearchBar"
+                    onChange={::this._onChange}
+                    onKeyDown={::this._onChange} />
             </div>
         );
     }

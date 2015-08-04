@@ -24,7 +24,7 @@ export default {
 	 *
 	 * @return Promise
 	 */
-	getRelatedContent : function(page_id, page_url) {
+	getRelatedContent : (page_id, page_url) => {
 	    return new Promise((resolve, reject) => {
 	        resolve([{
 	            title: 'Title 1',
@@ -34,7 +34,8 @@ export default {
 	            tags: ['tag 1', 'tag2'],
 	            bookmarked: false,
 	            visited: false,
-	            page_id: 0
+	            page_id: page_id,
+				searchFilter: ''
 	        }, {
 	            title: 'Title 2',
 	            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue consectetur ante hendrerit ...',
@@ -43,7 +44,8 @@ export default {
 	            tags: ['tag 1', 'tag2', 'tag3'],
 	            bookmarked: false,
 	            visited: false,
-	            page_id: 0
+	            page_id: page_id,
+				searchFilter: ''
 	        }]);
 	    })
 	},
@@ -55,9 +57,9 @@ export default {
 	 *
 	 * @return Promise
 	 */
-	 loadMoreRelatedContent: function(page_id, page_url) {
+	 loadMoreRelatedContent: (page_id, page_url, searchFilter) => {
     	return new Promise((resolve, reject) => {
-			// Fake delay
+			// Fake delay to test async
         	setTimeout(() => {resolve([
                 {
                     title: 'Title 3',
@@ -67,9 +69,33 @@ export default {
                     tags: ['tag 1', 'tag2', 'tag3'],
                     bookmarked: false,
                     visited: false,
-                    page_id: 0
+                    page_id: page_id,
+					searchFilter: searchFilter
                 }
             ]);}, 2000);
+	    })
+	},
+
+
+
+	/**
+	 * Search related contet
+	 *
+	 * @return Promise
+	 */
+	 searchRelatedContent: (page_id, page_url, searchFilter) => {
+    	return new Promise((resolve, reject) => {
+        	resolve([{
+                title: 'Title 3',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue consectetur ante hendrerit ...',
+                website: 'website.com',
+                url: 'http://website.com/article4',
+                tags: ['tag 1', 'tag2', 'tag3'],
+                bookmarked: false,
+                visited: false,
+                page_id: page_id,
+				searchFilter: searchFilter
+            }]);
 	    })
 	}
 };
