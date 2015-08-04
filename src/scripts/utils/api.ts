@@ -1,8 +1,4 @@
-// Links_from_content param: uri, response: linked_content
-//{ "status":200, "links":[{ "link_uri": 9457, ”content_uri”:65432,"content_title": "Zimbabwe", "content_summary": "my summary" }, { "link__uri": 5, ”content_uri”:143957,"content_title": "Paris”,"content_summary":"my summary"}]}
-
-//Links_from_research param: content_uri, research, response: linked_content
-//{ "status":200, "links":[{ "link_uri": 9457, ”content_uri”:65432,"content_title": "Zimbabwe", "content_summary": "my summary" }, { "link__uri": 5, ”content_uri”:143957,"content_title": "Paris”,"content_summary":"my summary"}]}
+/// <reference path="es6-promise.d.ts"/>
 
 export module API{
     export module DataModel {
@@ -17,8 +13,20 @@ export module API{
             content_summary: string;
         }
 
-        export interface LinkedContent extends Response {
+	    export interface LinkedContent extends Response {
             links: Link[]
+        }
+
+        export interface ViewLinkData {
+            title: string;
+            description: string;
+            website: string;
+            url: string;
+            tags: string[];
+            bookmarked: boolean;
+            visited: boolean;
+            page_id: number;
+            searchFilter: string;
         }
     }
 
@@ -36,12 +44,42 @@ export module API{
         }
     }
 
-    export function getLinksFromContent(uri: string): DataModel.Link[] {
-        return doAjaxCall('linkedcontent/from_content/', uri).links;
+    export function DataToPromise(APIresult: DataModel.Link[], searchFilter?: string) : Promise<DataModel.ViewLinkData[]>
+    {
+        var result: DataModel.ViewLinkData[] = [];
+        if (APIresult !== null)
+        {
+            for (var i: number = 0 ; i < APIresult.length ; i++)
+            {
+                var Data:DataModel.Link = APIresult[i];
+                result.push({
+                    title: Data.content_title,
+                    description: Data.content_summary,
+                    website: Data.content_uri.replace('http://', ''),
+                    url: Data.content_uri,
+                    tags: [],
+                    bookmarked: false,
+                    visited: false,
+                    page_id: 0,
+                    searchFilter: searchFilter
+                });
+            }
+        }
+        return new Promise<DataModel.ViewLinkData[]>((resolve, reject) =>
+        {
+            resolve(result);
+        });
+    }
+
+    export function getLinksFromContent(uri: string): Promise<DataModel.ViewLinkData[]> {
+        var APIresult: DataModel.Link[]  =  doAjaxCall('linkedcontent/from_content/', uri).links;
+        return DataToPromise(APIresult, '');
     }
 
 
-    export function getLinksFromResearch(uri: string, input: string) : DataModel.Link[] {
-        return doAjaxCall('linkedcontent/search/' + encodeURIComponent(uri), input).links;
+    export function getLinksFromResearch(uri: string, input: string) : Promise<DataModel.ViewLinkData[]> {
+        var APIresult: DataModel.Link[] = doAjaxCall('linkedcontent/search/' + encodeURIComponent(uri) + '/', input).links;
+        console.log(APIresult);
+        return DataToPromise(APIresult, input);
     }
 }
