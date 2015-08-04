@@ -24,9 +24,9 @@ export default {
 	 *
 	 * @return Promise
 	 */
-	getRelatedContent: function(page_id, page_url){
-		return new Promise((resolve, reject) => {
-			resolve([{
+	getRelatedContent : function(page_id, page_url) {
+	    return new Promise((resolve, reject) => {
+	        resolve([{
 	            title: 'Title 1',
 	            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue consectetur ante hendrerit ...',
 	            website: 'website.com',
@@ -35,7 +35,7 @@ export default {
 	            bookmarked: false,
 	            visited: false,
 	            page_id: 0
-	        },{
+	        }, {
 	            title: 'Title 2',
 	            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue consectetur ante hendrerit ...',
 	            website: 'website.com',
@@ -45,7 +45,7 @@ export default {
 	            visited: false,
 	            page_id: 0
 	        }]);
-		})
+	    })
 	},
 
 
@@ -55,22 +55,21 @@ export default {
 	 *
 	 * @return Promise
 	 */
-	loadMoreRelatedContent: function(page_id, page_url){
-		return new Promise((resolve, reject) => {
+	 loadMoreRelatedContent: function(page_id, page_url) {
+    	return new Promise((resolve, reject) => {
 			// Fake delay
-			setTimeout(() => {
-				resolve([{
-		            title: 'Title 3',
-		            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue consectetur ante hendrerit ...',
-		            website: 'website.com',
-		            url: 'http://website.com/article3',
-		            tags: ['tag 1', 'tag2', 'tag3'],
-		            bookmarked: false,
-		            visited: false,
-		            page_id: 0
-		        }]);
-			}, 2000);
-		})
+        	setTimeout(() => {resolve([
+                {
+                    title: 'Title 3',
+                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue consectetur ante hendrerit ...',
+                    website: 'website.com',
+                    url: 'http://website.com/article3',
+                    tags: ['tag 1', 'tag2', 'tag3'],
+                    bookmarked: false,
+                    visited: false,
+                    page_id: 0
+                }
+            ]);}, 2000);
+	    })
 	}
-
 };
