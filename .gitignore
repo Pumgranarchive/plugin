@@ -4,3 +4,5 @@ npm-debug.log
 node_modules/
 __build__/
 src/scripts/utils/api.js
+chrome_extension/app.js
+chrome_extension/style.css
