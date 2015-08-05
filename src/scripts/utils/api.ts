@@ -1,6 +1,6 @@
 /// <reference path="es6-promise.d.ts"/>
 
-export module API{
+export module WebAPI{
     export module DataModel {
         export interface Response {
             status: number;
@@ -44,7 +44,7 @@ export module API{
         }
     }
 
-    export function DataToPromise(APIresult: DataModel.Link[], searchFilter?: string) : Promise<DataModel.ViewLinkData[]>
+    export function DataToPromise(APIresult: DataModel.Link[], id: number, searchFilter?: string) : Promise<DataModel.ViewLinkData[]>
     {
         var result: DataModel.ViewLinkData[] = [];
         if (APIresult !== null)
@@ -60,7 +60,7 @@ export module API{
                     tags: [],
                     bookmarked: false,
                     visited: false,
-                    page_id: 0,
+                    page_id: id,
                     searchFilter: searchFilter
                 });
             }
@@ -71,15 +71,15 @@ export module API{
         });
     }
 
-    export function getLinksFromContent(uri: string): Promise<DataModel.ViewLinkData[]> {
+    export function getRelatedContent(id: number, uri: string): Promise<DataModel.ViewLinkData[]> {
         var APIresult: DataModel.Link[]  =  doAjaxCall('linkedcontent/from_content/', uri).links;
-        return DataToPromise(APIresult, '');
+        return DataToPromise(APIresult, id, '');
     }
 
 
-    export function getLinksFromResearch(uri: string, input: string) : Promise<DataModel.ViewLinkData[]> {
+    export function searchRelatedContent(id: number, uri: string, input: string) : Promise<DataModel.ViewLinkData[]> {
         var APIresult: DataModel.Link[] = doAjaxCall('linkedcontent/search/' + encodeURIComponent(uri) + '/', input).links;
         console.log(APIresult);
-        return DataToPromise(APIresult, input);
+        return DataToPromise(APIresult, id, input);
     }
 }

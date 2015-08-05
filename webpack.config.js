@@ -25,8 +25,8 @@ module.exports = {
     server: {
         port: 3000,
         url: 'localhost',
-        hot: true,
-        historyApiFallback: true,
+        hot: (dev ? true : false),
+        historyApiFallback: true
     },
     entry: entryFiles,
     output: {

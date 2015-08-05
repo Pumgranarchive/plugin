@@ -1,6 +1,6 @@
 {
   "name": "pumgrana-plugin",
-  "version": "0.1.9",
+  "version": "0.2.0-alpha",
   "description": "This extension allows you to add content to the Pumgrana website.",
   "scripts": {
     "start": "env UV_THREADPOOL_SIZE=100 DEBUG=false NODE_ENV=DEV node server.js",
