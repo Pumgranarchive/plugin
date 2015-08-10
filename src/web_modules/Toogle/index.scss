@@ -1,0 +1,27 @@
+/**
+ * Toogle style component
+ *
+ */
+
+@import 'core';
+
+.Pumgrana .Toogle {
+    // Settings
+    $d: 55px;
+
+    // Style
+    display: block;
+    position: absolute;
+    width: $d;  height: $d;
+    cursor: pointer;
+    margin-left: $d / -2 - $borderLeft;
+    top: 50%;    margin-top: $d / -2;
+    background: url("./../../assets/images/toogle.svg") no-repeat, url("./../../assets/images/toogle.svg") no-repeat $primaryColor;
+    background-position: 30% center, 70% center;
+    z-index: 0;
+    border-radius: 50%;
+
+    &.is-closed{
+        transform: rotate(180deg);
+    }
+}

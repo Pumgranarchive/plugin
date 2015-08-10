@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
+import ctx from 'classnames';
 import './index.scss';
 import View from 'View/';
 import ViewBookmarks from 'ViewBookmarks/';
 import Footer from 'Footer/';
+import Overlay from 'Overlay/';
+import Toogle from 'Toogle/';
 
 export default class Container extends Component{
 
@@ -24,7 +27,8 @@ export default class Container extends Component{
      */
     state = {
         current_page: 0,
-        bookmarks_content: false
+        bookmarks_content: false,
+        show: true
     }
 
 
@@ -45,11 +49,26 @@ export default class Container extends Component{
     /**
      * Go to an other view
      *
+     * @param id (number)
+     * @returb this.setState()
      */
     goTo(id){
         return this.setState({
             current_page: id
-        })
+        });
+    }
+
+
+
+    /**
+     * Toogle
+     *
+     * @return this.setState()
+     */
+    toogle(){
+        return this.setState({
+            show: !this.state.show
+        });
     }
 
 
@@ -57,43 +76,58 @@ export default class Container extends Component{
     /**
      * Render
      *
+     * @return JSX
      */
     render(){
         let { pages, actions, related_content } = this.props;
-        let { current_page, bookmarks_content } = this.state;
+        let { current_page, bookmarks_content, show } = this.state;
 
         return (
-            <div className="Pumgrana">
-                <div className="Pumgrana_views">
-                    { pages.map((page, i) => {
-                        let position = 'current';
-                        if((current_page - i) > 0){
-                            position = 'before';
-                        }
-                        else if((current_page - i) < 0){
-                            position = 'after';
-                        }
+            <div>
+                <div className={ ctx("Pumgrana",{
+                    "is-disabled": !show
+                })}>
+                    <Toogle
+                        toogle={ ::this.toogle }
+                        show={ show } />
+                    <div className="Pumgrana_container">
+                        <div className="Pumgrana_views">
+                            { pages.map((page, i) => {
+                                let position = 'current';
+                                if((current_page - i) > 0){
+                                    position = 'before';
+                                }
+                                else if((current_page - i) < 0){
+                                    position = 'after';
+                                }
 
-                        return (
-                            <View page={ page }
-                                  related_content={
-                                       related_content.filter(
-                                           item => item.page_id === page.id
-                                       )
-                                  }
-                                  lastPageId={ (pages.length - 1) }
-                                  position={ position }
-                                  goTo={ ::this.goTo }
-                                  actions={ actions }
-                                  key={ i } />
-                        );
-                    })}
-                    <ViewBookmarks
+                                return (
+                                    <View page={ page }
+                                          related_content={
+                                               related_content.filter(
+                                                   item => item.page_id === page.id
+                                               )
+                                          }
+                                          lastPageId={ (pages.length - 1) }
+                                          position={ position }
+                                          goTo={ ::this.goTo }
+                                          actions={ actions }
+                                          key={ i } />
+                                );
+                            })}
+                            <ViewBookmarks
+                                related_content={ related_content }
+                                show={ bookmarks_content }
+                                actions={ actions } />
+                        </div>
+                    </div>
+                    <Footer
                         related_content={ related_content }
-                        show={ bookmarks_content }
-                        actions={ actions } />
+                        goToBookmarks={ ::this.goToBookmarks } />
                 </div>
-                <Footer related_content={ related_content } goToBookmarks={ ::this.goToBookmarks } />
+                <Overlay
+                    toogle={ ::this.toogle }
+                    show={ show } />
             </div>
         );
     }

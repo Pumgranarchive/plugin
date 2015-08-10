@@ -1,0 +1,29 @@
+/**
+ * Resultats style component
+ *
+ */
+
+@import 'core';
+
+.Overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(118,118,118,.6);
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    z-index: $zIndex-max - 10;
+    transition: .4s opacity ease;
+    cursor: pointer;
+
+    &:hover, &:focus{
+        box-shadow: inset rgba(black, .1) 0 0 20px;
+    }
+
+    &.is-disabled{
+        opacity: 0;
+        cursor: inherit;
+    }
+}

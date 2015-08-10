@@ -36,7 +36,7 @@ export default class Footer{
      * @return JSX
      */
      render(){
-     let { related_content } = this.props;
+         let { related_content } = this.props;
 
          return(
              <div className="Footer">

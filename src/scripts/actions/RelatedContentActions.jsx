@@ -1,6 +1,7 @@
 import * as types from 'constants/ActionTypes';
 import { createAction } from 'redux-actions';
-import {WebAPI} from 'utils/api.ts'
+import {WebAPI} from 'utils/api.ts'; // ** __DEV__ ** //
+//import WebAPI from 'utils/WebAPI'; // ** __PROD__ ** //
 
 export function getRelatedContent(page_id, page_url) {
     return {
