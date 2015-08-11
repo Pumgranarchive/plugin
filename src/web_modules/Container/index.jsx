@@ -36,36 +36,6 @@ export default class Container extends Component{
 
 
     /**
-     * Component did mount
-     *
-     */
-    componentDidMount(){
-        var el = this.refs.container.getDOMNode();
-
-        observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                console.log(el.getAttribute('data-state'));
-            });
-        });
-        observer.observe(el, {
-            attributes: true,
-            attributeFilter: ['data-state']
-        });
-    }
-
-
-
-    /**
-     * Component will unmount
-     *
-     */
-    componentWillUnmount(){
-        observer.disconnect();
-    }
-
-
-
-    /**
      * Go to bookmarks content
      *
      * @return setState
