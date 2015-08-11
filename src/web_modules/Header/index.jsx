@@ -8,7 +8,7 @@ export default class Header extends Component{
      * Props
      *
      */
-    static defaultProps = { page: {}, lastPageId:0, goTo: function(){} }
+    static defaultProps = { page: {}, lastPageId: 0, goTo: function(){} }
     static propTypes = {
         page: React.PropTypes.object.isRequired,
         lastPageId: React.PropTypes.number.isRequired,
@@ -53,8 +53,8 @@ export default class Header extends Component{
                 })}></a>
                 <span className="Header_url">{ page.website }</span>
                 <span className="Header_title">{ page.title }</span>
-                <a role="button" onClick={ ::this._next } ref="next" aria-label="Go next" href="#/" className={ctx("Header_next",{
-                    "is-active": page.id != lastPageId
+                <a role='button' onClick={ ::this._next } ref='next' aria-label='Go next' href='#/' className={ctx('Header_next',{
+                    'is-active': page.id !== lastPageId
                 })}></a>
             </div>
         );

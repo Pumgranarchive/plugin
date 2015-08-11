@@ -28,9 +28,7 @@ export default class App extends Component{
                 </DebugPanel>
             )
         }
-        else{
-            return (<div></div>)
-        }
+        return (<div></div>)
     }
 
 

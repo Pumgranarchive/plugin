@@ -7,6 +7,8 @@ import Footer from 'Footer/';
 import Overlay from 'Overlay/';
 import Toogle from 'Toogle/';
 
+var observer;
+
 export default class Container extends Component{
 
     /**
@@ -29,6 +31,36 @@ export default class Container extends Component{
         current_page: 0,
         bookmarks_content: false,
         show: true
+    }
+
+
+
+    /**
+     * Component did mount
+     *
+     */
+    componentDidMount(){
+        var el = this.refs.container.getDOMNode();
+
+        observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                console.log(el.getAttribute('data-state'));
+            });
+        });
+        observer.observe(el, {
+            attributes: true,
+            attributeFilter: ['data-state']
+        });
+    }
+
+
+
+    /**
+     * Component will unmount
+     *
+     */
+    componentWillUnmount(){
+        observer.disconnect();
     }
 
 
@@ -86,7 +118,7 @@ export default class Container extends Component{
             <div>
                 <div className={ ctx("Pumgrana",{
                     "is-disabled": !show
-                })}>
+                })} ref="container">
                     <Toogle
                         toogle={ ::this.toogle }
                         show={ show } />

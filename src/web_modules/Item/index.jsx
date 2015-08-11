@@ -28,6 +28,7 @@ export default class Item extends Component{
      */
     handleVisite(){
         this.props.visitRelatedContent(this.props.item.url);
+        window.location.href = this.props.item.url;
     }
 
 
@@ -68,7 +69,7 @@ export default class Item extends Component{
                     <p className="Item_description">{ description }</p>
                     { tags.map((tag, i) => { return (
                         <span className="Item_tag" key={ i }>{ tag }</span>
-                    );}) }
+                    ); }) }
                 </div>
             </div>
         );

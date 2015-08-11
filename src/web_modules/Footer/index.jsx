@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './index.scss';
 import ctx from 'classnames';
 
-export default class Footer{
+export default class Footer extends Component{
 
     /**
      * Props
@@ -38,7 +38,7 @@ export default class Footer{
      render(){
          let { related_content } = this.props;
 
-         return(
+         return (
              <div className="Footer">
                  <a className={ ctx("Footer_viewBookmarks", {
                     "is-active": related_content.filter(item => item.bookmarked === true).length

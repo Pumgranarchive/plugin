@@ -1,6 +1,5 @@
-chrome.tabs.query({active: true}, function(tabs){
-   window.close();
-   chrome.tabs.executeScript(tabs[0].id, {
-        code: "tooglePumgrana()"
-    });
-});
+function PumgranaToogle(){
+    var el = document.querySelector('.Pumgrana');
+    var value = (el.getAttribute('data-state') == "masked") ? "visible" : "masked";
+    el.setAttribute("data-state", value);
+}
