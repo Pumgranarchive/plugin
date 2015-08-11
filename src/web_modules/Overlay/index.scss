@@ -15,8 +15,8 @@
     height: 100vh;
     opacity: 1;
     z-index: $zIndex-max - 10;
-    transition: .4s opacity ease;
     cursor: pointer;
+    transition: opacity .4s ease, visibility 0s ease;
 
     &:hover, &:focus{
         box-shadow: inset rgba(black, .1) 0 0 20px;
@@ -25,5 +25,7 @@
     &.is-disabled{
         opacity: 0;
         cursor: inherit;
+        visibility: hidden;
+        transition: opacity .4s ease, visibility 0s ease .4s;
     }
 }
