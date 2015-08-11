@@ -36,12 +36,13 @@ export default class Toogle extends Component{
      */
     render(){
         return (
-            <div
+            <button
                 className= { ctx("Toogle",{
-                    "is-closed": !this.props.show
+                    "is-closed": this.props.show
                 }) }
-                onClick={ ::this._onClick }>
-            </div>
+                onClick={ ::this._onClick }
+                title= {( this.props.show ? 'Close' : 'Open' )} >
+            </button>
         );
     }
 }
