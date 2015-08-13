@@ -30,7 +30,7 @@ export default class Container extends Component{
     state = {
         current_page: 0,
         bookmarks_content: false,
-        show: true
+        show: false
     }
 
 
