@@ -51,7 +51,7 @@ export default class Item extends Component{
 
         return (
             <div
-                className={ctx('Item' ,{
+                className={ctx('Item', {
                     'is-visited': visited
                 })}
                 href={ link }>

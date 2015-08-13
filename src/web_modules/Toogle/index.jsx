@@ -9,7 +9,7 @@ export default class Toogle extends Component{
      *
      */
     static defaultProps = {
-        toogle: function(){return true},
+        toogle: function(){},
         show: true
     }
     static propTypes = {
@@ -23,7 +23,7 @@ export default class Toogle extends Component{
      * On click (event)
      *
      */
-    _onClick(){
+    onClick(){
         return this.props.toogle();
     }
 
@@ -37,10 +37,10 @@ export default class Toogle extends Component{
     render(){
         return (
             <button
-                className= { ctx("Toogle",{
-                    "is-closed": this.props.show
+                className= { ctx('Toogle', {
+                    'is-closed': this.props.show
                 }) }
-                onClick={ ::this._onClick }
+                onClick={ ::this.onClick }
                 title= {( this.props.show ? 'Close' : 'Open' )} >
             </button>
         );
