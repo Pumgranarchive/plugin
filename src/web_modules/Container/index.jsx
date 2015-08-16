@@ -91,7 +91,7 @@ export default class Container extends Component{
                                     <View page={ page }
                                           relatedContent={
                                                relatedContent.filter(
-                                                   item => item.pageId == page.id
+                                                   item => item.pageId === page.id
                                                )
                                           }
                                           lastPageId={ (pages.length - 1) }
@@ -109,7 +109,8 @@ export default class Container extends Component{
                     </div>
                     <Footer
                         relatedContent={ relatedContent }
-                        goToBookmarks={ ::this.goToBookmarksView } />
+                        showViewBookmarks={ plugin.showViewBookmarks }
+                        goToViewBookmarks={ ::this.goToBookmarksView } />
                 </div>
                 <Overlay
                     toogle={ ::this.tooglePlugin }

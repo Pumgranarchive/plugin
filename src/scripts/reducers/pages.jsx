@@ -15,15 +15,6 @@ var initialState = [{
     searchFilter: '',
     pendingLoadMoreData: false,
     pendingSearchData: false
-},
-{
-    id: 1,
-    title: 'Hello',
-    url: 'example.com',
-    website: document.location.host,
-    searchFilter: '',
-    pendingLoadMoreData: false,
-    pendingSearchData: false
 }];
 
 export const pages = handleActions({
