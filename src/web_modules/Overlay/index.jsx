@@ -9,8 +9,8 @@ export default class Overlay extends Component{
      * Props
      *
      */
-    static defaultProps = { 
-        toogle: function(){return true},
+    static defaultProps = {
+        toogle: function(){},
         show: true
     }
     static propTypes = {
@@ -25,11 +25,11 @@ export default class Overlay extends Component{
      *
      * @return toogle (this.props)
      */
-    _onClick(){
-        if(this.props.show == true){
+    onClick(){
+        if(this.props.show === true){
             return this.props.toogle();
         }
-        return;
+        return false;
     }
 
 
@@ -39,7 +39,7 @@ export default class Overlay extends Component{
      *
      */
     render(){
-        let {toogle, show} = this.props;
+        let { show } = this.props;
 
         select('html, body')::css({
             overflow: (show ? 'hidden' : 'auto')
@@ -47,10 +47,10 @@ export default class Overlay extends Component{
 
         return (
             <div className={
-                ctx("Overlay", {
-                    "is-disabled": !show
+                ctx('Overlay', {
+                    'is-disabled': !show
                 })}
-                onClick={ ::this._onClick }>
+                onClick={ ::this.onClick }>
             </div>
         );
     }

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './index.scss';
 import Item from './../Item/';
-import SearchBar from '../SearchBar/';
 import ctx from 'classnames';
 
 export default class List extends Component{
@@ -11,16 +10,16 @@ export default class List extends Component{
      *
      */
     static defaultProps = {
-        related_content: [],
+        relatedContent: [],
         page: {},
-        loadMoreRelatedContent: function(){return true},
-        bookmarkRelatedContent: function(){return true},
-        visitRelatedContent: function(){return true},
+        loadMoreRelatedContent: function(){},
+        bookmarkRelatedContent: function(){},
+        visitRelatedContent: function(){},
         loadMore: false
     }
 
     static propTypes = {
-        related_content: React.PropTypes.array.isRequired,
+        relatedContent: React.PropTypes.array.isRequired,
         page: React.PropTypes.object.isRequired,
         loadMoreRelatedContent: React.PropTypes.func.isRequired,
         bookmarkRelatedContent: React.PropTypes.func.isRequired,
@@ -48,9 +47,9 @@ export default class List extends Component{
      * @return JSX
      */
     renderList(){
-        let {related_content, bookmarkRelatedContent, visitRelatedContent} = this.props;
+        let {relatedContent, bookmarkRelatedContent, visitRelatedContent} = this.props;
 
-        let list = related_content.map((item, i) => {
+        let list = relatedContent.map((item, i) => {
             return (
                 <Item bookmarkRelatedContent={ bookmarkRelatedContent } visitRelatedContent={ visitRelatedContent } key={i} item={item} />
             );
@@ -74,8 +73,8 @@ export default class List extends Component{
         return (
             <button
                 onClick={::this.loadMore}
-                className={ctx("List_loadMore",{
-                    "is-active": page.pendingLoadMoreData
+                className={ctx('List_loadMore', {
+                    'is-active': page.pendingLoadMoreData
                 })}>
                 { (page.pendingLoadMoreData ? 'Loading ...' : 'Load more') }
             </button>
@@ -90,9 +89,9 @@ export default class List extends Component{
      * @return JSX
      */
     render(){
-        let {related_content, loadMore} = this.props;
+        let {relatedContent, loadMore} = this.props;
 
-        if(related_content.length == 0){
+        if(relatedContent.length === 0){
             return (
                 <div className="List">
                     {<div className="List-empty">No resultats found</div>}
@@ -105,7 +104,7 @@ export default class List extends Component{
                     {this.renderList()}
                     { (loadMore ? this.renderLoadMore() : '') }
                 </div>
-            )
+            );
         }
     }
 }

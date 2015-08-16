@@ -25,7 +25,7 @@ export module WebAPI{
             tags: string[];
             bookmarked: boolean;
             visited: boolean;
-            page_id: number;
+            pageId: number;
             searchFilter: string;
         }
     }
@@ -60,7 +60,7 @@ export module WebAPI{
                     tags: [],
                     bookmarked: false,
                     visited: false,
-                    page_id: id,
+                    pageId: id,
                     searchFilter: searchFilter
                 });
             }

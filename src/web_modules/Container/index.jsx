@@ -7,18 +7,16 @@ import Footer from 'Footer/';
 import Overlay from 'Overlay/';
 import Toogle from 'Toogle/';
 
-var observer;
-
 export default class Container extends Component{
 
     /**
      * Props
      *
      */
-    static defaultProps = { pages: [], related_content: [] }
+    static defaultProps = { pages: [], relatedContent: [] }
     static propTypes = {
         pages: React.PropTypes.array.isRequired,
-        related_content: React.PropTypes.array.isRequired
+        relatedContent: React.PropTypes.array.isRequired
     }
 
 
@@ -28,8 +26,8 @@ export default class Container extends Component{
      *
      */
     state = {
-        current_page: 0,
-        bookmarks_content: false,
+        currentPage: 0,
+        bookmarksContent: false,
         show: false
     }
 
@@ -42,7 +40,7 @@ export default class Container extends Component{
      */
     goToBookmarks(){
         return this.setState({
-            bookmarks_content: !this.state.bookmarks_content
+            bookmarksContent: !this.state.bookmarksContent
         });
     }
 
@@ -56,7 +54,7 @@ export default class Container extends Component{
      */
     goTo(id){
         return this.setState({
-            current_page: id
+            currentPage: id
         });
     }
 
@@ -81,14 +79,14 @@ export default class Container extends Component{
      * @return JSX
      */
     render(){
-        let { pages, actions, related_content } = this.props;
-        let { current_page, bookmarks_content, show } = this.state;
+        let { pages, actions, relatedContent } = this.props;
+        let { currentPage, bookmarksContent, show } = this.state;
 
         return (
             <div>
-                <div className={ ctx("Pumgrana",{
-                    "is-disabled": !show
-                })} ref="container">
+                <div className={ ctx('Pumgrana', {
+                    'is-disabled': !show
+                })} ref='container'>
                     <Toogle
                         toogle={ ::this.toogle }
                         show={ show } />
@@ -96,18 +94,18 @@ export default class Container extends Component{
                         <div className="Pumgrana_views">
                             { pages.map((page, i) => {
                                 let position = 'current';
-                                if((current_page - i) > 0){
+                                if((currentPage - i) > 0){
                                     position = 'before';
                                 }
-                                else if((current_page - i) < 0){
+                                else if((currentPage - i) < 0){
                                     position = 'after';
                                 }
 
                                 return (
                                     <View page={ page }
-                                          related_content={
-                                               related_content.filter(
-                                                   item => item.page_id === page.id
+                                          relatedContent={
+                                               relatedContent.filter(
+                                                   item => item.pageId === page.id
                                                )
                                           }
                                           lastPageId={ (pages.length - 1) }
@@ -118,13 +116,13 @@ export default class Container extends Component{
                                 );
                             })}
                             <ViewBookmarks
-                                related_content={ related_content }
-                                show={ bookmarks_content }
+                                relatedContent={ relatedContent }
+                                show={ bookmarksContent }
                                 actions={ actions } />
                         </div>
                     </div>
                     <Footer
-                        related_content={ related_content }
+                        relatedContent={ relatedContent }
                         goToBookmarks={ ::this.goToBookmarks } />
                 </div>
                 <Overlay

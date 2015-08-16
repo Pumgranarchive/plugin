@@ -7,7 +7,7 @@ import {
     SEARCH_RELATED_CONTENT_SUCCESS
 } from 'constants/ActionTypes';
 
-const related_content = handleActions({
+export const relatedContent = handleActions({
     [GET_RELATED_CONTENT_SUCCESS]: (state, action) => ([
         ...state,
         ...action.response
@@ -39,5 +39,3 @@ const related_content = handleActions({
         )
     )
 }, []);
-
-export default related_content;

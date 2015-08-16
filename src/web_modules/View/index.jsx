@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ctx from 'classnames';
 import removeDuplicateContent from 'utils/removeDuplicateContent';
 import './index.scss';
 import Header from 'Header/';
@@ -14,14 +13,14 @@ export default class View extends Component{
      */
     static defaultProps = {
         page: {},
-        related_content: [],
+        relatedContent: [],
         position: 'current',
         lastPageId: 0,
         goTo: function(){}
     }
     static propTypes = {
         page: React.PropTypes.object.isRequired,
-        related_content: React.PropTypes.array.isRequired,
+        relatedContent: React.PropTypes.array.isRequired,
         position: React.PropTypes.string.isRequired,
         lastPageId: React.PropTypes.number.isRequired,
         goTo: React.PropTypes.func.isRequired
@@ -53,9 +52,9 @@ export default class View extends Component{
      * Reset search (event)
      *
      */
-    resetSearch(search){
-        if(this.props.page.searchFilter != ''){
-            this.props.actions.resetSearchRelatedContent(this.props.page.id, this.props.page.url);
+    resetSearch(){
+        if(this.props.page.searchFilter !== ''){
+            this.props.actions.resetSearchRelatedContent(this.props.page.id);
         }
     }
 
@@ -67,7 +66,7 @@ export default class View extends Component{
      * @return JSX
      */
     render(){
-        let {page, related_content, actions, position, lastPageId, goTo} = this.props;
+        let {page, relatedContent, actions, position, lastPageId, goTo} = this.props;
 
         return (
             <div className={`View View-${position}`}>
@@ -77,14 +76,14 @@ export default class View extends Component{
                     page={ page } />
                 <div className="View_content">
                     <h1>
-                       {((page.searchFilter == '') ? 'Related content' : `Resulats for "${page.searchFilter}"`)}
+                       { ((page.searchFilter === '') ? 'Related content' : `Resulats for "${page.searchFilter}"`) }
                     </h1>
                     <SearchBar
                         handleSearch={::this.handleSearch}
                         resetSearch={::this.resetSearch} />
                     <List
                         page={ page }
-                        related_content={ removeDuplicateContent(related_content.filter(
+                        relatedContent={ removeDuplicateContent(relatedContent.filter(
                             item => item.searchFilter === page.searchFilter
                         ))}
                         loadMoreRelatedContent={ actions.loadMoreRelatedContent }

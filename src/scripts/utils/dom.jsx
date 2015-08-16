@@ -7,12 +7,12 @@ export function select (value){
     let selector = [];
 
     if(value == null) {
-        return []
+        return [];
     }
     else{
         for(let element of value.split(',')){
             selector.push(document.querySelector(element));
-        };
+        }
     }
     return selector;
 }
@@ -22,6 +22,6 @@ export function css (object){
         for(let key in object) {
             element.style[key] = object[key];
         }
-    })
+    });
     return this;
 }

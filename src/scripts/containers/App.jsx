@@ -20,15 +20,15 @@ export default class App extends Component{
      *
      * @return JSX
      */
-    _renderDevTools(){
+    renderDevTools(){
         if(__DEBUG__){
             return (
                 <DebugPanel top left bottom>
                     <DevTools store={store} monitor={LogMonitor} />
                 </DebugPanel>
-            )
+            );
         }
-        return (<div></div>)
+        return (<div></div>);
     }
 
 
@@ -39,6 +39,8 @@ export default class App extends Component{
      * @return JSX
      */
     render(){
+        console.log(store.getState());
+
         return (
             <div>
                 <Provider store={store}>
@@ -46,8 +48,8 @@ export default class App extends Component{
                         <PumgranaApp />
                     }
                 </Provider>
-                { this._renderDevTools() }
+                { this.renderDevTools() }
             </div>
-        )
+        );
     }
 }

@@ -9,8 +9,8 @@ export default class SearchBar extends Component{
      *
      */
     static defaultProps = {
-        handleSearch: () => {return true},
-        resetSearch: () => {return true}
+        handleSearch: function(){},
+        resetSearch: function(){}
     }
     static propTypes = {
         handleSearch: React.PropTypes.func.isRequired,
@@ -23,11 +23,11 @@ export default class SearchBar extends Component{
      * On change event
      *
      */
-    _onChange(){
+    onChange(){
         let search = this.refs.searchBarInput.getDOMNode().value;
         clearTimeout(timer);
 
-        if(search == ''){
+        if(search === ''){
             this.props.resetSearch();
         }
         else{
@@ -52,8 +52,8 @@ export default class SearchBar extends Component{
                     ref="searchBarInput"
                     placeholder="Search..."
                     className="SearchBar"
-                    onChange={::this._onChange}
-                    onKeyDown={::this._onChange} />
+                    onChange={ ::this.onChange }
+                    onKeyDown={ ::this.onChange } />
             </div>
         );
     }

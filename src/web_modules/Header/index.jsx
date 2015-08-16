@@ -22,7 +22,7 @@ export default class Header extends Component{
      *
      * @return goTo function (props)
      */
-    _back(){
+    back(){
         return this.props.goTo(this.props.page.id - 1);
     }
 
@@ -33,7 +33,7 @@ export default class Header extends Component{
      *
      * @return goTo function (props)
      */
-    _next(){
+    next(){
         return this.props.goTo(this.props.page.id + 1);
     }
 
@@ -48,14 +48,14 @@ export default class Header extends Component{
 
         return (
             <div className="Header">
-                <a role="button" onClick={ ::this._back } ref="back" aria-label="Go back" href="#/" className={ctx("Header_back",{
-                    "is-active": page.id != 0
-                })}></a>
+                <a role="button" onClick={ ::this.back } ref="back" aria-label="Go back" href="#/" className={ ctx('Header_back', {
+                    'is-active': page.id !== 0
+                }) }></a>
                 <span className="Header_url">{ page.website }</span>
                 <span className="Header_title">{ page.title }</span>
-                <a role='button' onClick={ ::this._next } ref='next' aria-label='Go next' href='#/' className={ctx('Header_next',{
+                <a role='button' onClick={ ::this.next } ref='next' aria-label='Go next' href='#/' className={ ctx('Header_next', {
                     'is-active': page.id !== lastPageId
-                })}></a>
+                }) }></a>
             </div>
         );
     }

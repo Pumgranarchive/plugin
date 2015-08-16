@@ -17,10 +17,10 @@ var initialState = [{
     pendingSearchData: false
 }];
 
-const pages = handleActions({
+export const pages = handleActions({
     [LOAD_MORE_RELATED_CONTENT_REQUEST]: (state, action) => (
         state.map(page =>
-            page.id === action.page_id ?
+            page.id === action.pageId ?
                 { ...page, pendingLoadMoreData: true } :
                 page
         )
@@ -28,7 +28,7 @@ const pages = handleActions({
 
     [LOAD_MORE_RELATED_CONTENT_SUCCESS]: (state, action) => (
         state.map(page =>
-            page.id === action.page_id ?
+            page.id === action.pageId ?
                 { ...page, pendingLoadMoreData: false } :
                 page
         )
@@ -36,7 +36,7 @@ const pages = handleActions({
 
     [SEARCH_RELATED_CONTENT_REQUEST]: (state, action) => (
         state.map(page =>
-            page.id === action.page_id ?
+            page.id === action.pageId ?
                 { ...page, pendingSearchData: true, searchFilter: action.searchFilter } :
                 page
         )
@@ -44,7 +44,7 @@ const pages = handleActions({
 
     [SEARCH_RELATED_CONTENT_SUCCESS]: (state, action) => (
         state.map(page =>
-            page.id === action.page_id ?
+            page.id === action.pageId ?
                 { ...page, pendingSearchData: false } :
                 page
         )
@@ -52,11 +52,9 @@ const pages = handleActions({
 
     [RESET_SEARCH_RELATED_CONTENT]: (state, action) => (
         state.map(page =>
-            page.id === action.page_id ?
+            page.id === action.pageId ?
                 { ...page, searchFilter: '', pendingSearchData: false } :
                 page
         )
     )
 }, initialState);
-
-export default pages;

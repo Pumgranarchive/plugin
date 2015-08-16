@@ -1,4 +1,4 @@
-export default function promiseMiddleware(objMethods){
+export default function promiseMiddleware(){
     return (next) => (action) => {
         const { promise, types, ...rest } = action;
         if (!promise) {

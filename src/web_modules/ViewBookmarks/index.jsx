@@ -10,9 +10,9 @@ export default class ViewBookmarks extends Component{
      * Props
      *
      */
-    static defaultProps = { related_content: [], show: false }
+    static defaultProps = { relatedContent: [], show: false }
     static propTypes = {
-        related_content: React.PropTypes.array.isRequired,
+        relatedContent: React.PropTypes.array.isRequired,
         show: React.PropTypes.bool.isRequired
     }
 
@@ -22,20 +22,19 @@ export default class ViewBookmarks extends Component{
      *
      */
     render(){
-        let {related_content, actions, show} = this.props;
+        let {relatedContent, actions, show} = this.props;
+        relatedContent = removeDuplicateContent(relatedContent.filter(
+            item => item.bookmarked === true
+        ));
 
         return (
-            <div className={ctx("View ViewBookmarks", {
-                "is-showed": show
+            <div className={ctx('View ViewBookmarks', {
+                'is-showed': show
             })}>
-                <div className="View_content">
+                <div className='View_content'>
                     <h1>Bookmarks content</h1>
                     <List
-                        related_content={
-                             removeDuplicateContent(related_content.filter(
-                                 item => item.bookmarked === true
-                             ))
-                        }
+                        relatedContent={ relatedContent }
                         bookmarkRelatedContent={ actions.bookmarkRelatedContent }
                         visitRelatedContent={ actions.visitRelatedContent }
                         loadMore={false} />
