@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "description": "This extension allows you to add content to the Pumgrana website.",
   "scripts": {
-    "start": "env UV_THREADPOOL_SIZE=100 DEBUG=false NODE_ENV=DEV node server.js",
+    "start": "env UV_THREADPOOL_SIZE=100 DEBUG=true NODE_ENV=DEV node server.js",
     "chrome": "env BABEL_ENV=production UV_THREADPOOL_SIZE=100 DEBUG=false NODE_ENV=CHROME webpack",
     "lint": "eslint __build__"
   },
@@ -33,7 +33,7 @@
     "nyan-progress-webpack-plugin": "^1.0.0",
     "postcss-loader": "^0.5.1",
     "react-hot-loader": "^1.2.7",
-    "redux-devtools": "^0.1.2",
+    "redux-devtools": "^1.0.0",
     "sass-loader": "^1.0.2",
     "style-loader": "^0.12.3",
     "typescript": "^1.5.3",

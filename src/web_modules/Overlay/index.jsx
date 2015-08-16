@@ -40,6 +40,13 @@ export default class Overlay extends Component{
      */
     render(){
         let { show } = this.props;
+        let styles = {};
+
+        if(__DEBUG__){
+            styles = {
+                zIndex: 0
+            };
+        }
 
         select('html, body')::css({
             overflow: (show ? 'hidden' : 'auto')
@@ -50,6 +57,7 @@ export default class Overlay extends Component{
                 ctx('Overlay', {
                     'is-disabled': !show
                 })}
+                style={ styles }
                 onClick={ ::this.onClick }>
             </div>
         );

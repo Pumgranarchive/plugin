@@ -16,7 +16,7 @@ const store = createStoreWithMiddleware(combineReducers(reducers));
 export default class App extends Component{
 
     /**
-     * Render
+     * Render dev tools
      *
      * @return JSX
      */
@@ -24,11 +24,11 @@ export default class App extends Component{
         if(__DEBUG__){
             return (
                 <DebugPanel top left bottom>
-                    <DevTools store={store} monitor={LogMonitor} />
+                    <DevTools store={ store } monitor={ LogMonitor } />
                 </DebugPanel>
             );
         }
-        return (<div></div>);
+        return false;
     }
 
 
@@ -39,11 +39,9 @@ export default class App extends Component{
      * @return JSX
      */
     render(){
-        console.log(store.getState());
-
         return (
             <div>
-                <Provider store={store}>
+                <Provider store={ store }>
                     {() =>
                         <PumgranaApp />
                     }
