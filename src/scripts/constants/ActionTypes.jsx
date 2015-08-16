@@ -1,8 +1,11 @@
 import constants from 'react-constants';
 
 export default constants([
-    'BOOKMARK_RELATED_CONTENT',
+    'TOOGLE_PLUGIN',
+    'TOOGLE_VIEW_BOOKMARKS',
+    'GO_TO_PAGE',
 
+    'BOOKMARK_RELATED_CONTENT',
     'VISIT_RELATED_CONTENT',
 
     'GET_RELATED_CONTENT_REQUEST',

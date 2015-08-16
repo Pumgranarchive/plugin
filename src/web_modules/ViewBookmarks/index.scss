@@ -7,9 +7,11 @@
  @import 'core';
 
 .Pumgrana .ViewBookmarks{
-    left: 66.666%;
+    top: 100%;
+    left: 33.333%;
+    transition: top ease .3s;
 
     &.is-showed{
-        left: 33.333%;
+        top: 0;
     }
 }

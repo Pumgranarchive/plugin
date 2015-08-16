@@ -9,11 +9,11 @@ export default class Toogle extends Component{
      *
      */
     static defaultProps = {
-        toogle: function(){},
+        action: function(){},
         show: true
     }
     static propTypes = {
-        toogle: PropTypes.func.isRequired,
+        action: PropTypes.func.isRequired,
         show: PropTypes.bool.isRequired
     }
 
@@ -24,7 +24,7 @@ export default class Toogle extends Component{
      *
      */
     onClick(){
-        return this.props.toogle();
+        return this.props.action();
     }
 
 

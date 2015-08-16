@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import ctx from 'classnames';
 import './index.scss';
 import View from 'View/';
@@ -13,49 +13,15 @@ export default class Container extends Component{
      * Props
      *
      */
-    static defaultProps = { pages: [], relatedContent: [] }
+    static defaultProps = {
+        pages: [],
+        relatedContent: [],
+        plugin: {}
+    }
     static propTypes = {
-        pages: React.PropTypes.array.isRequired,
-        relatedContent: React.PropTypes.array.isRequired
-    }
-
-
-
-    /**
-     * States
-     *
-     */
-    state = {
-        currentPage: 0,
-        bookmarksContent: false,
-        show: false
-    }
-
-
-
-    /**
-     * Go to bookmarks content
-     *
-     * @return setState
-     */
-    goToBookmarks(){
-        return this.setState({
-            bookmarksContent: !this.state.bookmarksContent
-        });
-    }
-
-
-
-    /**
-     * Go to an other view
-     *
-     * @param id (number)
-     * @returb this.setState()
-     */
-    goTo(id){
-        return this.setState({
-            currentPage: id
-        });
+        pages: PropTypes.array.isRequired,
+        relatedContent: PropTypes.array.isRequired,
+        plugin: PropTypes.object.isRequired
     }
 
 
@@ -63,12 +29,33 @@ export default class Container extends Component{
     /**
      * Toogle
      *
-     * @return this.setState()
+     * @return tooglePlugin()
      */
-    toogle(){
-        return this.setState({
-            show: !this.state.show
-        });
+    tooglePlugin(){
+        return this.props.actions.tooglePlugin();
+    }
+
+
+
+    /**
+     * Go to an other page
+     *
+     * @param id (number)
+     * @returb goToPage()
+     */
+    goToPage(id){
+        return this.props.actions.goToPage(id);
+    }
+
+
+
+    /**
+     * Go to bookmarks content
+     *
+     * @return toogleViewBookmarks()
+     */
+    goToBookmarksView(){
+        return this.props.actions.toogleViewBookmarks();
     }
 
 
@@ -79,25 +66,24 @@ export default class Container extends Component{
      * @return JSX
      */
     render(){
-        let { pages, actions, relatedContent } = this.props;
-        let { currentPage, bookmarksContent, show } = this.state;
+        let { actions, pages, relatedContent, plugin } = this.props;
 
         return (
             <div>
                 <div className={ ctx('Pumgrana', {
-                    'is-disabled': !show
+                    'is-disabled': !plugin.open
                 })} ref='container'>
                     <Toogle
-                        toogle={ ::this.toogle }
-                        show={ show } />
+                        action={ ::this.tooglePlugin }
+                        show={ plugin.open } />
                     <div className="Pumgrana_container">
                         <div className="Pumgrana_views">
                             { pages.map((page, i) => {
                                 let position = 'current';
-                                if((currentPage - i) > 0){
+                                if((plugin.currentPage - i) > 0){
                                     position = 'before';
                                 }
-                                else if((currentPage - i) < 0){
+                                else if((plugin.currentPage - i) < 0){
                                     position = 'after';
                                 }
 
@@ -105,29 +91,29 @@ export default class Container extends Component{
                                     <View page={ page }
                                           relatedContent={
                                                relatedContent.filter(
-                                                   item => item.pageId === page.id
+                                                   item => item.pageId == page.id
                                                )
                                           }
                                           lastPageId={ (pages.length - 1) }
                                           position={ position }
-                                          goTo={ ::this.goTo }
+                                          goTo={ ::this.goToPage }
                                           actions={ actions }
                                           key={ i } />
                                 );
                             })}
                             <ViewBookmarks
                                 relatedContent={ relatedContent }
-                                show={ bookmarksContent }
+                                show={ plugin.showViewBookmarks }
                                 actions={ actions } />
                         </div>
                     </div>
                     <Footer
                         relatedContent={ relatedContent }
-                        goToBookmarks={ ::this.goToBookmarks } />
+                        goToBookmarks={ ::this.goToBookmarksView } />
                 </div>
                 <Overlay
-                    toogle={ ::this.toogle }
-                    show={ show } />
+                    toogle={ ::this.tooglePlugin }
+                    show={ plugin.open } />
             </div>
         );
     }

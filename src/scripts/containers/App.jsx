@@ -18,7 +18,7 @@ export default class App extends Component{
     /**
      * Render dev tools
      *
-     * @return JSX
+     * @return JSX or false
      */
     renderDevTools(){
         if(__DEBUG__){
