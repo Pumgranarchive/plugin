@@ -29,6 +29,7 @@ export default class PumgranaApp extends Component{
                 actions={ actions }
                 pages={ pages }
                 relatedContent={ relatedContent }
+                hasBookmarks={ (relatedContent.filter(item => item.bookmarked === true).length ? true : false) }
                 plugin={ plugin } />
         );
     }

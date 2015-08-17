@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import ctx from 'classnames';
 import './index.scss';
 
@@ -8,11 +8,15 @@ export default class Header extends Component{
      * Props
      *
      */
-    static defaultProps = { page: {}, lastPageId: 0, goTo: function(){} }
+    static defaultProps = {
+        page: {},
+        lastPageId: 0,
+        goTo: function(){}
+    }
     static propTypes = {
-        page: React.PropTypes.object.isRequired,
-        lastPageId: React.PropTypes.number.isRequired,
-        goTo: React.PropTypes.func.isRequired
+        page: PropTypes.object.isRequired,
+        lastPageId: PropTypes.number.isRequired,
+        goTo: PropTypes.func.isRequired
     }
 
 
@@ -44,7 +48,7 @@ export default class Header extends Component{
      *
      */
     render(){
-        let {page, lastPageId} = this.props;
+        let { page, lastPageId } = this.props;
 
         return (
             <div className="Header">

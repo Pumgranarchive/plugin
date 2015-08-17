@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-import removeDuplicateContent from 'utils/removeDuplicateContent';
+import React, { Component, PropTypes } from 'react';
 import './index.scss';
 import Header from 'Header/';
 import SearchBar from 'SearchBar/';
@@ -15,47 +14,27 @@ export default class View extends Component{
         page: {},
         relatedContent: [],
         position: 'current',
+        goToPage: function(){},
         lastPageId: 0,
-        goTo: function(){}
+        searchFilter: '',
+        searchRelatedContent: function(){},
+        resetSearchRelatedContent: function(){},
+        loadMoreRelatedContent: function(){},
+        bookmarkRelatedContent: function(){},
+        visitRelatedContent: function(){}
     }
     static propTypes = {
-        page: React.PropTypes.object.isRequired,
-        relatedContent: React.PropTypes.array.isRequired,
-        position: React.PropTypes.string.isRequired,
-        lastPageId: React.PropTypes.number.isRequired,
-        goTo: React.PropTypes.func.isRequired
-    }
-
-
-
-    /**
-     * Component will mount
-     *
-     */
-    componentWillMount(){
-        this.props.actions.getRelatedContent(this.props.page.id, this.props.page.url);
-    }
-
-
-
-    /**
-     * Handle search (event)
-     *
-     */
-    handleSearch(search){
-        this.props.actions.searchRelatedContent(this.props.page.id, this.props.page.url, search);
-    }
-
-
-
-    /**
-     * Reset search (event)
-     *
-     */
-    resetSearch(){
-        if(this.props.page.searchFilter !== ''){
-            this.props.actions.resetSearchRelatedContent(this.props.page.id);
-        }
+        page: PropTypes.object.isRequired,
+        relatedContent: PropTypes.array.isRequired,
+        position: PropTypes.string.isRequired,
+        goToPage: PropTypes.func.isRequired,
+        lastPageId: PropTypes.number.isRequired,
+        searchFilter: PropTypes.string.isRequired,
+        searchRelatedContent: PropTypes.func.isRequired,
+        resetSearchRelatedContent: PropTypes.func.isRequired,
+        loadMoreRelatedContent: PropTypes.func.isRequired,
+        bookmarkRelatedContent: PropTypes.func.isRequired,
+        visitRelatedContent: PropTypes.func.isRequired
     }
 
 
@@ -66,7 +45,19 @@ export default class View extends Component{
      * @return JSX
      */
     render(){
-        let {page, relatedContent, actions, position, lastPageId, goTo} = this.props;
+        let {
+            page,
+            relatedContent,
+            position,
+            lastPageId,
+            goTo,
+            searchFilter,
+            searchRelatedContent,
+            resetSearchRelatedContent,
+            loadMoreRelatedContent,
+            bookmarkRelatedContent,
+            visitRelatedContent
+        } = this.props;
 
         return (
             <div className={`View View-${position}`}>
@@ -76,19 +67,17 @@ export default class View extends Component{
                     page={ page } />
                 <div className="View_content">
                     <h1>
-                       { ((page.searchFilter === '') ? 'Related content' : `Resulats for "${page.searchFilter}"`) }
+                       { ((searchFilter === '') ? 'Related content' : `Resulats for "${searchFilter}"`) }
                     </h1>
                     <SearchBar
-                        handleSearch={::this.handleSearch}
-                        resetSearch={::this.resetSearch} />
+                        searchRelatedContent={ searchRelatedContent }
+                        resetSearchRelatedContent={ resetSearchRelatedContent } />
                     <List
                         page={ page }
-                        relatedContent={ removeDuplicateContent(relatedContent.filter(
-                            item => item.searchFilter === page.searchFilter
-                        ))}
-                        loadMoreRelatedContent={ actions.loadMoreRelatedContent }
-                        bookmarkRelatedContent={ actions.bookmarkRelatedContent }
-                        visitRelatedContent={ actions.visitRelatedContent }
+                        relatedContent={ relatedContent }
+                        loadMoreRelatedContent={ loadMoreRelatedContent }
+                        bookmarkRelatedContent={ bookmarkRelatedContent }
+                        visitRelatedContent={ visitRelatedContent }
                         loadMore={ true } />
                 </div>
             </div>

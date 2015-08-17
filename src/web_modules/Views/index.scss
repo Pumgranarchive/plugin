@@ -1,0 +1,19 @@
+/**
+ * Container style component
+ *
+ */
+
+@import 'core';
+
+.Pumgrana .Views{
+    overflow: hidden;
+    height: 100%;
+    width: $container-width;
+
+    &_wrapper{
+        position: relative;
+        width: 300%;
+        margin-left: -100%;
+        height: 100%;
+    }
+}

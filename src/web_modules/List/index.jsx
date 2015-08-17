@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import './index.scss';
 import Item from './../Item/';
 import ctx from 'classnames';
@@ -19,12 +19,12 @@ export default class List extends Component{
     }
 
     static propTypes = {
-        relatedContent: React.PropTypes.array.isRequired,
-        page: React.PropTypes.object.isRequired,
-        loadMoreRelatedContent: React.PropTypes.func.isRequired,
-        bookmarkRelatedContent: React.PropTypes.func.isRequired,
-        visitRelatedContent: React.PropTypes.func.isRequired,
-        loadMore: React.PropTypes.bool.isRequired
+        relatedContent: PropTypes.array.isRequired,
+        page: PropTypes.object.isRequired,
+        loadMoreRelatedContent: PropTypes.func.isRequired,
+        bookmarkRelatedContent: PropTypes.func.isRequired,
+        visitRelatedContent: PropTypes.func.isRequired,
+        loadMore: PropTypes.bool.isRequired
     }
 
 
@@ -32,7 +32,7 @@ export default class List extends Component{
     /**
      * Load more (event)
      *
-     * @return setState() with object in param
+     * @return loadMoreRelatedContent() (props function)
      */
     loadMore(){
         let {loadMoreRelatedContent, page} = this.props;
@@ -51,7 +51,11 @@ export default class List extends Component{
 
         let list = relatedContent.map((item, i) => {
             return (
-                <Item bookmarkRelatedContent={ bookmarkRelatedContent } visitRelatedContent={ visitRelatedContent } key={i} item={item} />
+                <Item
+                    bookmarkRelatedContent={ bookmarkRelatedContent }
+                    visitRelatedContent={ visitRelatedContent }
+                    key={i}
+                    item={item} />
             );
         });
 

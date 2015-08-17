@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import ctx from 'classnames';
-import removeDuplicateContent from 'utils/removeDuplicateContent';
 import './index.scss';
 import List from 'List/';
 
@@ -10,33 +9,39 @@ export default class ViewBookmarks extends Component{
      * Props
      *
      */
-    static defaultProps = { relatedContent: [], show: false }
-    static propTypes = {
-        relatedContent: React.PropTypes.array.isRequired,
-        show: React.PropTypes.bool.isRequired
+    static defaultProps = {
+        relatedContent: [],
+        show: false,
+        bookmarkRelatedContent: function(){},
+        visitRelatedContent: function(){}
     }
+    static propTypes = {
+        relatedContent: PropTypes.array.isRequired,
+        show: PropTypes.bool.isRequired,
+        bookmarkRelatedContent: PropTypes.func.isRequired,
+        visitRelatedContent: PropTypes.func.isRequired
+    }
+
 
 
     /**
      * Render
      *
+     * @return JSX
      */
     render(){
-        let {relatedContent, actions, show} = this.props;
-        relatedContent = removeDuplicateContent(relatedContent.filter(
-            item => item.bookmarked === true
-        ));
+        let { relatedContent, show, bookmarkRelatedContent, visitRelatedContent } = this.props;
 
         return (
-            <div className={ctx('View ViewBookmarks', {
+            <div className={ ctx('View ViewBookmarks', {
                 'is-showed': show
-            })}>
+            }) }>
                 <div className='View_content'>
                     <h1>Bookmarks content</h1>
                     <List
                         relatedContent={ relatedContent }
-                        bookmarkRelatedContent={ actions.bookmarkRelatedContent }
-                        visitRelatedContent={ actions.visitRelatedContent }
+                        bookmarkRelatedContent={ bookmarkRelatedContent }
+                        visitRelatedContent={ visitRelatedContent }
                         loadMore={false} />
                 </div>
             </div>

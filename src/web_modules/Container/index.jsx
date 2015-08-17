@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ctx from 'classnames';
 import './index.scss';
-import View from 'View/';
-import ViewBookmarks from 'ViewBookmarks/';
+import Views from 'Views/';
 import Footer from 'Footer/';
 import Overlay from 'Overlay/';
 import Toogle from 'Toogle/';
@@ -16,12 +15,14 @@ export default class Container extends Component{
     static defaultProps = {
         pages: [],
         relatedContent: [],
-        plugin: {}
+        plugin: {},
+        hasBookmarks: false
     }
     static propTypes = {
         pages: PropTypes.array.isRequired,
         relatedContent: PropTypes.array.isRequired,
-        plugin: PropTypes.object.isRequired
+        plugin: PropTypes.object.isRequired,
+        hasBookmarks: PropTypes.bool.isRequired
     }
 
 
@@ -50,11 +51,11 @@ export default class Container extends Component{
 
 
     /**
-     * Go to bookmarks content
+     * Go to the view of bookmarks
      *
-     * @return toogleViewBookmarks()
+     * @return goToViewBookmarks()
      */
-    goToBookmarksView(){
+    goToViewBookmarks(){
         return this.props.actions.toogleViewBookmarks();
     }
 
@@ -66,7 +67,7 @@ export default class Container extends Component{
      * @return JSX
      */
     render(){
-        let { actions, pages, relatedContent, plugin } = this.props;
+        let { pages, relatedContent, plugin, hasBookmarks } = this.props;
 
         return (
             <div>
@@ -76,44 +77,18 @@ export default class Container extends Component{
                     <Toogle
                         action={ ::this.tooglePlugin }
                         show={ plugin.open } />
-                    <div className="Pumgrana_container">
-                        <div className="Pumgrana_views">
-                            { pages.map((page, i) => {
-                                let position = 'current';
-                                if((plugin.currentPage - i) > 0){
-                                    position = 'before';
-                                }
-                                else if((plugin.currentPage - i) < 0){
-                                    position = 'after';
-                                }
-
-                                return (
-                                    <View page={ page }
-                                          relatedContent={
-                                               relatedContent.filter(
-                                                   item => item.pageId === page.id
-                                               )
-                                          }
-                                          lastPageId={ (pages.length - 1) }
-                                          position={ position }
-                                          goTo={ ::this.goToPage }
-                                          actions={ actions }
-                                          key={ i } />
-                                );
-                            })}
-                            <ViewBookmarks
-                                relatedContent={ relatedContent }
-                                show={ plugin.showViewBookmarks }
-                                actions={ actions } />
-                        </div>
-                    </div>
-                    <Footer
+                    <Views
                         relatedContent={ relatedContent }
+                        pages={ pages }
+                        currentPage={ plugin.currentPage }
+                        goToPage={ ::this.goToPage } />
+                    <Footer
+                        hasBookmarks={ hasBookmarks }
                         showViewBookmarks={ plugin.showViewBookmarks }
-                        goToViewBookmarks={ ::this.goToBookmarksView } />
+                        goToViewBookmarks={ ::this.goToViewBookmarks } />
                 </div>
                 <Overlay
-                    toogle={ ::this.tooglePlugin }
+                    clickAction={ ::this.tooglePlugin }
                     show={ plugin.open } />
             </div>
         );

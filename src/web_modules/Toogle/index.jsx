@@ -22,6 +22,7 @@ export default class Toogle extends Component{
     /**
      * On click (event)
      *
+     * @return action()
      */
     onClick(){
         return this.props.action();

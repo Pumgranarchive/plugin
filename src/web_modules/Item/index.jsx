@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import './index.scss';
 import ctx from 'classnames';
 
@@ -15,9 +15,9 @@ export default class Item extends Component{
     }
 
     static propTypes = {
-        item: React.PropTypes.object.isRequired,
-        bookmarkRelatedContent: React.PropTypes.func.isRequired,
-        visitRelatedContent: React.PropTypes.func.isRequired
+        item: PropTypes.object.isRequired,
+        bookmarkRelatedContent: PropTypes.func.isRequired,
+        visitRelatedContent: PropTypes.func.isRequired
     }
 
 

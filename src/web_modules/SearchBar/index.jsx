@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import './index.scss';
 var timer;
 
@@ -9,12 +9,12 @@ export default class SearchBar extends Component{
      *
      */
     static defaultProps = {
-        handleSearch: function(){},
-        resetSearch: function(){}
+        searchRelatedContent: function(){},
+        resetSearchRelatedContent: function(){}
     }
     static propTypes = {
-        handleSearch: React.PropTypes.func.isRequired,
-        resetSearch: React.PropTypes.func.isRequired
+        searchRelatedContent: PropTypes.func.isRequired,
+        resetSearchRelatedContent: PropTypes.func.isRequired
     }
 
 
@@ -28,11 +28,11 @@ export default class SearchBar extends Component{
         clearTimeout(timer);
 
         if(search === ''){
-            this.props.resetSearch();
+            this.props.resetSearchRelatedContent();
         }
         else{
             timer = setTimeout(() => {
-                this.props.handleSearch(search);
+                this.props.searchRelatedContent(search);
             }, 1300);
         }
     }
@@ -42,7 +42,7 @@ export default class SearchBar extends Component{
     /**
      * Render
      *
-     * @return <html>
+     * @return JSX
      */
     render(){
         return (

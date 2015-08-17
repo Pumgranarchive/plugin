@@ -10,11 +10,11 @@ export default class Overlay extends Component{
      *
      */
     static defaultProps = {
-        toogle: function(){},
+        clickAction: function(){},
         show: true
     }
     static propTypes = {
-        toogle: React.PropTypes.func.isRequired,
+        clickAction: PropTypes.func.isRequired,
         show: PropTypes.bool.isRequired
     }
 
@@ -27,7 +27,7 @@ export default class Overlay extends Component{
      */
     onClick(){
         if(this.props.show === true){
-            return this.props.toogle();
+            return this.props.clickAction();
         }
         return false;
     }
