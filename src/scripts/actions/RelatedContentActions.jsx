@@ -1,6 +1,6 @@
 import * as types from 'constants/ActionTypes';
-// import {WebAPI} from 'utils/api.ts'; // ** __PROD__ ** //
-import WebAPI from 'utils/WebAPI'; // ** __DEV__ ** //
+import { WebAPI } from 'utils/api.ts'; // ** __PROD__ ** //
+// import WebAPI from 'utils/WebAPI'; // ** __DEV__ ** //
 
 export function getRelatedContent(pageId, pageUrl) {
     return {
