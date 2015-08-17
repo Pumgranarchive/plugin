@@ -56,7 +56,9 @@ export default class Container extends Component{
      * @return goToViewBookmarks()
      */
     goToViewBookmarks(){
-        return this.props.actions.toogleViewBookmarks();
+        if(this.props.hasBookmarks){
+            return this.props.actions.toogleViewBookmarks();
+        }
     }
 
 

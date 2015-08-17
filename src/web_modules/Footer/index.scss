@@ -12,7 +12,6 @@
     width: $container-width;
     bottom: 0;
     background-color: $background-color;
-    opacity: 0.94;
     border-top: 1px solid #ebebeb;
 
     &_website {
@@ -35,7 +34,7 @@
         width: 32px;
         height: 32px;
         border-radius: 50%;
-        border: 1px solid #d2d2d2;
+        border: 1px solid $secondaryColor;
         margin-top: 13px;
         margin-left: 19px;
 		cursor: pointer;
@@ -44,6 +43,11 @@
             margin: auto;
             position: relative;
             left: -1px;
+
+            path{
+                fill: $secondaryColor-light;
+                stroke: $secondaryColor;
+            }
         }
 
 	    &.is-active {
