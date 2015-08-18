@@ -12,12 +12,6 @@ export default class Container extends Component{
      * Props
      *
      */
-    static defaultProps = {
-        pages: [],
-        relatedContent: [],
-        plugin: {},
-        hasBookmarks: false
-    }
     static propTypes = {
         pages: PropTypes.array.isRequired,
         relatedContent: PropTypes.array.isRequired,
@@ -70,13 +64,16 @@ export default class Container extends Component{
      */
     render(){
         let { pages, relatedContent, plugin, hasBookmarks } = this.props;
+        let hasResultats = (relatedContent.length > 0 ? true : false );
 
         return (
             <div>
                 <div className={ ctx('Pumgrana', {
-                    'is-disabled': !plugin.open
+                    'is-disabled': !plugin.open,
+                    'is-discreet': !hasResultats
                 })} ref='container'>
                     <Toogle
+                        hasResultats={ hasResultats }
                         action={ ::this.tooglePlugin }
                         show={ plugin.open } />
                     <Views

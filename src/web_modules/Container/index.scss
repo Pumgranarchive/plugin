@@ -24,11 +24,10 @@
 
     &.is-disabled{
         right: $container-width * -1 + $borderLeft;
-    }
 
-    &.is-masked{
-        border-left: 5px solid $secondaryColor-medium;
-        opacity: .8;
+        &.is-discreet{
+            border-left: 5px solid $secondaryColor-medium;
+        }
     }
 
     *{
