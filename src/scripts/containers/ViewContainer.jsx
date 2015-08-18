@@ -21,11 +21,6 @@ export default class ViewContainer extends Component{
      * Props
      *
      */
-    static defaultProps = {
-        position: 'current',
-        pageId: 0,
-        pageUrl: 'http://example.com'
-    }
     static propTypes = {
         position: PropTypes.string.isRequired,
         pageId: PropTypes.number.isRequired,
@@ -40,10 +35,12 @@ export default class ViewContainer extends Component{
      * @return dispatch getRelatedContent()
      */
     componentDidMount(){
-        return this.props.dispatch(getRelatedContent(
-            this.props.pageId,
-            this.props.pageUrl
-        ));
+        if(this.props.pageUrl.substring(4, 5) !== 's'){
+            return this.props.dispatch(getRelatedContent(
+                this.props.pageId,
+                this.props.pageUrl
+            ));
+        }
     }
 
 
@@ -134,7 +131,7 @@ export default class ViewContainer extends Component{
      */
     render() {
         let { pages, pageId, relatedContent, position } = this.props;
-        let page = pages.filter( page => page.id === pageId )[0];
+        let page = pages.filter( item => item.id === pageId )[0];
 
         return (
             <View

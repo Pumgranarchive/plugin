@@ -10,19 +10,6 @@ export default class View extends Component{
      * Props
      *
      */
-    static defaultProps = {
-        page: {},
-        relatedContent: [],
-        position: 'current',
-        goToPage: function(){},
-        lastPageId: 0,
-        searchFilter: '',
-        searchRelatedContent: function(){},
-        resetSearchRelatedContent: function(){},
-        loadMoreRelatedContent: function(){},
-        bookmarkRelatedContent: function(){},
-        visitRelatedContent: function(){}
-    }
     static propTypes = {
         page: PropTypes.object.isRequired,
         relatedContent: PropTypes.array.isRequired,
