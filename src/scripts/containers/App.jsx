@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import promiseMiddleware from 'middlewares/promiseMiddleware';
 import * as reducers from 'reducers/';
 import PumgranaApp from 'PumgranaApp';
-import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
 let cs = createStore;
 if(__DEBUG__){
@@ -22,13 +21,14 @@ export default class App extends Component{
      */
     renderDevTools(){
         if(__DEBUG__){
+            const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
+
             return (
                 <DebugPanel top left bottom>
-                    <DevTools store={ store } monitor={ LogMonitor } />
+                    <DevTools store={ store } monitor={LogMonitor} />
                 </DebugPanel>
             );
         }
-        return false;
     }
 
 
