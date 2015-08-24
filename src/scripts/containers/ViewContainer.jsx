@@ -6,7 +6,8 @@ import {
     bookmarkRelatedContent,
     visitRelatedContent,
     loadMoreRelatedContent,
-    resetSearchRelatedContent
+    resetSearchRelatedContent,
+    getTitle
 } from 'actions/RelatedContentActions';
 import { connect } from 'react-redux';
 import View from 'View/';
@@ -35,10 +36,18 @@ export default class ViewContainer extends Component{
      * @return dispatch getRelatedContent()
      */
     componentDidMount(){
-        if(this.props.pageUrl.substring(4, 5) !== 's'){
-            return this.props.dispatch(getRelatedContent(
-                this.props.pageId,
-                this.props.pageUrl
+        let { pageId, pageUrl, dispatch } = this.props;
+
+        document.onreadystatechange = function(){
+            if(document.readyState === 'complete'){
+                dispatch(getTitle(document.title, pageId));
+            }
+        };
+
+        if(pageUrl.substring(4, 5) !== 's'){
+            return dispatch(getRelatedContent(
+                pageId,
+                pageUrl
             ));
         }
     }

@@ -33,6 +33,14 @@ export function resetSearchRelatedContent(pageId) {
     };
 }
 
+export function getTitle(pageTitle, pageId) {
+    return {
+        type: types.GET_TITLE,
+        pageTitle,
+        pageId
+    };
+}
+
 export function bookmarkRelatedContent(url) {
     return {
         type: types.BOOKMARK_RELATED_CONTENT,

@@ -4,7 +4,9 @@ import {
     SEARCH_RELATED_CONTENT_SUCCESS,
     LOAD_MORE_RELATED_CONTENT_REQUEST,
     LOAD_MORE_RELATED_CONTENT_SUCCESS,
-    RESET_SEARCH_RELATED_CONTENT
+    RESET_SEARCH_RELATED_CONTENT,
+    GET_TITLE
+
 } from 'constants/ActionTypes';
 
 var initialState = [{
@@ -54,6 +56,14 @@ export const pages = handleActions({
         state.map(page =>
             page.id === action.pageId ?
                 { ...page, searchFilter: '', pendingSearchData: false } :
+                page
+        )
+    ),
+
+    [GET_TITLE]: (state, action) => (
+        state.map(page =>
+            page.id === action.pageId ?
+                { ...page, title: action.pageTitle} :
                 page
         )
     )
