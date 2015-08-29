@@ -8,12 +8,6 @@ export default class Item extends Component{
      * Props
      *
      */
-    static defaultProps = {
-        item: {},
-        bookmarkRelatedContent: function(){},
-        visitRelatedContent: function(){}
-    }
-
     static propTypes = {
         item: PropTypes.object.isRequired,
         bookmarkRelatedContent: PropTypes.func.isRequired,
@@ -28,7 +22,12 @@ export default class Item extends Component{
      */
     handleVisite(){
         this.props.visitRelatedContent(this.props.item.url);
-        window.location.href = this.props.item.url;
+        let selectors = [
+            ...document.querySelectorAll('body > *:not(.Pumgrana__ac863f3)')
+        ];
+        selectors.map((element) => {
+            element.parentNode.removeChild(element);
+        });
     }
 
 

@@ -8,10 +8,6 @@ export default class SearchBar extends Component{
      * Props
      *
      */
-    static defaultProps = {
-        searchRelatedContent: function(){},
-        resetSearchRelatedContent: function(){}
-    }
     static propTypes = {
         searchRelatedContent: PropTypes.func.isRequired,
         resetSearchRelatedContent: PropTypes.func.isRequired

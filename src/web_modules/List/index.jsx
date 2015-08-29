@@ -9,15 +9,6 @@ export default class List extends Component{
      * Props
      *
      */
-    static defaultProps = {
-        relatedContent: [],
-        page: {},
-        loadMoreRelatedContent: function(){},
-        bookmarkRelatedContent: function(){},
-        visitRelatedContent: function(){},
-        loadMore: false
-    }
-
     static propTypes = {
         relatedContent: PropTypes.array.isRequired,
         page: PropTypes.object.isRequired,

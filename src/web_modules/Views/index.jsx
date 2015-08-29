@@ -9,12 +9,6 @@ export default class Views extends Component{
      * Props
      *
      */
-    static defaultProps = {
-        relatedContent: [],
-        pages: [],
-        currentPage: 0,
-        goToPage: function(){}
-    }
     static propTypes = {
         relatedContent: PropTypes.array.isRequired,
         pages: PropTypes.array.isRequired,

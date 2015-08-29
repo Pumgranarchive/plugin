@@ -8,11 +8,6 @@ export default class Footer extends Component{
      * Props
      *
      */
-    static defaultProps = {
-        hasBookmarks: false,
-        goToViewBookmarks: function(){},
-        showViewBookmarks: false
-    }
     static propTypes = {
         hasBookmarks: PropTypes.bool.isRequired,
         goToViewBookmarks: PropTypes.func.isRequired,

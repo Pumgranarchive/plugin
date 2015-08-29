@@ -8,11 +8,6 @@ export default class Header extends Component{
      * Props
      *
      */
-    static defaultProps = {
-        page: {},
-        lastPageId: 0,
-        goTo: function(){}
-    }
     static propTypes = {
         page: PropTypes.object.isRequired,
         lastPageId: PropTypes.number.isRequired,

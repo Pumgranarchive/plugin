@@ -9,12 +9,6 @@ export default class ViewBookmarks extends Component{
      * Props
      *
      */
-    static defaultProps = {
-        relatedContent: [],
-        show: false,
-        bookmarkRelatedContent: function(){},
-        visitRelatedContent: function(){}
-    }
     static propTypes = {
         relatedContent: PropTypes.array.isRequired,
         show: PropTypes.bool.isRequired,

@@ -9,10 +9,6 @@ export default class Overlay extends Component{
      * Props
      *
      */
-    static defaultProps = {
-        clickAction: function(){},
-        show: true
-    }
     static propTypes = {
         clickAction: PropTypes.func.isRequired,
         show: PropTypes.bool.isRequired
