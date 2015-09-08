@@ -22,6 +22,7 @@
         "react"
     ],
     "globals": {
-        "__DEBUG__": true
+        "__DEBUG__": true,
+        "__DEV__": true
     }
 }
