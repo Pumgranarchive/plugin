@@ -36,6 +36,22 @@ export default class Item extends Component{
             element.parentNode.removeChild(element);
         });
 
+        // Set size of body / html
+        select('html')::css({
+            height: '100vh'
+        });
+        select('body')::css({
+            overflow: 'hidden'
+        });
+
+        // Create iframe
+        let webView = document.createElement('iframe');
+        webView.setAttribute('style', 'position: absolute; left: 0; top: 0;');
+        webView.setAttribute('src', 'http://lemonde.fr');
+        webView.setAttribute('width', '100%');
+        webView.setAttribute('height', '100%');
+        webView.setAttribute('frameborder', '0');
+        document.querySelector('body').insertBefore(webView, document.querySelector('.Pumgrana__ac863f3'));
     }
 
 
