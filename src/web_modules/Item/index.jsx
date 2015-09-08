@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { select, css } from 'utils/dom';
 import './index.scss';
 import ctx from 'classnames';
 
@@ -16,18 +17,25 @@ export default class Item extends Component{
 
 
 
+    /* ------------------------------------- */
+
+
+
     /**
      * Handle visited
      *
      */
     handleVisite(){
         this.props.visitRelatedContent(this.props.item.url);
+
+        // Remove all elements of the page
         let selectors = [
             ...document.querySelectorAll('body > *:not(.Pumgrana__ac863f3)')
         ];
         selectors.map((element) => {
             element.parentNode.removeChild(element);
         });
+
     }
 
 
@@ -41,19 +49,24 @@ export default class Item extends Component{
     }
 
 
+
+    /* ------------------------------------- */
+
+
+
     /**
      * Render
      *
+     * @return JSX
      */
     render(){
-        let {visited, link, bookmarked, website, title, description, tags} = this.props.item;
+        let { visited, bookmarked, website, title, description, tags } = this.props.item;
 
         return (
             <div
                 className={ctx('Item', {
                     'is-visited': visited
-                })}
-                href={ link }>
+                })}>
                 <svg onClick={ ::this.handleBookmark } className={
                     ctx('Item_bookmark', {
                         'is-active': bookmarked
@@ -73,4 +86,5 @@ export default class Item extends Component{
             </div>
         );
     }
+
 }
