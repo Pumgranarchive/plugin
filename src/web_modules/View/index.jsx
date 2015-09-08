@@ -37,7 +37,7 @@ export default class View extends Component{
             relatedContent,
             position,
             lastPageId,
-            goTo,
+            goToPage,
             searchFilter,
             searchRelatedContent,
             resetSearchRelatedContent,
@@ -50,7 +50,7 @@ export default class View extends Component{
             <div className={`View View-${position}`}>
                 <Header
                     lastPageId={ lastPageId }
-                    goTo={ goTo }
+                    goTo={ goToPage }
                     page={ page } />
                 <div className="View_content">
                     <h1>

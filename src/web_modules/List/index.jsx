@@ -11,8 +11,8 @@ export default class List extends Component{
      */
     static propTypes = {
         relatedContent: PropTypes.array.isRequired,
-        page: PropTypes.object.isRequired,
-        loadMoreRelatedContent: PropTypes.func.isRequired,
+        page: PropTypes.object,
+        loadMoreRelatedContent: PropTypes.func,
         bookmarkRelatedContent: PropTypes.func.isRequired,
         visitRelatedContent: PropTypes.func.isRequired,
         loadMore: PropTypes.bool.isRequired
@@ -26,8 +26,10 @@ export default class List extends Component{
      * @return loadMoreRelatedContent() (props function)
      */
     loadMore(){
-        let {loadMoreRelatedContent, page} = this.props;
-        loadMoreRelatedContent(page.id, page.url, page.searchFilter);
+        if(this.props.page){
+            let {loadMoreRelatedContent, page} = this.props;
+            loadMoreRelatedContent(page.id, page.url, page.searchFilter);
+        }
     }
 
 
