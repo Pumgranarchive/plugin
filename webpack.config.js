@@ -8,27 +8,16 @@ var dev = (process.env.NODE_ENV === 'DEV' ? true : false);
 var production = (process.env.NODE_ENV === 'CHROME' ? true : false);
 var chrome = (production ? true : false);
 
-var entryFiles = [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
-    './src/index'
-];
-var jsLoaders = ['react-hot', 'babel'];
-if(production){
-    entryFiles = [
-        './src/index'
-    ];
-    jsLoaders = ['babel'];
-}
-
 module.exports = {
+    devtool: 'eval',
     server: {
         port: 3000,
         url: 'localhost',
         hot: (dev ? true : false),
         historyApiFallback: true
     },
-    entry: entryFiles,
+    entry: production ? ['./src/index'] :
+        ['webpack-hot-middleware/client', './src/index'],
     output: {
         path: chrome ? path.join(__dirname, 'chrome_extension') : path.join(__dirname, '__build__'),
         filename: 'app.js',
@@ -47,7 +36,7 @@ module.exports = {
     module: {
         loaders: [{
             test: /\.jsx?$/,
-            loaders: jsLoaders,
+            loaders: ['babel'],
             include: path.join(__dirname, 'src')
         },
         {
