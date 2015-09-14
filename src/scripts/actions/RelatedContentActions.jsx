@@ -5,7 +5,7 @@ if(__DEV__){
     WebAPI = require('utils/WebAPI.jsx');
 }
 else{
-    WebAPI = require('utils/api.ts').WebApi;
+    WebAPI = require('utils/api.ts').WebAPI;
 }
 
 export function getRelatedContent(pageId, pageUrl) {
