@@ -4,7 +4,7 @@
   "description": "This extension allows you to add content to the Pumgrana website.",
   "scripts": {
     "start": "env BABEL_ENV=dev UV_THREADPOOL_SIZE=100 DEBUG=true NODE_ENV=DEV node server.js",
-    "chrome": "env BABEL_ENV=production UV_THREADPOOL_SIZE=100 DEBUG=false NODE_ENV=CHROME webpack",
+    "chrome": "env BABEL_ENV=production UV_THREADPOOL_SIZE=100 DEBUG=false NODE_ENV=CHROME webpack --watch",
     "lint": "eslint __build__"
   },
   "repository": {
