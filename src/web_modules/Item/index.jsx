@@ -47,7 +47,7 @@ export default class Item extends Component{
         // Create iframe
         let webView = document.createElement('iframe');
         webView.setAttribute('style', 'position: absolute; left: 0; top: 0;');
-        webView.setAttribute('src', 'http://lemonde.fr');
+        webView.setAttribute('src', this.props.item.url);
         webView.setAttribute('width', '100%');
         webView.setAttribute('height', '100%');
         webView.setAttribute('frameborder', '0');
