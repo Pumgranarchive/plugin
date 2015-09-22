@@ -5,30 +5,21 @@ var timer;
 export default class SearchBar extends Component{
 
     /**
-     * Props
+     * onChange()
+     * (update search resulatats when input changes)
      *
-     */
-    static propTypes = {
-        searchRelatedContent: PropTypes.func.isRequired,
-        resetSearchRelatedContent: PropTypes.func.isRequired
-    }
-
-
-
-    /**
-     * On change event
-     *
+     * @return {func} resetSearchRelatedContent() || searchRelatedContent()
      */
     onChange(){
-        let search = this.refs.searchBarInput.getDOMNode().value;
+        let search = this.refs.searchBarInput.value;
         clearTimeout(timer);
 
         if(search === ''){
-            this.props.resetSearchRelatedContent();
+            return this.props.resetSearchRelatedContent();
         }
         else{
             timer = setTimeout(() => {
-                this.props.searchRelatedContent(search);
+                return this.props.searchRelatedContent(search);
             }, 1300);
         }
     }
@@ -42,15 +33,21 @@ export default class SearchBar extends Component{
      */
     render(){
         return (
-            <div className="SearchBar_container">
-                <input
-                    type="text"
-                    ref="searchBarInput"
-                    placeholder="Search..."
-                    className="SearchBar"
-                    onChange={ ::this.onChange }
-                    onKeyDown={ ::this.onChange } />
-            </div>
+           <div className="SearchBar_container">
+               <input
+                   type="text"
+                   ref="searchBarInput"
+                   placeholder="Search..."
+                   className="SearchBar"
+                   onChange={ ::this.onChange }
+                   onKeyDown={ ::this.onChange } />
+           </div>
         );
     }
+
 }
+
+SearchBar.propTypes = {
+    searchRelatedContent: PropTypes.func.isRequired,
+    resetSearchRelatedContent: PropTypes.func.isRequired
+};

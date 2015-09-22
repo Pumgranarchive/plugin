@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-import promiseMiddleware from 'middlewares/promiseMiddleware';
-import * as reducers from 'reducers/';
+import configureStore from 'configStore';
 import PumgranaApp from 'PumgranaApp';
-
-let cs = createStore;
-if(__DEBUG__){
-    cs = compose(require('redux-devtools').devTools(), createStore);
-}
-const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(cs);
-const store = createStoreWithMiddleware(combineReducers(reducers));
+const store = configureStore();
 
 export default class App extends Component{
 
@@ -42,9 +34,7 @@ export default class App extends Component{
         return (
             <div>
                 <Provider store={ store }>
-                    {() =>
-                        <PumgranaApp />
-                    }
+                    <PumgranaApp />
                 </Provider>
                 { this.renderDevTools() }
             </div>

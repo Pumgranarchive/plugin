@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import App from './scripts/containers/App';
 import 'stylesheets/main';
 
@@ -7,6 +8,6 @@ document.onreadystatechange = function(){
         let el = document.createElement('div');
         el.className = 'Pumgrana__ac863f3';
         document.body.appendChild(el);
-        React.render(<App />, document.querySelector('.Pumgrana__ac863f3'));
+        ReactDOM.render(<App />, document.querySelector('.Pumgrana__ac863f3'));
     }
 };
