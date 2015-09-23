@@ -1,6 +1,8 @@
-/**
- * Functions
- *
- */
-
-/* ... */
+ /**
+  * image-url()
+  *
+  * @return relative path
+  */
+ @function image-url($file, $path:'') {
+     @return url("./#{$path}../../assets/images/#{$file}")
+ }
