@@ -1,0 +1,31 @@
+/**
+ * Footer Component Style
+ *
+ */
+
+@import 'core';
+
+.container {
+    position: absolute;
+    border-box: box-sizing;
+    height: $footer-height;
+    width: $container-width;
+    bottom: 0;
+    background-color: $background-color;
+    border-top: 1px solid #ebebeb;
+}
+
+.logo {
+    position: absolute;
+    right: 24px;
+    top: 13px;
+    width: 100px;
+    height: 28px;
+    background-image: image-url('logo.svg');
+    opacity: 0.8;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 1;
+    }
+}
