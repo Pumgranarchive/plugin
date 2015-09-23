@@ -45,7 +45,7 @@ module.exports = {
         },
         {
             test: /\.(scss|css)$/,
-            loader: ExtractTextPlugin.extract('style', 'css!postcss!sass?outputStyle=expanded&' +
+            loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass?outputStyle=expanded&' +
                       'includePaths[]=' +
                         (path.resolve(__dirname, './src/assets/fonts/')) + '&' +
                       'includePaths[]=' +
