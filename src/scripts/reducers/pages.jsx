@@ -7,7 +7,7 @@ import {
 
 var initialState = Immutable.fromJS([]);
 
-export default function views(state = initialState, action) {
+export default function pages(state = initialState, action) {
     switch(action.type) {
         case GET_RELATED_CONTENT_REQUEST:
             state = state.set('isFetching', true);
