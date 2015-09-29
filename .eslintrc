@@ -23,6 +23,7 @@
     ],
     "globals": {
         "__DEBUG__": true,
-        "__DEV__": true
+        "__DEV__": true,
+        "chrome": true
     }
 }
