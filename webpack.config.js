@@ -9,7 +9,7 @@ var production = (process.env.NODE_ENV === 'CHROME' ? true : false);
 var chrome = (production ? true : false);
 
 module.exports = {
-    devtool: 'eval',
+    devtool: (dev ? 'eval' : ''),
     server: {
         port: 3000,
         url: 'localhost',
