@@ -3,9 +3,11 @@ export default {
 	/**
 	 * Get related contet
 	 *
+	 * @params {object} params
 	 * @return Promise
 	 */
-	getRelatedContent: (pageId) => {
+	getRelatedContent: (params) => {
+		console.log(params);
 		return new Promise((resolve) => {
 			resolve([
 				{
@@ -16,7 +18,7 @@ export default {
 					tags: ['tag 1', 'tag2'],
 					bookmarked: false,
 					visited: false,
-					pageId: pageId,
+					pageId: 1,
 					searchFilter: ''
 				},
 				{
@@ -27,7 +29,7 @@ export default {
 					tags: ['tag 1', 'tag2', 'tag3'],
 					bookmarked: false,
 					visited: false,
-					pageId: pageId,
+					pageId: 2,
 					searchFilter: ''
 				}
 			]);

@@ -7,23 +7,25 @@ else{
     WebAPI = require('utils/api.ts').WebAPI;
 }
 
-const defaultLimit = 12;
-
 
 
 /**
  * Get related content
  *
- * @param {string} filter
+ * @param {object} params
  * @return {object} promise
  */
-export function getRelatedContent(page, start = 0, limit = defaultLimit, filter = '') {
-    return {
+export function getRelatedContent(
+    {
+        url = document.location.href,
+        start = 0,
+        limit = 12,
+        filter = ''
+    } = {}
+) {
+   return {
         types: [types.GET_RELATED_CONTENT_REQUEST, types.GET_RELATED_CONTENT_SUCCESS, types.GET_RELATED_CONTENT_ERROR],
-        promise: WebAPI.getRelatedContent({
-            start,
-            filter,
-            limit
-        })
+        promise: WebAPI.getRelatedContent({url, start, filter, limit}),
+        url
     };
 }
