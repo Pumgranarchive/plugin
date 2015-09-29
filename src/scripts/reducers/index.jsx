@@ -1,3 +1,3 @@
-export { pages } from './pages';
-export { relatedContent } from './relatedContent';
-export { plugin } from './plugin';
+export views from './views';
+export relatedContent from './relatedContent';
+export router from './router';
