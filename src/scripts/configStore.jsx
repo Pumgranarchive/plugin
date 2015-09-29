@@ -9,9 +9,7 @@ if(__DEBUG__){
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(cs);
 
 export default function configureStore() {
-    const store = createStoreWithMiddleware(combineReducers({
-        ...reducers
-    }));
+    const store = createStoreWithMiddleware(combineReducers(reducers));
 
     if (module.hot) {
         module.hot.accept('./reducers/index', () => {
