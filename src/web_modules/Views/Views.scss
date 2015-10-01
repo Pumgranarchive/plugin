@@ -1,0 +1,15 @@
+/**
+ * Views style component
+ *
+ */
+
+@import 'core';
+
+.container {
+    position: absolute;
+    overflow: hidden;
+    height: 100%;
+    width: $container-width;
+    background: $background-color;
+    z-index: $zIndex-max + 1;
+}
