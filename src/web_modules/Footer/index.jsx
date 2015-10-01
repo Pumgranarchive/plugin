@@ -7,7 +7,7 @@ export default class Footer extends Component{
     /**
      * Render
      *
-     * @return JSX
+     * @return {JSX}
      */
      render(){
          return (

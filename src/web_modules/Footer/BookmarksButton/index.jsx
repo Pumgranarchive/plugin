@@ -4,9 +4,9 @@ import styles from './BookmarksButton';
 export default class BookmarksButton extends Component{
 
     /**
-     * Render
+     * Render bookmark icon
      *
-     * @return JSX
+     * @return {JSX}
      */
     render() {
         return (
