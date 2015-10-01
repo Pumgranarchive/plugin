@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getRelatedContent } from 'actions/RelatedContentActions';
 import Wrapper from 'Wrapper/';
 import Footer from 'Footer/';
 import ToogleButton from 'ToogleButton/';
+import Views from 'Views/';
+import Overlay from 'Overlay/';
 
+@connect(state => ({
+    pages: state.pages
+}))
 export default class App extends Component{
 
     /**
@@ -11,6 +18,19 @@ export default class App extends Component{
      */
     state = {
         stateToogle: 'close'
+    }
+
+
+
+    /**
+     * Component did mount
+     *
+     * @return {func} Dispatch getRelatedContent()
+     */
+    componentDidMount() {
+        return this.props.dispatch(getRelatedContent({
+            url: document.location.href
+        }));
     }
 
 
@@ -26,10 +46,11 @@ export default class App extends Component{
 
 
     /**
-     * Open || Close plugin
+     * Open || close the plugin
      *
+     * @return {func} setState
      */
-    tooglePlugin() {
+    toogleAction() {
         return this.setState({
             stateToogle: (this.state.stateToogle == 'open' ? 'close' : 'open')
         });
@@ -38,20 +59,32 @@ export default class App extends Component{
 
 
     /**
-     * Render
+     * Render <Wrapper /> component
      *
-     * @return JSX
+     * @return {JSX}
      */
     render() {
+        let { pages } = this.props;
+
         return (
-            <Wrapper state={ this.state.stateToogle }>
-                <ToogleButton
+            <div>
+                <Overlay
                     state={ this.state.stateToogle }
-                    action={ ::this.tooglePlugin } />
-                <Footer
-                    showViewBookmarks={ ::this.showViewBookmarks }
-                    stateViewBookmarks={ 'disabled' } />
-            </Wrapper>
+                    toogleAction={ ::this.toogleAction } />
+                <Wrapper state={ this.state.stateToogle }>
+                    <ToogleButton
+                        state={ this.state.stateToogle }
+                        action={ ::this.toogleAction } />
+                    <Views> {
+                        pages.map(page => (
+                            <div>{ page }</div>
+                        ))
+                    } </Views>
+                    <Footer
+                        showViewBookmarks={ ::this.showViewBookmarks }
+                        stateViewBookmarks={ 'disabled' } />
+                </Wrapper>
+            </div>
         );
     }
 
