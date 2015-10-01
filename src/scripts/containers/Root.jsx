@@ -7,9 +7,9 @@ const store = configureStore();
 export default class Root extends Component{
 
     /**
-     * Render dev tools
+     * Render redux-devtools
      *
-     * @return {JSX || false}
+     * @return {JSX} Render <DebugPanel />
      */
     renderDevTools(){
         if(__DEBUG__){
@@ -28,7 +28,7 @@ export default class Root extends Component{
     /**
      * Render
      *
-     * @return JSX
+     * @return {JSX} Render <Provider /> component
      */
     render(){
         return (
