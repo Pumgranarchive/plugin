@@ -5,7 +5,7 @@
 
 @import 'core';
 
-.Overlay {
+.commonBox {
     display: block;
     position: fixed;
     top: 0;
@@ -13,19 +13,20 @@
     background: rgba(118,118,118,.6);
     width: 100vw;
     height: 100vh;
-    opacity: 1;
     z-index: $zIndex-max - 10;
+}
+
+.openBox {
+    composes: commonBox;
+    opacity: 1;
     cursor: pointer;
     transition: opacity .4s ease, visibility 0s ease;
+}
 
-    &:hover, &:focus{
-        box-shadow: inset rgba(black, .1) 0 0 20px;
-    }
-
-    &.is-disabled{
-        opacity: 0;
-        cursor: inherit;
-        visibility: hidden;
-        transition: opacity .4s ease, visibility 0s ease .4s;
-    }
+.closedBox {
+    composes: commonBox;
+    opacity: 0;
+    cursor: inherit;
+    visibility: hidden;
+    transition: opacity .4s ease, visibility 0s ease .4s;
 }

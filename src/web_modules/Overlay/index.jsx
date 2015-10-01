@@ -1,61 +1,38 @@
-import React, {Component, PropTypes} from 'react';
-import './index.scss';
-import {select, css} from 'utils/dom';
+import React, { Component, PropTypes } from 'react';
+import styles from './Overlay.scss';
 import ctx from 'classnames';
 
 export default class Overlay extends Component{
 
     /**
-     * Props
-     *
-     */
-    static propTypes = {
-        clickAction: PropTypes.func.isRequired,
-        show: PropTypes.bool.isRequired
-    }
-
-
-
-    /**
-     * On click
-     *
-     * @return toogle (this.props)
-     */
-    onClick(){
-        if(this.props.show === true){
-            return this.props.clickAction();
-        }
-        return false;
-    }
-
-
-
-    /**
      * Render
      *
+     * @return {JSX}
      */
-    render(){
-        let { show } = this.props;
-        let styles = {};
-
+    render() {
+        let { state } = this.props;
+        let zIndex = {};
         if(__DEBUG__){
-            styles = {
+            zIndex = {
                 zIndex: 0
             };
         }
 
-        select('html, body')::css({
-            overflow: (show ? 'hidden' : 'auto')
-        });
-
         return (
             <div className={
-                ctx('Overlay', {
-                    'is-disabled': !show
+                ctx({
+                    [styles.openBox]: (state == 'open'),
+                    [styles.closedBox]: (state == 'close')
                 })}
-                style={ styles }
-                onClick={ ::this.onClick }>
+                style={ zIndex }
+                onClick={ e => this.props.toogleAction(e) } >
             </div>
         );
     }
+
 }
+
+Overlay.PropTypes = {
+    state: PropTypes.string.isRequired,
+    toogleAction: PropTypes.func.isRequired
+};
