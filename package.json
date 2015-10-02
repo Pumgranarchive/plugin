@@ -3,7 +3,7 @@
   "version": "0.3.9",
   "description": "This extension allows you to add content to the Pumgrana website.",
   "scripts": {
-    "start": "env BABEL_ENV=dev UV_THREADPOOL_SIZE=100 DEBUG=true NODE_ENV=DEV node server.js",
+    "start": "env UV_THREADPOOL_SIZE=100 DEBUG=true NODE_ENV=DEV node server.js",
     "chrome": "env BABEL_ENV=production UV_THREADPOOL_SIZE=100 DEBUG=false NODE_ENV=CHROME webpack --watch",
     "lint": "eslint __build__"
   },
@@ -19,10 +19,10 @@
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
     "awesome-typescript-loader": "^0.9.1",
-    "babel-core": "^5.4.7",
+    "babel-core": "^5.8.23",
     "babel-eslint": "^3.1.9",
     "babel-loader": "^5.1.2",
-    "babel-plugin-react-transform": "^1.0.3",
+    "babel-plugin-react-transform": "^1.0.2",
     "babel-runtime": "^5.8.20",
     "css-loader": "^0.15.3",
     "cssnext-loader": "^1.0.1",
@@ -38,6 +38,7 @@
     "react-transform-catch-errors": "^0.1.1",
     "react-transform-webpack-hmr": "^0.1.4",
     "redbox-react": "^1.0.2",
+    "redux": "^2.0.0",
     "redux-devtools": "^2.1.2",
     "sass-loader": "^2.0.1",
     "style-loader": "^0.12.3",
