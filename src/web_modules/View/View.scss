@@ -1,0 +1,20 @@
+/**
+ * View component style
+ *
+ */
+
+@import 'core';
+
+.container {
+    display: inline-block;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    vertical-align: top;
+    box-sizing: border-box;
+    width: $container-width - $container-borderLeft;
+    height: calc(100% - #{$footer-height});
+    padding: $container-padding $container-padding 0;
+    background: $background-color;
+    box-shadow: 0 0 6px rgba(black, .3);
+    transition: left ease .4s;
+}
