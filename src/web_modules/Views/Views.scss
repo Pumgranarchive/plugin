@@ -8,8 +8,9 @@
 .container {
     position: absolute;
     overflow: hidden;
+    width: 300%;
     height: 100%;
-    width: $container-width;
     background: $background-color;
     z-index: $zIndex-max + 1;
+    font-family: 'PT Sans';
 }

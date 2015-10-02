@@ -6,6 +6,7 @@ export default class Views extends Component{
     /**
      * Render
      *
+     * @return {JSX}
      */
     render(){
         return (
