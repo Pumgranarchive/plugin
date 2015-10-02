@@ -11,12 +11,18 @@ export default class Wrapper extends Component {
      */
     render() {
         let { state } = this.props;
+        let zIndex = {};
+        if(__DEBUG__){
+            zIndex = {
+                zIndex: 0
+            };
+        }
 
         return (
             <div className={ ctx({
                 [styles.enabledWrapper]: (state == 'open'),
                 [styles.disabledWrapper]: (state == 'close')
-            }) }>
+            }) } style={ zIndex }>
                 { this.props.children }
             </div>
         );
