@@ -5,19 +5,8 @@
 
 @import 'core';
 
-.Pumgrana .Item {
-    /* Settings */
+.container{
     $extraSize: 6%;
-
-    /* Hack for hover */
-    &:before {
-        content: "";
-        display: block;
-        height: 100%;
-        width: 10%;
-        margin-left: -10%;
-        position: absolute;
-    }
 
     display: block;
     position: relative;
@@ -29,15 +18,69 @@
     color: $secondaryColor-dark;
     cursor: pointer;
 
-    & + & {
-        margin-top: 2px;
-    }
-
     &:hover,
     &:focus {
         background: $secondaryColor-white;
     }
 
+    & + & {
+        margin-top: 2px;
+    }
+
+    &:before {
+        content: "";
+        display: block;
+        height: 100%;
+        width: 10%;
+        margin-left: -10%;
+        position: absolute;
+    }
+}
+
+.domainName {
+    font-size: 13px;
+    font-weight: 400;
+    color: #cbcaca;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 19px;
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
+
+.description {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.tag {
+    display: inline-block;
+    margin-right: 3px;
+    padding: 3px 7px 4px;
+    border: 1px solid $primaryColor;
+    border-radius: 3px;
+    color: $primaryColor;
+    font-size: 12px;
+    margin-bottom: 5px;
+
+    & + & {
+        margin-left: 4px;
+    }
+
+    &:hover {
+        background: $primaryColor-white;
+    }
+}
+
+
+
+
+
+.Pumgrana .Item {
     &_bookmark {
         opacity: 0;
         position: absolute;
@@ -81,44 +124,13 @@
         }
     }
 
-    &_url {
-        font-size: 13px;
-        font-weight: 400;
-        color: #cbcaca;
-    }
 
-    &_title {
-        font-weight: 700;
-        font-size: 19px;
-        margin-top: 5px;
-        margin-bottom: 3px;
-    }
 
-    &_description {
-        font-size: 14px;
-        margin-top: 0;
-        margin-bottom: 10px;
-        word-wrap: break-word;
-    }
 
-    &_tag {
-        display: inline-block;
-        margin-right: 3px;
-        padding: 3px 7px 4px;
-        border: 1px solid $primaryColor;
-        border-radius: 3px;
-        color: $primaryColor;
-        font-size: 12px;
-        margin-bottom: 5px;
 
-        & + & {
-            margin-left: 4px;
-        }
 
-        &:hover {
-            background: $primaryColor-white;
-        }
-    }
+
+
 
     &.is-visited {
         .Item {
