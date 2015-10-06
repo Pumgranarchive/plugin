@@ -7,32 +7,27 @@ export default {
 	 * @return Promise
 	 */
 	getRelatedContent: (params) => {
-		console.log(params);
 		return new Promise((resolve) => {
-			resolve([
-				{
+			resolve({
+				'http://website.com/article1': {
+					id: 'http://website.com/article1',
 					title: 'Title 1',
 					description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue consectetur ante hendrerit ...',
-					website: 'website.com',
-					url: 'http://website.com/article1',
+					domainName: 'website.com',
 					tags: ['tag 1', 'tag2'],
 					bookmarked: false,
-					visited: false,
-					pageId: 1,
-					searchFilter: ''
+					visited: false
 				},
-				{
+				'http://website.com/article2': {
 					title: 'Title 2',
 					description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue consectetur ante hendrerit ...',
-					website: 'website.com',
-					url: 'http://website.com/article2',
+					domainName: 'website.com',
 					tags: ['tag 1', 'tag2', 'tag3'],
 					bookmarked: false,
-					visited: false,
-					pageId: 2,
-					searchFilter: ''
+					visited: false
 				}
-			]);
+			});
 		});
 	}
+
 };
