@@ -1,0 +1,35 @@
+/**
+ * BookmarkIcon component stye
+ *
+ */
+
+@import 'core';
+
+.commonContainer {
+    position: absolute;
+    margin-left: -36px;
+    margin-top: 2px;
+}
+
+.enabledContainer {
+    composes: commonContainer;
+    opacity: 1;
+
+    &:hover {
+
+    }
+}
+
+.disabledContainer {
+    composes: commonContainer;
+    opacity: 0;
+}
+
+.icon {
+    stroke: $secondaryColor;
+    fill: white;
+
+    &:hover {
+        stroke: $secondaryColor-medium;
+    }
+}
