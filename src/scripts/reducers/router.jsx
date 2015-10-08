@@ -13,7 +13,7 @@ export default function router(state = initialState, action) {
             break;
 
         case GET_RELATED_CONTENT_REQUEST:
-            state = state.set('view', action.response.view);
+            //state = state.set('view', action.response.view);
             break;
 
         default: state = state;
