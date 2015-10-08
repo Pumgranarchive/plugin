@@ -18,3 +18,21 @@
     box-shadow: 0 0 6px rgba(black, .3);
     transition: left ease .4s;
 }
+
+.wrapper {
+    padding: 24px $resultats-padding $resultats-padding;
+    background: white;
+    border: 1px solid $secondaryColor-light;
+    border-radius: 3px;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 20px;
+    color: $primaryColor;
+    margin: 6px 0 3px;
+}
+
+.footer {
+    text-align: center;
+}
