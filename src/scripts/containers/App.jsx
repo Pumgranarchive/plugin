@@ -5,6 +5,7 @@ import Wrapper from 'Wrapper/';
 import Footer from 'Footer/';
 import ToogleButton from 'ToogleButton/';
 import Views from 'Views/';
+import ViewContainer from 'ViewContainer';
 import Overlay from 'Overlay/';
 
 @connect(state => ({
@@ -64,8 +65,6 @@ export default class App extends Component{
      * @return {JSX}
      */
     render() {
-        let { pages } = this.props;
-
         return (
             <div>
                 <Overlay
@@ -76,8 +75,10 @@ export default class App extends Component{
                         state={ this.state.stateToogle }
                         action={ ::this.toogleAction } />
                     <Views> {
-                        pages.map(page => (
-                            <div>{ page }</div>
+                        [0, 1].map((page, index) => (
+                            <ViewContainer
+                                key={ index }
+                                pageUrl={ page.url } />
                         ))
                     } </Views>
                     <Footer
