@@ -13,7 +13,7 @@
     box-sizing: border-box;
     width: 100% + $extraSize * 2;
     left: -1 * $extraSize;
-    padding: ($extraSize * .9) $extraSize;
+    padding: 12px $extraSize 13px;
     text-decoration: none;
     color: $secondaryColor-dark;
     cursor: pointer;
@@ -46,8 +46,7 @@
 .title {
     font-weight: 700;
     font-size: 19px;
-    margin-top: 5px;
-    margin-bottom: 3px;
+    margin: 4px 0 5px;
 }
 
 .description {
