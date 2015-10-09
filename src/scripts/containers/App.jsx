@@ -7,6 +7,7 @@ import ToogleButton from 'ToogleButton/';
 import Views from 'Views/';
 import ViewContainer from 'ViewContainer';
 import Overlay from 'Overlay/';
+import Iframe from 'Iframe/';
 
 @connect(state => ({
     pages: state.pages
@@ -28,7 +29,7 @@ export default class App extends Component{
      *
      * @return {func} Dispatch getRelatedContent()
      */
-    componentDidMount() {
+    componentWillMount() {
         return this.props.dispatch(getRelatedContent({
             url: document.location.href
         }));
@@ -60,13 +61,35 @@ export default class App extends Component{
 
 
     /**
+     * getPages()
+     *
+     * @return {array} response
+     */
+    getPages() {
+        let response = [];
+
+        this.props.pages.map(page => {
+            response.push(page.get('_id'));
+        });
+
+        return response;
+    }
+
+
+
+    /**
      * Render <Wrapper /> component
      *
      * @return {JSX}
      */
     render() {
+        let pages = this.getPages();
+
         return (
             <div>
+                { pages.length > 1 &&
+                    <Iframe src={ 'http://lemonde.fr' } />
+                }
                 <Overlay
                     state={ this.state.stateToogle }
                     toogleAction={ ::this.toogleAction } />
@@ -75,10 +98,10 @@ export default class App extends Component{
                         state={ this.state.stateToogle }
                         action={ ::this.toogleAction } />
                     <Views> {
-                        [0, 1].map((page, index) => (
+                        pages.map((page, index) => (
                             <ViewContainer
                                 key={ index }
-                                pageUrl={ page.url } />
+                                pageUrl={ page } />
                         ))
                     } </Views>
                     <Footer
