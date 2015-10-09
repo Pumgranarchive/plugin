@@ -1,0 +1,12 @@
+/**
+ * Iframe component
+ *
+ */
+
+@import 'core';
+
+.container {
+    position: absolute;
+    top: 0;    left: 0;
+    width: calc(100% - #{$container-borderLeft});    height: 100%;
+}
