@@ -33,6 +33,7 @@ export default class Item extends Component{
      * @return {JSX}
      */
     render() {
+        let { title, description, domainName, tags, bookmarked, visited } = this.props;
 
         return (
             <div onMouseOver={ ::this.onHover }
@@ -41,10 +42,10 @@ export default class Item extends Component{
                 <BookmarkIcon
                     show={ this.state.hover } />
                 <div>
-                    <span className={ styles.domainName }>lemonde.fr</span>
-                    <h2 className={ styles.title }>Mon titre à afficher</h2>
-                    <p className={ styles.description }>lorem ipsum</p>
-                    { ['tag 1', 'tag 2', 'tag 3'].map((tag, i) => { return (
+                    <span className={ styles.domainName }>{ domainName }</span>
+                    <h2 className={ styles.title }>{ title }</h2>
+                    <p className={ styles.description }>{ description } </p>
+                    { tags.map((tag, i) => { return (
                         <span className={ styles.tag } key={ i }>{ tag }</span>
                     ); }) }
                 </div>
@@ -55,5 +56,10 @@ export default class Item extends Component{
 }
 
 Item.PropTypes = {
-
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    domainName: PropTypes.string.isRequired,
+    tags: PropTypes.array.isRequired,
+    bookmarked: PropTypes.bool.isRequired,
+    visited: PropTypes.bool.isRequired
 }

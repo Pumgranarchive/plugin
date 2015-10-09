@@ -4,22 +4,28 @@ import View from 'View/';
 import Item from 'Item/';
 
 @connect(state => ({
-    pages: state.pages
+    pages: state.pages,
+    relatedContent: state.relatedContent
 }))
 export default class ViewContainer extends Component {
 
     /**
      * getRelatedContent()
      *
-     * @return {jsx}
+     * @return {array} response
      */
     getRelatedContent() {
-        let page = this.props.pages.get('items');
-        if(page != undefined) {
-        }
+        let page = this.props.pages.get(this.props.pageUrl),
+            response = [];
 
-            console.log(page.toJS());
-        return [0, 1];
+        page.get('relatedContent').map(relatedContent => {
+            response = [
+                ...response,
+                {...this.props.relatedContent.get('items').get(relatedContent).toJS()}
+            ]
+        });
+
+        return response;
     }
 
 
@@ -30,12 +36,17 @@ export default class ViewContainer extends Component {
      * @return {jsx}
      */
     render() {
-        this.getRelatedContent();
+        let relatedContent = this.getRelatedContent(),
+            isFetching = this.props.pages.get(this.props.pageUrl).get('isFetching');
 
         return (
-            <View> {
-                [0, 1].map((item, index) => (
-                    <Item key={ index } />
+            <View
+                nrbOfRelatedContent={ relatedContent.length }
+                isFetching={ isFetching } > {
+                relatedContent.map((item, index) => (
+                    <Item
+                        { ...item }
+                        key={ index } />
                 ))
             } </View>
         );
