@@ -28,6 +28,17 @@ export default class Item extends Component{
 
 
     /**
+     * bookmarkRelatedContent()
+     *
+     *
+     */
+    bookmarkRelatedContent() {
+        return this.props.bookmarkRelatedContent(this.props._id);
+    }
+
+
+
+    /**
      * Render
      *
      * @return {JSX}
@@ -40,6 +51,8 @@ export default class Item extends Component{
                  onMouseOut={ ::this.onHover }
                  className={ styles.container }>
                 <BookmarkIcon
+                    action={ ::this.bookmarkRelatedContent }
+                    active={ bookmarked }
                     show={ this.state.hover } />
                 <div>
                     <span className={ styles.domainName }>{ domainName }</span>
@@ -56,10 +69,12 @@ export default class Item extends Component{
 }
 
 Item.PropTypes = {
+    _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     domainName: PropTypes.string.isRequired,
     tags: PropTypes.array.isRequired,
     bookmarked: PropTypes.bool.isRequired,
-    visited: PropTypes.bool.isRequired
+    visited: PropTypes.bool.isRequired,
+    bookmarkRelatedContent: PropTypes.func.isRequired
 }

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { bookmarkRelatedContent } from 'actions/RelatedContentActions';
 import View from 'View/';
 import Item from 'Item/';
 
@@ -21,11 +22,26 @@ export default class ViewContainer extends Component {
         page.get('relatedContent').map(relatedContent => {
             response = [
                 ...response,
-                {...this.props.relatedContent.get('items').get(relatedContent).toJS()}
+                {
+                    _id: relatedContent,
+                    ...this.props.relatedContent.get('items').get(relatedContent).toJS()
+                }
             ]
         });
 
         return response;
+    }
+
+
+
+    /**
+     * Bookmark related content
+     *
+     * @param {integer} relatedContentId
+     * @return {func} relatedContentId()
+     */
+    bookmarkRelatedContent(relatedContentId) {
+        return this.props.dispatch(bookmarkRelatedContent(relatedContentId))
     }
 
 
@@ -45,8 +61,9 @@ export default class ViewContainer extends Component {
                 isFetching={ isFetching } > {
                 relatedContent.map((item, index) => (
                     <Item
+                        key={ index }
                         { ...item }
-                        key={ index } />
+                        bookmarkRelatedContent={ ::this.bookmarkRelatedContent } />
                 ))
             } </View>
         );

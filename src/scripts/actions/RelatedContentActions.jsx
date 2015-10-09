@@ -29,3 +29,18 @@ export function getRelatedContent(
         url
     };
 }
+
+
+
+/**
+ * Bookmark a related content
+ *
+ * @param {integer} relatedContentId
+ * @return {object} promise
+ */
+export function bookmarkRelatedContent(relatedContentId) {
+    return {
+        type: types.BOOKMARK_RELATED_CONTENT,
+        relatedContentId
+    }
+}

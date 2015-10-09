@@ -100,6 +100,7 @@ export default class App extends Component{
                     <Views> {
                         pages.map((page, index) => (
                             <ViewContainer
+
                                 key={ index }
                                 pageUrl={ page } />
                         ))

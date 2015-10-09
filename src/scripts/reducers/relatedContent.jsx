@@ -2,7 +2,8 @@ import Immutable from 'immutable';
 import {
     GET_RELATED_CONTENT_REQUEST,
     GET_RELATED_CONTENT_SUCCESS,
-    GET_RELATED_CONTENT_ERROR
+    GET_RELATED_CONTENT_ERROR,
+    BOOKMARK_RELATED_CONTENT
 } from 'constants/ActionTypes';
 
 var initialState = Immutable.fromJS({
@@ -23,6 +24,10 @@ export default function relatedContent(state = initialState, action) {
 
         case GET_RELATED_CONTENT_ERROR:
             state = state.set('isFetching', false);
+            break;
+
+        case BOOKMARK_RELATED_CONTENT:
+            state = state.setIn(['items', action.relatedContentId, 'bookmarked'], !state.getIn(['items', action.relatedContentId, 'bookmarked']))
             break;
 
         default: state = state;

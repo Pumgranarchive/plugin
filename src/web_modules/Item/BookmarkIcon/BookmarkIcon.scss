@@ -25,11 +25,16 @@
     opacity: 0;
 }
 
-.icon {
+.simpleIcon {
     stroke: $secondaryColor;
     fill: white;
 
     &:hover {
         stroke: $secondaryColor-medium;
     }
+}
+
+.strongIcon {
+    composes: simpleIcon;
+    fill: $secondaryColor-white;
 }
