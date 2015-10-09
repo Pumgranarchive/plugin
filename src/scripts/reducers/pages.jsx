@@ -5,24 +5,24 @@ import {
     GET_RELATED_CONTENT_ERROR
 } from 'constants/ActionTypes';
 
-var initialState = Immutable.fromJS({
-    isFetching: false,
-    items: {}
-});
+var initialState = Immutable.fromJS({});
 
 export default function views(state = initialState, action) {
     switch(action.type) {
         case GET_RELATED_CONTENT_REQUEST:
-            state = state.set('isFetching', true);
-            state = state.mergeIn(['items', action.url], {
+            state = state.mergeIn([action.url], {
+                _id: action.url,
+                isFetching: true,
                 relatedContent: []
-            })
+            });
             break;
 
         case GET_RELATED_CONTENT_SUCCESS:
-            state = state.set('isFetching', false);
+            state = state.mergeIn([action.url], {
+                isFetching: false,
+            });
 
-            let listOfRelatedContent = state.getIn(['items', action.url, 'relatedContent']),
+            let listOfRelatedContent = state.getIn([action.url, 'relatedContent']),
                 response = [];
             if(listOfRelatedContent != undefined) {
                 response = [...listOfRelatedContent];
@@ -33,12 +33,14 @@ export default function views(state = initialState, action) {
                     key
                 ]
             };
-            state = state.setIn(['items', action.url, 'relatedContent'], response);
+            state = state.setIn([action.url, 'relatedContent'], response);
 
             break;
 
         case GET_RELATED_CONTENT_ERROR :
-            state = state.set('isFetching', false);
+            state = state.mergeIn([action.url], {
+                isFetching: false,
+            });
             break;
 
         default: state = state;
