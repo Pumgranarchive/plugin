@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import BookmarkIcon from './BookmarkIcon/';
-import styles from './index.scss';
+import styles from './Item.scss';
 
 export default class Item extends Component{
 
@@ -17,9 +17,10 @@ export default class Item extends Component{
     /**
      * Hover
      *
+     * @return {string} type
      * @return {func} setState()
      */
-    onHover() {
+    onHover(type) {
         return this.setState({
             hover: !this.state.hover
         })
