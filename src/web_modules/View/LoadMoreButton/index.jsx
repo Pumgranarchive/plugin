@@ -10,7 +10,10 @@ export default class LoadMoreButton extends Component {
      */
     render() {
         return (
-            <div className={ styles.button }>Load more</div>
+            <div onClick={ () => this.props.action() }
+                 className={ styles.button }>
+                Load more
+            </div>
         )
     }
 

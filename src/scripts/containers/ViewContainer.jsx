@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bookmarkRelatedContent } from 'actions/RelatedContentActions';
+import { bookmarkRelatedContent, getRelatedContent } from 'actions/RelatedContentActions';
 import View from 'View/';
 import Item from 'Item/';
 
@@ -79,6 +79,20 @@ export default class ViewContainer extends Component {
 
 
     /**
+     * loadMoreRelatedContent()
+     *
+     * @return {func} getRelatedContent()
+     */
+    loadMoreRelatedContent() {
+        return this.props.dispatch(getRelatedContent({
+            url: document.location.href,
+            start: (this.getRelatedContent().length + 1)
+        }));
+    }
+
+
+
+    /**
      * Render
      *
      * @return {jsx}
@@ -90,6 +104,7 @@ export default class ViewContainer extends Component {
 
         return (
             <View
+                loadMoreRelatedContent={ ::this.loadMoreRelatedContent }
                 type={ this.props.type }
                 pageInformations={ getPageInformations }
                 position={ 'current' }

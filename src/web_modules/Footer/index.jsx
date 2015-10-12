@@ -12,9 +12,9 @@ export default class Footer extends Component{
      render(){
          return (
              <div className={ styles.container }>
-                 <BookmarksButton
-                     onClick={ ::this.props.showViewBookmarks }
-                     state={ this.props.stateViewBookmarks } />
+                 <div onClick={ () => this.props.toogleViewBookmarks() }>
+                     <BookmarksButton state={ this.props.stateViewBookmarks } />
+                 </div>
                  <span className={ styles.logo } title="Pumgrana"></span>
              </div>
          );
@@ -23,6 +23,6 @@ export default class Footer extends Component{
 }
 
 Footer.propTypes = {
-    showViewBookmarks: PropTypes.func.isRequired,
+    toogleViewBookmarks: PropTypes.func.isRequired,
     stateViewBookmarks: PropTypes.string.isRequired
 };

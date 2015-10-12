@@ -39,7 +39,7 @@ export default class View extends Component{
                 </div>
                 { type == 'page' &&
                     <footer className={ styles.footer }>
-                        <LoadMoreButton />
+                        <LoadMoreButton action={ ::this.props.loadMoreRelatedContent } />
                     </footer>
                 }
             </div>
