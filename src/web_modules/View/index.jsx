@@ -11,12 +11,12 @@ export default class View extends Component{
      * @return {JSX}
      */
     render(){
-        let { type, isFetching, nrbOfRelatedContent } = this.props;
+        let { type, isFetching, nrbOfRelatedContent, pageInformations } = this.props;
 
         return (
             <div className={ styles.container }>
                 { type == 'page' &&
-                    <Header />
+                    <Header { ...pageInformations } />
                 }
                 <div className={ styles.wrapper }>
                     <h2 className={ styles.title }>{
@@ -53,5 +53,6 @@ View.PropTypes = {
     nrbOfRelatedContent: PropTypes.number.isRequired,
     isFetching: PropTypes.bool.isRequired,
     children: PropTypes.object.isRequired,
+    pageInformations: PropTypes.object.isRequired,
     position: PropTypes.oneOf(['current', 'prev', 'next']).isRequired
 }

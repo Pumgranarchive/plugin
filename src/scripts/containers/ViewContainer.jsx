@@ -11,23 +11,55 @@ import Item from 'Item/';
 export default class ViewContainer extends Component {
 
     /**
+     * getPageInformations
+     *
+     */
+    getPageInformations() {
+        let page = this.props.relatedContent.get(this.props.pageUrl),
+            response = {};
+
+        if(page !== undefined) {
+            response = page.toJS();
+        }
+
+        return response;
+    }
+
+
+
+    /**
      * getRelatedContent()
      *
      * @return {array} response
      */
     getRelatedContent() {
-        let page = this.props.pages.get(this.props.pageUrl),
-            response = [];
+        let response = [];
 
-        page.get('relatedContent').map(relatedContent => {
-            response = [
-                ...response,
-                {
-                    _id: relatedContent,
-                    ...this.props.relatedContent.get('items').get(relatedContent).toJS()
-                }
-            ]
-        });
+        if(this.props.type == 'bookmarks') {
+            this.props.relatedContent.filter(
+                relatedContent => relatedContent.get('bookmarked')
+            ).map((relatedContent, key) => {
+                response = [
+                    ...response,
+                    {
+                        _id: key,
+                        ...relatedContent.toJS()
+                    }
+                ]
+            });
+        }
+        else { // type == 'page'
+            let page = this.props.pages.get(this.props.pageUrl);
+            page.get('relatedContent').map(relatedContent => {
+                response = [
+                    ...response,
+                    {
+                        _id: relatedContent,
+                        ...this.props.relatedContent.get(relatedContent).toJS()
+                    }
+                ]
+            });
+        }
 
         return response;
     }
@@ -53,12 +85,17 @@ export default class ViewContainer extends Component {
      */
     render() {
         let relatedContent = this.getRelatedContent(),
-            isFetching = this.props.pages.get(this.props.pageUrl).get('isFetching');
+            isFetching = (this.props.type == 'bookmarks' ? false : this.props.pages.get(this.props.pageUrl).get('isFetching')),
+            getPageInformations = this.getPageInformations();
 
         return (
             <View
+                type={ this.props.type }
+                pageInformations={ getPageInformations }
+                position={ 'current' }
                 nrbOfRelatedContent={ relatedContent.length }
-                isFetching={ isFetching } > {
+                isFetching={ isFetching } >
+            {
                 relatedContent.map((item, index) => (
                     <Item
                         key={ index }
@@ -72,6 +109,6 @@ export default class ViewContainer extends Component {
 }
 
 ViewContainer.PropTypes = {
-    pageUrl: PropTypes.string.isRequired,
+    pageUrl: PropTypes.string,
     pages: PropTypes.object.isRequired
 };

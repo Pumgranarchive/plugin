@@ -28,14 +28,14 @@
 	transform: rotate(180deg);
 }
 
-.url, .title{
+.domainName, .title{
 	display:inline-block;
 	padding-left: 45px;
 	font-weight: 700;
 	width: 64%;
 }
 
-.url{
+.domainName{
 	width: 100%;
 	font-size: 14px;
 	color: $secondaryColor-medium;
