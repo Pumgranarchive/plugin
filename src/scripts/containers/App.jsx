@@ -127,20 +127,38 @@ export default class App extends Component{
 
 
     /**
+     * getCurrentWebsite()
+     *
+     * @return {string}
+     */
+    getCurrentWebsite() {
+        this.props.pages.map(page => {
+            if(page.get('current')) {
+                return page.get('_id');
+            }
+        });
+
+        return false;
+    }
+
+
+
+    /**
      * Render <Wrapper /> component
      *
      * @return {JSX}
      */
     render() {
         let pages = this.getPages(),
+            currentWebsite = this.getCurrentWebsite(),
             stateViewBookmarks = this.getStateViewBookmarks(),
             nbreOfBookmarkedRelatedContent = this.getNbreOfBookmarkedRelatedContent();
 
         return (
             <div>
                 { pages.length > 1 &&
-                    <Iframe src={ 'http://lemonde.fr' } />
-                }
+                    <Iframe src={ currentWebsite } />
+                }*
                 <Overlay
                     state={ this.state.stateToogle }
                     toogleAction={ ::this.toogleAction } />
