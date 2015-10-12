@@ -50,16 +50,20 @@ export default class ViewContainer extends Component {
         }
         else { // type == 'page'
             let page = this.props.pages.get(this.props.pageUrl);
-            page.get('relatedContent').map(relatedContent => {
-                response = [
-                    ...response,
-                    {
-                        _id: relatedContent,
-                        ...this.props.relatedContent.get(relatedContent).toJS()
-                    }
-                ]
-            });
+
+            if(page.get('relatedContent') !== undefined) {
+                page.get('relatedContent').map(relatedContent => {
+                    response = [
+                        ...response,
+                        {
+                            _id: relatedContent,
+                            ...this.props.relatedContent.get(relatedContent).toJS()
+                        }
+                    ]
+                });
+            }
         }
+
 
         return response;
     }

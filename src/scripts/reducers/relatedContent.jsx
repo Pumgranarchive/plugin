@@ -6,28 +6,16 @@ import {
     BOOKMARK_RELATED_CONTENT
 } from 'constants/ActionTypes';
 
-var initialState = Immutable.fromJS({
-    isFetching: false,
-    items: {}
-});
+var initialState = Immutable.fromJS({});
 
 export default function relatedContent(state = initialState, action) {
     switch(action.type) {
-        case GET_RELATED_CONTENT_REQUEST:
-            state = state.set('isFetching', true);
-            break;
-
         case GET_RELATED_CONTENT_SUCCESS:
-            state = state.set('isFetching', false);
-            state = state.mergeIn(['items'], action.response);
-            break;
-
-        case GET_RELATED_CONTENT_ERROR:
-            state = state.set('isFetching', false);
+            state = state.merge(action.response);
             break;
 
         case BOOKMARK_RELATED_CONTENT:
-            state = state.setIn(['items', action.relatedContentId, 'bookmarked'], !state.getIn(['items', action.relatedContentId, 'bookmarked']))
+            state = state.setIn([action.relatedContentId, 'bookmarked'], !state.getIn([action.relatedContentId, 'bookmarked']))
             break;
 
         default: state = state;

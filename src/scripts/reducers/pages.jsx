@@ -12,8 +12,7 @@ export default function views(state = initialState, action) {
         case GET_RELATED_CONTENT_REQUEST:
             state = state.mergeIn([action.url], {
                 _id: action.url,
-                isFetching: true,
-                relatedContent: []
+                isFetching: true
             });
             break;
 

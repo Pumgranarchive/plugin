@@ -24,6 +24,11 @@ export default class View extends Component{
                     <h2 className={ styles.title }>{
                         (type == 'bookmarks') ? 'Bookmarked contents' : 'Related content'
                     }</h2>
+                    { isFetching && nrbOfRelatedContent == 0 &&
+                        <div className={ styles.noResultat }>
+                            Loading ...
+                        </div>
+                    }
                     { !isFetching && nrbOfRelatedContent == 0 &&
                         <div className={ styles.noResultat }>
                             { (type == 'bookmarks') ?
@@ -39,9 +44,11 @@ export default class View extends Component{
                         this.props.children
                     }
                 </div>
-                { type == 'page' &&
+                { type == 'page' && nrbOfRelatedContent != 0 &&
                     <footer className={ styles.footer }>
-                        <LoadMoreButton action={ ::this.props.loadMoreRelatedContent } />
+                        <LoadMoreButton
+                            status={ (isFetching ? 'loading' : 'loaded') }
+                            action={ ::this.props.loadMoreRelatedContent } />
                     </footer>
                 }
             </div>
