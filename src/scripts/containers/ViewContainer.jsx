@@ -108,6 +108,73 @@ export default class ViewContainer extends Component {
 
 
     /**
+     * clickOnRelatedContent
+     *
+     * @param {string} relatedContentId
+     */
+    clickOnRelatedContent(relatedContentId) {
+        return this.props.dispatch(getRelatedContent({
+            url: relatedContentId
+        }));
+    }
+
+
+    /**
+     * hasAncestors() && hasParents()
+     *
+     * @return {bool}
+     */
+    hasAncestors() {
+        let i = 0,
+            founded = false;
+
+        if(this.props.pageUrl !== undefined) {
+            this.props.pages.map((page, index) => {
+                if(index == this.props.pageUrl){
+                    founded = true;
+                }
+
+                if(!founded) {
+                    i++;
+                }
+            });
+        }
+
+        if(i > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    hasParents() {
+        let i = 0,
+            founded = false;
+
+        if(this.props.pageUrl !== undefined) {
+            this.props.pages.reverse().map((page, index) => {
+                if(index == this.props.pageUrl){
+                    founded = true;
+                }
+
+                if(!founded) {
+                    i++;
+                }
+            });
+        }
+
+        if(i > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+
+
+
+    /**
      * Render
      *
      * @return {jsx}
@@ -115,7 +182,9 @@ export default class ViewContainer extends Component {
     render() {
         let relatedContent = this.getRelatedContent(),
             isFetching = (this.props.type == 'bookmarks' ? false : this.props.pages.get(this.props.pageUrl).get('isFetching')),
-            getPageInformations = this.getPageInformations();
+            getPageInformations = this.getPageInformations(),
+            hasAncestors = this.hasAncestors(),
+            hasParents = this.hasParents();
 
         return (
             <View
@@ -123,7 +192,9 @@ export default class ViewContainer extends Component {
                 loadMoreRelatedContent={ ::this.loadMoreRelatedContent }
                 type={ this.props.type }
                 pageInformations={ getPageInformations }
-                position={ 'current' }
+                current={ (this.props.type == 'bookmarks' ? false : this.props.pages.get(this.props.pageUrl).get('current')) }
+                hasAncestors={ hasAncestors }
+                hasParents={ hasParents }
                 nrbOfRelatedContent={ relatedContent.length }
                 isFetching={ isFetching } >
             {
@@ -131,6 +202,7 @@ export default class ViewContainer extends Component {
                     <Item
                         key={ index }
                         { ...item }
+                        clickOnRelatedContent={ ::this.clickOnRelatedContent }
                         bookmarkRelatedContent={ ::this.bookmarkRelatedContent } />
                 ))
             } </View>
