@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import BookmarkIcon from './BookmarkIcon/';
+import BookmarkIcon from 'BookmarkIcon/';
 import styles from './Item.scss';
 
 export default class Item extends Component{

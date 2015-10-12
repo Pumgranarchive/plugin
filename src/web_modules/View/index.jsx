@@ -16,7 +16,9 @@ export default class View extends Component{
         return (
             <div className={ styles.container }>
                 { type == 'page' &&
-                    <Header { ...pageInformations } />
+                    <Header
+                        bookmarkPage={ ::this.props.bookmarkPage }
+                        { ...pageInformations } />
                 }
                 <div className={ styles.wrapper }>
                     <h2 className={ styles.title }>{

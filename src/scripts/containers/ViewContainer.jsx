@@ -70,10 +70,21 @@ export default class ViewContainer extends Component {
      * Bookmark related content
      *
      * @param {integer} relatedContentId
-     * @return {func} relatedContentId()
+     * @return {func} bookmarkRelatedContent()
      */
     bookmarkRelatedContent(relatedContentId) {
         return this.props.dispatch(bookmarkRelatedContent(relatedContentId))
+    }
+
+
+
+    /**
+     * Bookmark page
+     *
+     * @return {func} relatedContentId()
+     */
+    bookmarkPage() {
+        return this.props.dispatch(bookmarkRelatedContent(this.props.pageUrl))
     }
 
 
@@ -104,6 +115,7 @@ export default class ViewContainer extends Component {
 
         return (
             <View
+                bookmarkPage={ ::this.bookmarkPage }
                 loadMoreRelatedContent={ ::this.loadMoreRelatedContent }
                 type={ this.props.type }
                 pageInformations={ getPageInformations }
