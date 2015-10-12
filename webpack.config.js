@@ -11,7 +11,7 @@ var dev = (process.env.NODE_ENV === 'DEV' ? true : false),
 module.exports = {
     devTools: (dev ? 'eval-source-map' : ''),
     server: {
-        port: 3000,
+        port: 8000,
         url: 'localhost',
         hot: true,
         historyApiFallback: true
