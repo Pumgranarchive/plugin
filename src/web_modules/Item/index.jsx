@@ -45,7 +45,7 @@ export default class Item extends Component{
      * @return {JSX}
      */
     render() {
-        let { title, description, domainName, tags, bookmarked, visited } = this.props;
+        let { title, description, domainName, tags, bookmarked, visited, _id } = this.props;
 
         return (
             <div onMouseOver={ ::this.onHover }
@@ -55,7 +55,7 @@ export default class Item extends Component{
                     action={ ::this.bookmarkRelatedContent }
                     active={ bookmarked }
                     show={ this.state.hover } />
-                <div>
+                <div onClick={ () => this.props.clickOnRelatedContent(_id) }>
                     <span className={ styles.domainName }>{ domainName }</span>
                     <h2 className={ styles.title }>{ title }</h2>
                     <p className={ styles.description }>{ description } </p>
