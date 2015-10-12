@@ -16,10 +16,10 @@
 
 .disabledContainer {
     composes: commonContainer;
-    transform: translateY(100%);
+    transform: translateY(100%) translateZ(0);
 }
 
 .enableContainer {
     composes: commonContainer;
-    transform: translateY(0);
+    transform: translateY(0) translateZ(0);
 }
