@@ -11,16 +11,37 @@ export default class View extends Component{
      * @return {JSX}
      */
     render(){
+        let { type, isFetching, nrbOfRelatedContent } = this.props;
+
         return (
             <div className={ styles.container }>
-                <Header />
+                { type == 'page' &&
+                    <Header />
+                }
                 <div className={ styles.wrapper }>
-                    <h2 className={ styles.title }>Related content</h2>
-                    { this.props.children }
+                    <h2 className={ styles.title }>{
+                        (type == 'bookmarks') ? 'Bookmarked contents' : 'Related content'
+                    }</h2>
+                    { !isFetching && nrbOfRelatedContent == 0 &&
+                        <div className={ styles.noResultat }>
+                            { (type == 'bookmarks') ?
+                                `Hey, you have nothing bookmarked yet : /
+                                To start bookmarking during your navigation session
+                                just click on the icon that appears on hover` :
+                                'No resultats found'
+                            }
+
+                        </div>
+                    }
+                    { nrbOfRelatedContent > 0 &&
+                        this.props.children
+                    }
                 </div>
-                <footer className={ styles.footer }>
-                    <LoadMoreButton />
-                </footer>
+                { type == 'page' &&
+                    <footer className={ styles.footer }>
+                        <LoadMoreButton />
+                    </footer>
+                }
             </div>
         );
     }
@@ -28,5 +49,9 @@ export default class View extends Component{
 }
 
 View.PropTypes = {
-    children: PropTypes.object.isRequired
+    type: PropTypes.oneOf(['page', 'bookmarks']).isRequired,
+    nrbOfRelatedContent: PropTypes.number.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    children: PropTypes.object.isRequired,
+    position: PropTypes.oneOf(['current', 'prev', 'next']).isRequired
 }

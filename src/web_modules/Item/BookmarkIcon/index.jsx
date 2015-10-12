@@ -5,6 +5,21 @@ import styles from './BookmarkIcon.scss';
 export default class BookmarkIcon extends Component {
 
     /**
+     * shouldComponentUpdate()
+     *
+     * @param {object} nextProps
+     * @return {bool}
+     */
+    shouldComponentUpdate(nextProps) {
+        return (
+            this.props.show !== nextProps.show ||
+            this.props.active !== nextProps.active
+        );
+    }
+
+
+
+    /**
      * Render
      *
      * @return {JSX}

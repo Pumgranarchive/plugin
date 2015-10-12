@@ -6,11 +6,13 @@ import Footer from 'Footer/';
 import ToogleButton from 'ToogleButton/';
 import Views from 'Views/';
 import ViewContainer from 'ViewContainer';
+import ViewBookmarks from 'ViewBookmarks/';
 import Overlay from 'Overlay/';
 import Iframe from 'Iframe/';
 
 @connect(state => ({
-    pages: state.pages
+    pages: state.pages,
+    relatedContent: state.relatedContent
 }))
 export default class App extends Component{
 
@@ -19,7 +21,8 @@ export default class App extends Component{
      *
      */
     state = {
-        stateToogle: 'close'
+        stateToogle: 'close',
+        showViewBookmarks: false
     }
 
 
@@ -38,11 +41,23 @@ export default class App extends Component{
 
 
     /**
-     * Show view bookmarks
+     * Toogle view bookmarks
      *
+     * @return setState()
      */
-    showViewBookmarks() {
-        console.log('show');
+    toogleViewBookmarks() {
+        let response;
+
+        if(this.state.showViewBookmarks || this.getNbreOfBookmarkedRelatedContent() == 0) {
+            response = false;
+        }
+        else {
+            response = true;
+        }
+
+        return this.setState({
+            showViewBookmarks: response
+        });
     }
 
 
@@ -78,12 +93,48 @@ export default class App extends Component{
 
 
     /**
+     * getNbreOfBookmarkedRelatedContent()
+     *
+     * @return {integer} response
+     */
+    getNbreOfBookmarkedRelatedContent() {
+        return this.props.relatedContent.filter(
+            relatedContent => relatedContent.get('bookmarked')
+        ).size;
+    }
+
+
+
+    /**
+     * getStateViewBookmarks()
+     *
+     * @return {string} response
+     */
+    getStateViewBookmarks() {
+        let response = 'enabled';
+
+        if(this.getNbreOfBookmarkedRelatedContent() == 0) {
+            response = 'disabled';
+        }
+
+        if(this.state.showViewBookmarks) {
+            response = 'clicked';
+        }
+
+        return response;
+    }
+
+
+
+    /**
      * Render <Wrapper /> component
      *
      * @return {JSX}
      */
     render() {
-        let pages = this.getPages();
+        let pages = this.getPages(),
+            stateViewBookmarks = this.getStateViewBookmarks(),
+            nbreOfBookmarkedRelatedContent = this.getNbreOfBookmarkedRelatedContent();
 
         return (
             <div>
@@ -97,17 +148,22 @@ export default class App extends Component{
                     <ToogleButton
                         state={ this.state.stateToogle }
                         action={ ::this.toogleAction } />
-                    <Views> {
+                    <Views>
+                        <ViewBookmarks state={ ( this.state.showViewBookmarks ? 'enable' : 'disabled' ) }>
+                            <ViewContainer
+                                type='bookmarks' />
+                        </ViewBookmarks>
+                    {
                         pages.map((page, index) => (
                             <ViewContainer
-
                                 key={ index }
+                                type='page'
                                 pageUrl={ page } />
                         ))
                     } </Views>
                     <Footer
-                        showViewBookmarks={ ::this.showViewBookmarks }
-                        stateViewBookmarks={ 'disabled' } />
+                        toogleViewBookmarks={ ::this.toogleViewBookmarks }
+                        stateViewBookmarks={ stateViewBookmarks } />
                 </Wrapper>
             </div>
         );
