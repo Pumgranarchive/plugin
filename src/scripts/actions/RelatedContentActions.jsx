@@ -36,11 +36,26 @@ export function getRelatedContent(
  * Bookmark a related content
  *
  * @param {integer} relatedContentId
- * @return {object} promise
+ * @return {object}
  */
 export function bookmarkRelatedContent(relatedContentId) {
     return {
         type: types.BOOKMARK_RELATED_CONTENT,
         relatedContentId
+    }
+}
+
+
+
+/**
+ * Set page selected
+ *
+ * @param {string} pageId
+ * @return {object}
+ */
+export function setPageSelected(pageId) {
+    return {
+        type: types.SET_PAGE_SELECTED,
+        pageId
     }
 }

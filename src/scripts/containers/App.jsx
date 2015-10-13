@@ -132,13 +132,13 @@ export default class App extends Component{
      * @return {string}
      */
     getCurrentWebsite() {
+        let response = null;
+
         this.props.pages.map(page => {
-            if(page.get('current')) {
-                return page.get('_id');
-            }
+            response = page.get('_id');
         });
 
-        return false;
+        return response;
     }
 
 
@@ -158,7 +158,7 @@ export default class App extends Component{
             <div>
                 { pages.length > 1 &&
                     <Iframe src={ currentWebsite } />
-                }*
+                }
                 <Overlay
                     state={ this.state.stateToogle }
                     toogleAction={ ::this.toogleAction } />

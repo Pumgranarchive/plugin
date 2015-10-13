@@ -7,7 +7,7 @@
  @import 'core';
 
 .commonContainer {
-    transition: transform ease .4s;
+    transition: transform ease .3s;
     position: absolute;
     height: 100%;
     background: $background-color;
@@ -16,10 +16,12 @@
 
 .disabledContainer {
     composes: commonContainer;
-    transform: translateY(100%) translateZ(0);
+    transform: translateY(100%) translateZ(0) scale(.82);
+    opacity: .9;
 }
 
 .enableContainer {
     composes: commonContainer;
-    transform: translateY(0) translateZ(0);
+    transform: translateY(0) translateZ(0) scale(1);
+    opacity: 1;
 }

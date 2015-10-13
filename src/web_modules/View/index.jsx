@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Header from 'Header/';
 import LoadMoreButton from './LoadMoreButton/';
 import styles from './View.scss';
+import ctx from 'classnames';
 
 export default class View extends Component{
 
@@ -11,12 +12,18 @@ export default class View extends Component{
      * @return {JSX}
      */
     render(){
-        let { type, isFetching, nrbOfRelatedContent, pageInformations } = this.props;
+        let { type, isFetching, nrbOfRelatedContent, pageInformations, current, insideWrapper } = this.props;
 
         return (
-            <div className={ styles.container }>
+            <div className={ ctx({
+                [styles.disabledContainer]: !insideWrapper && type != 'bookmarks',
+                [styles.enableContainer]: insideWrapper || type == 'bookmarks'
+            }) }>
                 { type == 'page' &&
                     <Header
+                        goTo={  ::this.props.goTo }
+                        hasAncestors={ this.props.hasAncestors }
+                        hasParents={ this.props.hasParents }
                         bookmarkPage={ ::this.props.bookmarkPage }
                         { ...pageInformations } />
                 }
@@ -61,7 +68,11 @@ View.PropTypes = {
     type: PropTypes.oneOf(['page', 'bookmarks']).isRequired,
     nrbOfRelatedContent: PropTypes.number.isRequired,
     isFetching: PropTypes.bool.isRequired,
+    goTo: PropTypes.func.isRequired,
+    hasAncestors: PropTypes.bool.isRequired,
+    hasParents: PropTypes.bool.isRequired,
+    current: PropTypes.bool.isRequired,
+    insideWrapper: PropTypes.bool.isRequired,
     children: PropTypes.object.isRequired,
-    pageInformations: PropTypes.object.isRequired,
-    position: PropTypes.oneOf(['current', 'prev', 'next']).isRequired
+    pageInformations: PropTypes.object.isRequired
 }

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bookmarkRelatedContent, getRelatedContent } from 'actions/RelatedContentActions';
+import { bookmarkRelatedContent, getRelatedContent, setPageSelected } from 'actions/RelatedContentActions';
 import View from 'View/';
 import Item from 'Item/';
 
@@ -100,7 +100,7 @@ export default class ViewContainer extends Component {
      */
     loadMoreRelatedContent() {
         return this.props.dispatch(getRelatedContent({
-            url: document.location.href,
+            url: this.props.pageUrl,
             start: (this.getRelatedContent().length + 1)
         }));
     }
@@ -113,9 +113,16 @@ export default class ViewContainer extends Component {
      * @param {string} relatedContentId
      */
     clickOnRelatedContent(relatedContentId) {
-        return this.props.dispatch(getRelatedContent({
-            url: relatedContentId
-        }));
+        let page = this.props.pages.get(relatedContentId);
+
+        if(page === undefined) {
+            return this.props.dispatch(getRelatedContent({
+                url: relatedContentId
+            }));
+        }
+        else {
+            return this.props.dispatch(setPageSelected(relatedContentId));
+        }
     }
 
 
@@ -172,6 +179,71 @@ export default class ViewContainer extends Component {
 
 
 
+    /**
+     * goTo()
+     *
+     * @param {string} direction
+     * @param dispatch setPageSelected()
+     */
+    goTo(direction) {
+        let response,
+            cache;
+
+        switch (direction) {
+            case 'back':
+                if(this.hasAncestors()) {
+                    this.props.pages.map(page => {
+                        if(this.props.pageUrl == page.get('_id')) {
+                            response = cache;
+                        }
+                        cache = page.get('_id');
+                    });
+                }
+
+                break;
+
+            case 'next':
+                if(this.hasParents()) {
+                    this.props.pages.reverse().map(page => {
+                        if(this.props.pageUrl == page.get('_id')) {
+                            response = cache;
+                        }
+                        cache = page.get('_id');
+                    });
+                }
+
+                break;
+
+            default:
+                response = null;
+        }
+
+        return this.props.dispatch(setPageSelected(response))
+    }
+
+
+
+    /**
+     * isInsideWrapper(
+     *
+     */
+    isInsideWrapper() {
+        let response = true,
+            currentPage = null;
+
+        // Get current page
+        this.props.pages.map(page => {
+            if(page.get('_id') == this.props.pageUrl && currentPage !== null) {
+                response = false;
+            }
+            if(page.get('current')) {
+                currentPage = page.get('_id');
+            }
+        });
+
+        return response;
+    }
+
 
 
     /**
@@ -184,13 +256,16 @@ export default class ViewContainer extends Component {
             isFetching = (this.props.type == 'bookmarks' ? false : this.props.pages.get(this.props.pageUrl).get('isFetching')),
             getPageInformations = this.getPageInformations(),
             hasAncestors = this.hasAncestors(),
-            hasParents = this.hasParents();
+            hasParents = this.hasParents(),
+            isInsideWrapper = this.isInsideWrapper();
 
         return (
             <View
+                goTo={ ::this.goTo }
                 bookmarkPage={ ::this.bookmarkPage }
                 loadMoreRelatedContent={ ::this.loadMoreRelatedContent }
                 type={ this.props.type }
+                insideWrapper={ isInsideWrapper }
                 pageInformations={ getPageInformations }
                 current={ (this.props.type == 'bookmarks' ? false : this.props.pages.get(this.props.pageUrl).get('current')) }
                 hasAncestors={ hasAncestors }

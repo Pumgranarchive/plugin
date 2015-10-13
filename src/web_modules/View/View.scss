@@ -5,8 +5,9 @@
 
 @import 'core';
 
-.container {
-    display: inline-block;
+.commonContainer {
+    display: block;
+    position: absolute;
     overflow-y: scroll;
     overflow-x: hidden;
     vertical-align: top;
@@ -15,8 +16,19 @@
     height: calc(100% - #{$footer-height});
     padding: $container-padding $container-padding 0;
     background: $background-color;
-    box-shadow: 0 0 6px rgba(black, .3);
-    transition: left ease .4s;
+}
+
+.disabledContainer {
+    composes: commonContainer;
+    animation: reverse-translate .4s ease;
+    animation-fill-mode: forwards;
+    transform: translateX(100%);
+}
+
+.enableContainer {
+    composes: commonContainer;
+    animation: translate .4s ease;
+    animation-fill-mode: forwards;
 }
 
 .wrapper {
@@ -43,4 +55,25 @@
 .footer {
     text-align: center;
     margin-bottom: 20px;
+}
+
+@keyframes translate {
+    from {
+        opacity: .8;
+        transform: translateX(100%) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0%) scale(1);
+    }
+}
+
+
+@keyframes reverse-translate {
+    from {
+        transform: translateX(0%) scale(1);
+    }
+    to {
+        transform: translateX(100%) scale(0.95);
+    }
 }

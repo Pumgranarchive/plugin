@@ -2,7 +2,8 @@ import Immutable from 'immutable';
 import {
     GET_RELATED_CONTENT_REQUEST,
     GET_RELATED_CONTENT_SUCCESS,
-    GET_RELATED_CONTENT_ERROR
+    GET_RELATED_CONTENT_ERROR,
+    SET_PAGE_SELECTED
 } from 'constants/ActionTypes';
 
 var initialState = Immutable.fromJS({});
@@ -10,11 +11,18 @@ var initialState = Immutable.fromJS({});
 export default function views(state = initialState, action) {
     switch(action.type) {
         case GET_RELATED_CONTENT_REQUEST:
+
+            state.map(page => state = state.mergeIn([page.get('_id')], { current: false }))
+
+            // Set new page
             state = state.mergeIn([action.url], {
                 _id: action.url,
-                isFetching: true
+                isFetching: true,
+                current: true
             });
+
             break;
+
 
         case GET_RELATED_CONTENT_SUCCESS:
             state = state.mergeIn([action.url], {
@@ -36,13 +44,23 @@ export default function views(state = initialState, action) {
 
             break;
 
+
         case GET_RELATED_CONTENT_ERROR :
             state = state.mergeIn([action.url], {
-                isFetching: false,
+                isFetching: false
             });
             break;
 
+        case SET_PAGE_SELECTED :
+            state.map(page => state = state.mergeIn([page.get('_id')], { current: false }));
+            state = state.mergeIn([action.pageId], {
+                current: true
+            });
+
+            break;
+
         default: state = state;
+
     }
 
     return state;
