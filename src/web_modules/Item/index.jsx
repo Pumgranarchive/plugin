@@ -20,40 +20,10 @@ export default class Item extends Component{
      * @return {string} type
      * @return {func} setState()
      */
-<<<<<<< HEAD
-    handleVisite(){
-        this.props.visitRelatedContent(this.props.item.url);
-
-        // Remove all elements of the page
-        let selectors = [
-            ...document.querySelectorAll('body > *:not(.Pumgrana__ac863f3)')
-        ];
-        selectors.map((element) => {
-            element.parentNode.removeChild(element);
-        });
-
-        // Set size of body / html
-        select('html')::css({
-            height: '100vh'
-        });
-        select('body')::css({
-            overflow: 'hidden'
-        });
-
-        // Create iframe
-        let webView = document.createElement('iframe');
-        webView.setAttribute('style', 'position: absolute; left: 0; top: 0;');
-        webView.setAttribute('src', this.props.item.url);
-        webView.setAttribute('width', '100%');
-        webView.setAttribute('height', '100%');
-        webView.setAttribute('frameborder', '0');
-        document.querySelector('body').insertBefore(webView, document.querySelector('.Pumgrana__ac863f3'));
-=======
     onHover(type) {
         return this.setState({
             hover: !this.state.hover
         })
->>>>>>> next
     }
 
 
