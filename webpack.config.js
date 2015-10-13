@@ -19,7 +19,7 @@ module.exports = {
     entry: production ? ['./src/index'] :
         ['webpack-hot-middleware/client', './src/index'],
     output: {
-        path: path.join(__dirname, '__build__'),
+        path: chrome ? path.join(__dirname, 'chrome_extension') : path.join(__dirname, '__build__'),
         filename: 'app.js',
         publicPath: (dev ? '/__build__/' : '')
     },
