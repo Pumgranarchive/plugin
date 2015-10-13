@@ -1,53 +1,190 @@
 import React, { Component } from 'react';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import { Provider } from 'react-redux';
-import promiseMiddleware from 'middlewares/promiseMiddleware';
-import * as reducers from 'reducers/';
-import PumgranaApp from 'PumgranaApp';
+import { connect } from 'react-redux';
+import { getRelatedContent } from 'actions/RelatedContentActions';
+import Wrapper from 'Wrapper/';
+import Footer from 'Footer/';
+import ToogleButton from 'ToogleButton/';
+import Views from 'Views/';
+import ViewContainer from 'ViewContainer';
+import ViewBookmarks from 'ViewBookmarks/';
+import Overlay from 'Overlay/';
+import Iframe from 'Iframe/';
 
-let cs = createStore;
-if(__DEBUG__){
-    cs = compose(require('redux-devtools').devTools(), createStore);
-}
-const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(cs);
-const store = createStoreWithMiddleware(combineReducers(reducers));
-
+@connect(state => ({
+    pages: state.pages,
+    relatedContent: state.relatedContent
+}))
 export default class App extends Component{
 
     /**
-     * Render dev tools
+     * State
      *
-     * @return JSX or false
      */
-    renderDevTools(){
-        if(__DEBUG__){
-            const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
-
-            return (
-                <DebugPanel top left bottom>
-                    <DevTools store={ store } monitor={LogMonitor} />
-                </DebugPanel>
-            );
-        }
+    state = {
+        stateToogle: 'close',
+        showViewBookmarks: false
     }
 
 
 
     /**
-     * Render
+     * Component did mount
      *
-     * @return JSX
+     * @return {func} Dispatch getRelatedContent()
      */
-    render(){
+    componentWillMount() {
+        return this.props.dispatch(getRelatedContent({
+            url: document.location.href
+        }));
+    }
+
+
+
+    /**
+     * Toogle view bookmarks
+     *
+     * @return setState()
+     */
+    toogleViewBookmarks() {
+        let response;
+
+        if(this.state.showViewBookmarks || this.getNbreOfBookmarkedRelatedContent() == 0) {
+            response = false;
+        }
+        else {
+            response = true;
+        }
+
+        return this.setState({
+            showViewBookmarks: response
+        });
+    }
+
+
+
+    /**
+     * Open || close the plugin
+     *
+     * @return {func} setState
+     */
+    toogleAction() {
+        return this.setState({
+            stateToogle: (this.state.stateToogle == 'open' ? 'close' : 'open')
+        });
+    }
+
+
+
+    /**
+     * getPages()
+     *
+     * @return {array} response
+     */
+    getPages() {
+        let response = [];
+
+        this.props.pages.map(page => {
+            response.push(page.get('_id'));
+        });
+
+        return response;
+    }
+
+
+
+    /**
+     * getNbreOfBookmarkedRelatedContent()
+     *
+     * @return {integer} response
+     */
+    getNbreOfBookmarkedRelatedContent() {
+        return this.props.relatedContent.filter(
+            relatedContent => relatedContent.get('bookmarked')
+        ).size;
+    }
+
+
+
+    /**
+     * getStateViewBookmarks()
+     *
+     * @return {string} response
+     */
+    getStateViewBookmarks() {
+        let response = 'enabled';
+
+        if(this.getNbreOfBookmarkedRelatedContent() == 0) {
+            response = 'disabled';
+        }
+
+        if(this.state.showViewBookmarks) {
+            response = 'clicked';
+        }
+
+        return response;
+    }
+
+
+
+    /**
+     * getCurrentWebsite()
+     *
+     * @return {string}
+     */
+    getCurrentWebsite() {
+        let response = null;
+
+        this.props.pages.map(page => {
+            response = page.get('_id');
+        });
+
+        return response;
+    }
+
+
+
+    /**
+     * Render <Wrapper /> component
+     *
+     * @return {JSX}
+     */
+    render() {
+        let pages = this.getPages(),
+            currentWebsite = this.getCurrentWebsite(),
+            stateViewBookmarks = this.getStateViewBookmarks(),
+            nbreOfBookmarkedRelatedContent = this.getNbreOfBookmarkedRelatedContent();
+
         return (
             <div>
-                <Provider store={ store }>
-                    {() =>
-                        <PumgranaApp />
-                    }
-                </Provider>
-                { this.renderDevTools() }
+                { pages.length > 1 &&
+                    <Iframe src={ currentWebsite } />
+                }
+                <Overlay
+                    state={ this.state.stateToogle }
+                    toogleAction={ ::this.toogleAction } />
+                <Wrapper state={ this.state.stateToogle }>
+                    <ToogleButton
+                        state={ this.state.stateToogle }
+                        action={ ::this.toogleAction } />
+                    <Views>
+                        <ViewBookmarks state={ ( this.state.showViewBookmarks ? 'enable' : 'disabled' ) }>
+                            <ViewContainer
+                                type='bookmarks' />
+                        </ViewBookmarks>
+                    {
+                        pages.map((page, index) => (
+                            <ViewContainer
+                                key={ index }
+                                type='page'
+                                pageUrl={ page } />
+                        ))
+                    } </Views>
+                    <Footer
+                        toogleViewBookmarks={ ::this.toogleViewBookmarks }
+                        stateViewBookmarks={ stateViewBookmarks } />
+                </Wrapper>
             </div>
         );
     }
+
 }

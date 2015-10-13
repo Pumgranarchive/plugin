@@ -1,0 +1,51 @@
+/**
+ * BookmarksButton component style
+ *
+ */
+
+@import 'core';
+
+.commonContainer {
+    display: flex;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: solid;
+    margin-top: 13px;
+    margin-left: 19px;
+    cursor: pointer;
+}
+
+.disabledContainer {
+    composes: commonContainer;
+    border-color: $secondaryColor;
+}
+
+.activeContainer {
+    composes: commonContainer;
+    border-color: $primaryColor;
+    background: $primaryColor-white;
+}
+
+.clickedContainer {
+    composes: commonContainer;
+    border-color: $primaryColor;
+    background: $primaryColor-light;
+}
+
+.iconContainer {
+    position: relative;
+    margin: auto;
+    left: 1px;
+}
+
+.disabledIcon {
+    fill: $secondaryColor-light;
+    stroke: $secondaryColor;
+}
+
+.enabledIcon {
+    stroke: $primaryColor;
+    fill: $primaryColor-light;
+}

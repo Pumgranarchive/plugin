@@ -3,17 +3,17 @@ var path = require('path'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     NyanProgressPlugin = require('nyan-progress-webpack-plugin');
 
-var debug = (process.env.DEBUG === 'true' ? true : false);
-var dev = (process.env.NODE_ENV === 'DEV' ? true : false);
-var production = (process.env.NODE_ENV === 'CHROME' ? true : false);
-var chrome = (production ? true : false);
+var dev = (process.env.NODE_ENV === 'DEV' ? true : false),
+    debug = (process.env.DEBUG === 'true' ? true : false),
+    chrome = (process.env.NODE_ENV === 'CHROME' ? true : false),
+    production = (chrome ? true : false);
 
 module.exports = {
-    devtool: 'eval',
+    devTools: (dev ? 'eval-source-map' : ''),
     server: {
-        port: 3000,
+        port: 8000,
         url: 'localhost',
-        hot: (dev ? true : false),
+        hot: true,
         historyApiFallback: true
     },
     entry: production ? ['./src/index'] :
@@ -21,14 +21,15 @@ module.exports = {
     output: {
         path: chrome ? path.join(__dirname, 'chrome_extension') : path.join(__dirname, '__build__'),
         filename: 'app.js',
-        publicPath: chrome ? '' : '/__build__/'
+        publicPath: (dev ? '/__build__/' : '')
     },
     resolve: {
-        extensions: ['', '.js', '.jsx', '.scss', 'ts'],
+        extensions: ['', '.js', '.jsx', '.scss'],
         modulesDirectories: [
             'src/web_modules',
             'node_modules',
             'src/assets',
+            'src/assets/stylesheets/base',
             'src/scripts',
             'src/scripts/containers'
         ]
@@ -44,8 +45,12 @@ module.exports = {
             loader: 'awesome-typescript-loader'
         },
         {
+            test: /\.json?$/,
+            loaders: ['json']
+        },
+        {
             test: /\.(scss|css)$/,
-            loader: ExtractTextPlugin.extract('style', 'css!postcss!sass?outputStyle=expanded&' +
+            loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass?outputStyle=expanded&' +
                       'includePaths[]=' +
                         (path.resolve(__dirname, './src/assets/fonts/')) + '&' +
                       'includePaths[]=' +
@@ -56,13 +61,13 @@ module.exports = {
         {
             test: /.*\.(gif|png|jpe?g|svg)$/i,
             loaders: [
-              'url?limit=15000&name=[name]-[sha512:hash:base64:7].[ext]',
+              'url?limit=10000&name=[name]-[sha512:hash:base64:7].[ext]',
               'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
             ]
         },
         {
-            test: /.*\.(ttf|woff)$/i,
-            loader: 'url?name=[name].[ext]'
+            test: /.*\.(otf|ttf|woff)$/i,
+            loader: 'url?limit=1500&name=[name].[ext]'
         }]
     },
     plugins: [
@@ -70,15 +75,15 @@ module.exports = {
         new ExtractTextPlugin('style.css', {disable: !production}),
         new webpack.DefinePlugin({
            __PROD__: production,
-           __DEBUG__: debug,
-           __DEV__: dev
+           __DEV__: dev,
+           __DEBUG__: debug
          })
     ].concat(
         production ? [
             new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    warnings: true
-                }
+              compress: {
+                warnings: false
+              }
             })
         ] : [
             new webpack.HotModuleReplacementPlugin(),
@@ -86,9 +91,8 @@ module.exports = {
         ]
     ),
     postcss: function(){
-        var autoprefixer = require('autoprefixer-core');
         return [
-            autoprefixer({ browsers: ['last 10 Chrome versions'] })
+            require('autoprefixer-core')({ browsers: ['last 2 versions'] })
         ];
     }
 

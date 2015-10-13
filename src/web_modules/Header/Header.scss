@@ -1,0 +1,53 @@
+/**
+ * Header style component
+ *
+ */
+
+@import 'core';
+
+.container {
+	position: relative;
+	margin-bottom: 32px;
+}
+
+.back, .next{
+	display: block;
+	position: absolute;
+	top: 12px;
+	width: 11px;	height: 20px;
+	background-image: image-url('back.svg');
+	cursor: pointer;
+
+	&:hover, &:focus{
+		opacity: .5;
+	}
+}
+
+.next{
+	right: 20px;
+	transform: rotate(180deg);
+}
+
+.domainName, .title{
+	display:inline-block;
+	padding-left: 45px;
+	font-weight: 700;
+	width: 64%;
+}
+
+.domainName{
+	width: 100%;
+	font-size: 14px;
+	color: $secondaryColor-medium;
+}
+
+.title{
+	font-size: 16px;
+}
+
+.bookmarkIcon {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 40px;
+}

@@ -1,134 +1,247 @@
 import React, { Component, PropTypes } from 'react';
-import removeDuplicateContent from 'utils/removeDuplicateContent';
-import {
-    getRelatedContent,
-    searchRelatedContent,
-    bookmarkRelatedContent,
-    visitRelatedContent,
-    loadMoreRelatedContent,
-    resetSearchRelatedContent,
-    getTitle
-} from 'actions/RelatedContentActions';
 import { connect } from 'react-redux';
+import { bookmarkRelatedContent, getRelatedContent, setPageSelected } from 'actions/RelatedContentActions';
 import View from 'View/';
+import Item from 'Item/';
 
 @connect(state => ({
     pages: state.pages,
     relatedContent: state.relatedContent
 }))
-export default class ViewContainer extends Component{
+export default class ViewContainer extends Component {
 
     /**
-     * Props
+     * getPageInformations
      *
      */
-    static propTypes = {
-        position: PropTypes.string.isRequired,
-        pageId: PropTypes.number.isRequired,
-        pageUrl: PropTypes.string.isRequired
+    getPageInformations() {
+        let page = this.props.relatedContent.get(this.props.pageUrl),
+            response = {};
+
+        if(page !== undefined) {
+            response = page.toJS();
+        }
+
+        return response;
     }
 
 
 
     /**
-     * Get related content (fetch data)
+     * getRelatedContent()
      *
-     * @return dispatch getRelatedContent()
+     * @return {array} response
      */
-    componentDidMount(){
-        let { pageId, pageUrl, dispatch } = this.props;
+    getRelatedContent() {
+        let response = [];
 
-        document.onreadystatechange = function(){
-            if(document.readyState === 'complete'){
-                dispatch(getTitle(document.title, pageId));
+        if(this.props.type == 'bookmarks') {
+            this.props.relatedContent.filter(
+                relatedContent => relatedContent.get('bookmarked')
+            ).map((relatedContent, key) => {
+                response = [
+                    ...response,
+                    {
+                        _id: key,
+                        ...relatedContent.toJS()
+                    }
+                ]
+            });
+        }
+        else { // type == 'page'
+            let page = this.props.pages.get(this.props.pageUrl);
+
+            if(page.get('relatedContent') !== undefined) {
+                page.get('relatedContent').map(relatedContent => {
+                    response = [
+                        ...response,
+                        {
+                            _id: relatedContent,
+                            ...this.props.relatedContent.get(relatedContent).toJS()
+                        }
+                    ]
+                });
             }
-        };
+        }
 
-        if(pageUrl.substring(4, 5) !== 's'){
-            return dispatch(getRelatedContent(
-                pageId,
-                pageUrl
-            ));
+
+        return response;
+    }
+
+
+
+    /**
+     * Bookmark related content
+     *
+     * @param {integer} relatedContentId
+     * @return {func} bookmarkRelatedContent()
+     */
+    bookmarkRelatedContent(relatedContentId) {
+        return this.props.dispatch(bookmarkRelatedContent(relatedContentId))
+    }
+
+
+
+    /**
+     * Bookmark page
+     *
+     * @return {func} relatedContentId()
+     */
+    bookmarkPage() {
+        return this.props.dispatch(bookmarkRelatedContent(this.props.pageUrl))
+    }
+
+
+
+    /**
+     * loadMoreRelatedContent()
+     *
+     * @return {func} getRelatedContent()
+     */
+    loadMoreRelatedContent() {
+        return this.props.dispatch(getRelatedContent({
+            url: this.props.pageUrl,
+            start: (this.getRelatedContent().length + 1)
+        }));
+    }
+
+
+
+    /**
+     * clickOnRelatedContent
+     *
+     * @param {string} relatedContentId
+     */
+    clickOnRelatedContent(relatedContentId) {
+        let page = this.props.pages.get(relatedContentId);
+
+        if(page === undefined) {
+            return this.props.dispatch(getRelatedContent({
+                url: relatedContentId
+            }));
+        }
+        else {
+            return this.props.dispatch(setPageSelected(relatedContentId));
         }
     }
 
 
-
     /**
-     * Search related content
+     * hasAncestors() && hasParents()
      *
+     * @return {bool}
      */
-    searchRelatedContent(search){
-        this.props.dispatch(searchRelatedContent(
-            this.props.pageId,
-            this.props.pageUrl,
-            search
-        ));
-    }
+    hasAncestors() {
+        let i = 0,
+            founded = false;
 
+        if(this.props.pageUrl !== undefined) {
+            this.props.pages.map((page, index) => {
+                if(index == this.props.pageUrl){
+                    founded = true;
+                }
 
-
-    /**
-     * Reset searchRelatedContent()
-     *
-     */
-    resetSearchRelatedContent(){
-        let pageSearchFilter = this.props.pages.filter( page => page.id === this.props.pageId )[0].searchFilter;
-
-        if(pageSearchFilter !== ''){
-            this.props.dispatch(resetSearchRelatedContent(this.props.pageId));
+                if(!founded) {
+                    i++;
+                }
+            });
         }
+
+        if(i > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    hasParents() {
+        let i = 0,
+            founded = false;
+
+        if(this.props.pageUrl !== undefined) {
+            this.props.pages.reverse().map((page, index) => {
+                if(index == this.props.pageUrl){
+                    founded = true;
+                }
+
+                if(!founded) {
+                    i++;
+                }
+            });
+        }
+
+        if(i > 0) {
+            return true;
+        }
+
+        return false;
     }
 
 
 
     /**
-     * Load more related content
+     * goTo()
      *
-     * @return dispatch loadMoreRelatedContent()
+     * @param {string} direction
+     * @param dispatch setPageSelected()
      */
-    loadMoreRelatedContent(){
-        return this.props.dispatch(loadMoreRelatedContent(
-            this.props.pageId,
-            this.props.pages.filter( page => page.id === this.props.pageId )[0].url,
-            this.state.searchFilter
-        ));
+    goTo(direction) {
+        let response,
+            cache;
+
+        switch (direction) {
+            case 'back':
+                if(this.hasAncestors()) {
+                    this.props.pages.map(page => {
+                        if(this.props.pageUrl == page.get('_id')) {
+                            response = cache;
+                        }
+                        cache = page.get('_id');
+                    });
+                }
+
+                break;
+
+            case 'next':
+                if(this.hasParents()) {
+                    this.props.pages.reverse().map(page => {
+                        if(this.props.pageUrl == page.get('_id')) {
+                            response = cache;
+                        }
+                        cache = page.get('_id');
+                    });
+                }
+
+                break;
+
+            default:
+                response = null;
+        }
+
+        return this.props.dispatch(setPageSelected(response))
     }
 
 
 
     /**
-     * Bookmard a related content
+     * isInsideWrapper(
      *
-     * @param itemUrl (string)
-     * @return dispatch bookmarkRelatedContent()
      */
-    bookmarkRelatedContent(itemUrl){
-        return this.props.dispatch(bookmarkRelatedContent(itemUrl));
-    }
+    isInsideWrapper() {
+        let response = true,
+            currentPage = null;
 
+        // Get current page
+        this.props.pages.map(page => {
+            if(page.get('_id') == this.props.pageUrl && currentPage !== null) {
+                response = false;
+            }
+            if(page.get('current')) {
+                currentPage = page.get('_id');
+            }
+        });
 
-
-    /**
-     * Visit a related content
-     *
-     * @param itemUrl (string)
-     * @return dispatch visitRelatedContent()
-     */
-    visitRelatedContent(itemUrl){
-        return this.props.dispatch(visitRelatedContent(itemUrl));
-    }
-
-
-
-    /**
-     * GoToPage()
-     *
-     * @param pageId (numb)
-     * @return goToPage() (props function)
-     */
-    goToPage(pageId){
-        return this.props.goToPage(pageId);
+        return response;
     }
 
 
@@ -136,27 +249,44 @@ export default class ViewContainer extends Component{
     /**
      * Render
      *
-     * @return JSX
+     * @return {jsx}
      */
     render() {
-        let { pages, pageId, relatedContent, position } = this.props;
-        let page = pages.filter( item => item.id === pageId )[0];
+        let relatedContent = this.getRelatedContent(),
+            isFetching = (this.props.type == 'bookmarks' ? false : this.props.pages.get(this.props.pageUrl).get('isFetching')),
+            getPageInformations = this.getPageInformations(),
+            hasAncestors = this.hasAncestors(),
+            hasParents = this.hasParents(),
+            isInsideWrapper = this.isInsideWrapper();
 
         return (
             <View
-                page={ page }
-                relatedContent={ removeDuplicateContent(relatedContent.filter( item =>
-                    item.pageId === pageId && item.searchFilter === page.searchFilter )) }
-                position={ position }
-                goToPage={ ::this.goToPage }
-                lastPageId={ (pages.length - 1) }
+                goTo={ ::this.goTo }
+                bookmarkPage={ ::this.bookmarkPage }
                 loadMoreRelatedContent={ ::this.loadMoreRelatedContent }
-                searchFilter={ page.searchFilter }
-                searchRelatedContent={ ::this.searchRelatedContent }
-                resetSearchRelatedContent={ ::this.resetSearchRelatedContent }
-                bookmarkRelatedContent={ ::this.bookmarkRelatedContent }
-                visitRelatedContent={ ::this.visitRelatedContent } />
+                type={ this.props.type }
+                insideWrapper={ isInsideWrapper }
+                pageInformations={ getPageInformations }
+                current={ (this.props.type == 'bookmarks' ? false : this.props.pages.get(this.props.pageUrl).get('current')) }
+                hasAncestors={ hasAncestors }
+                hasParents={ hasParents }
+                nrbOfRelatedContent={ relatedContent.length }
+                isFetching={ isFetching } >
+            {
+                relatedContent.map((item, index) => (
+                    <Item
+                        key={ index }
+                        { ...item }
+                        clickOnRelatedContent={ ::this.clickOnRelatedContent }
+                        bookmarkRelatedContent={ ::this.bookmarkRelatedContent } />
+                ))
+            } </View>
         );
     }
 
 }
+
+ViewContainer.PropTypes = {
+    pageUrl: PropTypes.string,
+    pages: PropTypes.object.isRequired
+};

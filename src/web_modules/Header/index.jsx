@@ -1,61 +1,29 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import ctx from 'classnames';
-import './index.scss';
+import styles from './Header.scss';
+import BookmarkIcon from 'BookmarkIcon/';
 
-export default class Header extends Component{
+const Header = ({ title, domainName, bookmarked, bookmarkPage, goTo, hasAncestors , hasParents, goBack, goNext }) => (
+    <div className={ styles.container }>
+        <div onClick={ () => goTo('back') }
+           role="button"
+           className={ ctx({
+            [styles.back]: hasAncestors
+        }) }></div>
+        <span className={ styles.domainName }>{ domainName }</span>
+        <span className={ styles.title }>{ title }</span>
+        <div className={ styles.bookmarkIcon }>
+            <BookmarkIcon
+                show={ true }
+                active={ bookmarked }
+                action={ () => bookmarkPage() } />
+        </div>
+        <div onClick={ () => goTo('next') }
+           role='button'
+           className={ ctx({
+            [styles.next]: hasParents
+        }) }></div>
+    </div>
+);
 
-    /**
-     * Props
-     *
-     */
-    static propTypes = {
-        page: PropTypes.object.isRequired,
-        lastPageId: PropTypes.number.isRequired,
-        goTo: PropTypes.func.isRequired
-    }
-
-
-
-    /**
-     * On click to back
-     *
-     * @return goTo function (props)
-     */
-    back(){
-        return this.props.goTo(this.props.page.id - 1);
-    }
-
-
-
-    /**
-     * On click to next
-     *
-     * @return goTo function (props)
-     */
-    next(){
-        return this.props.goTo(this.props.page.id + 1);
-    }
-
-
-
-    /**
-     * Render
-     *
-     */
-    render(){
-        let { page, lastPageId } = this.props;
-
-        return (
-            <div className="Header">
-                <a role="button" onClick={ ::this.back } ref="back" aria-label="Go back" href="#/" className={ ctx('Header_back', {
-                    'is-active': page.id !== 0
-                }) }></a>
-                <span className="Header_url">{ page.website }</span>
-                <span className="Header_title">{ page.title }</span>
-                <a role='button' onClick={ ::this.next } ref='next' aria-label='Go next' href='#/' className={ ctx('Header_next', {
-                    'is-active': page.id !== lastPageId
-                }) }></a>
-            </div>
-        );
-    }
-}
+export default Header;

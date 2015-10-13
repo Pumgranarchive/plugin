@@ -1,74 +1,82 @@
 import React, { Component, PropTypes } from 'react';
-import './index.scss';
 import Header from 'Header/';
+import LoadMoreButton from './LoadMoreButton/';
 import SearchBar from 'SearchBar/';
-import List from 'List/';
+import styles from './View.scss';
+import ctx from 'classnames';
 
 export default class View extends Component{
 
     /**
-     * Props
-     *
-     */
-    static propTypes = {
-        page: PropTypes.object.isRequired,
-        relatedContent: PropTypes.array.isRequired,
-        position: PropTypes.string.isRequired,
-        goToPage: PropTypes.func.isRequired,
-        lastPageId: PropTypes.number.isRequired,
-        searchFilter: PropTypes.string.isRequired,
-        searchRelatedContent: PropTypes.func.isRequired,
-        resetSearchRelatedContent: PropTypes.func.isRequired,
-        loadMoreRelatedContent: PropTypes.func.isRequired,
-        bookmarkRelatedContent: PropTypes.func.isRequired,
-        visitRelatedContent: PropTypes.func.isRequired
-    }
-
-
-
-    /**
      * Render
      *
-     * @return JSX
+     * @return {JSX}
      */
     render(){
-        let {
-            page,
-            relatedContent,
-            position,
-            lastPageId,
-            goToPage,
-            searchFilter,
-            searchRelatedContent,
-            resetSearchRelatedContent,
-            loadMoreRelatedContent,
-            bookmarkRelatedContent,
-            visitRelatedContent
-        } = this.props;
+        let { type, isFetching, nrbOfRelatedContent, pageInformations, current, insideWrapper } = this.props;
 
         return (
-            <div className={`View View-${position}`}>
-                <Header
-                    lastPageId={ lastPageId }
-                    goTo={ goToPage }
-                    page={ page } />
-                <div className="View_content">
-                    <h1>
-                       { ((searchFilter === '') ? 'Related content' : `Resulats for "${searchFilter}"`) }
-                    </h1>
-                    <SearchBar
-                        searchRelatedContent={ searchRelatedContent }
-                        resetSearchRelatedContent={ resetSearchRelatedContent } />
-                    <List
-                        page={ page }
-                        relatedContent={ relatedContent }
-                        loadMoreRelatedContent={ loadMoreRelatedContent }
-                        bookmarkRelatedContent={ bookmarkRelatedContent }
-                        visitRelatedContent={ visitRelatedContent }
-                        loadMore={ true } />
+            <div className={ ctx({
+                [styles.disabledContainer]: !insideWrapper && type != 'bookmarks',
+                [styles.enableContainer]: insideWrapper || type == 'bookmarks'
+            }) }>
+                { type == 'page' &&
+                    <Header
+                        goTo={  ::this.props.goTo }
+                        hasAncestors={ this.props.hasAncestors }
+                        hasParents={ this.props.hasParents }
+                        bookmarkPage={ ::this.props.bookmarkPage }
+                        { ...pageInformations } />
+                }
+                <div className={ styles.wrapper }>
+                    <h2 className={ styles.title }>{
+                        (type == 'bookmarks') ? 'Bookmarked contents' : 'Related content'
+                    }</h2>
+                    { type == 'page' &&
+                        <SearchBar />
+                    }
+                    { isFetching && nrbOfRelatedContent == 0 &&
+                        <div className={ styles.noResultat }>
+                            Loading ...
+                        </div>
+                    }
+                    { !isFetching && nrbOfRelatedContent == 0 &&
+                        <div className={ styles.noResultat }>
+                            { (type == 'bookmarks') ?
+                                `Hey, you have nothing bookmarked yet : /
+                                To start bookmarking during your navigation session
+                                just click on the icon that appears on hover` :
+                                'No resultats found'
+                            }
+
+                        </div>
+                    }
+                    { nrbOfRelatedContent > 0 &&
+                        this.props.children
+                    }
                 </div>
+                { type == 'page' && nrbOfRelatedContent != 0 &&
+                    <footer className={ styles.footer }>
+                        <LoadMoreButton
+                            status={ (isFetching ? 'loading' : 'loaded') }
+                            action={ ::this.props.loadMoreRelatedContent } />
+                    </footer>
+                }
             </div>
         );
     }
 
+}
+
+View.PropTypes = {
+    type: PropTypes.oneOf(['page', 'bookmarks']).isRequired,
+    nrbOfRelatedContent: PropTypes.number.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    goTo: PropTypes.func.isRequired,
+    hasAncestors: PropTypes.bool.isRequired,
+    hasParents: PropTypes.bool.isRequired,
+    current: PropTypes.bool.isRequired,
+    insideWrapper: PropTypes.bool.isRequired,
+    children: PropTypes.object.isRequired,
+    pageInformations: PropTypes.object.isRequired
 }

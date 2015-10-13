@@ -1,0 +1,29 @@
+/**
+ * Wrapper Component Style
+ *
+ */
+
+@import 'core';
+
+.commonWrapper {
+    position: fixed;
+    z-index: $zIndex-max;
+    top: 0;
+    height: 100%;
+    width: $container-width;
+    box-sizing: border-box;
+    background: $background-color;
+    border-left: 5px solid $primaryColor;
+    color: $text-color;
+    transition: right ease .3s;
+}
+
+.enabledWrapper {
+    composes: commonWrapper;
+    right: 0;
+}
+
+.disabledWrapper {
+    composes: commonWrapper;
+    right: ($container-width * -1) + 5px;
+}

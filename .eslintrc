@@ -9,6 +9,7 @@
     },
     "parser": "babel-eslint",
     "rules": {
+        "eqeqeq": 0,
         "quotes": [2, "single"],
         "strict": [2, "never"],
         "react/jsx-uses-react": 2,
@@ -23,6 +24,7 @@
     ],
     "globals": {
         "__DEBUG__": true,
-        "__DEV__": true
+        "__DEV__": true,
+        "chrome": true
     }
 }

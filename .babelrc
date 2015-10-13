@@ -1,29 +1,19 @@
 {
-    "env": {
-        "production": {
-            "optional": ["runtime"],
-            "plugins": ["react-transform"],
-            "extra": {
-                "react-transform": [{
-                    "target": "react-transform-webpack-hmr",
-                    "imports": ["react"],
-                    "locals": ["module"]
-                }]
-            }
-        },
-        "env": {
-            "plugins": ["react-transform"],
-            "extra": {
-                "react-transform": [{
-                    "target": "react-transform-webpack-hmr",
-                    "imports": ["react"],
-                    "locals": ["module"]
-                }, {
-                    "target": "react-transform-catch-errors",
-                    "imports": ["react", "redbox-react"]
-                }]
-            }
-        }
-    },
-    "stage": 0
+  "env": {
+      "production": {
+          "optional": ["runtime"]
+      }
+  },
+  "stage": 0,
+  "plugins": ["react-transform"],
+  "extra": {
+    "react-transform": [{
+      "target": "react-transform-webpack-hmr",
+      "imports": ["react"],
+      "locals": ["module"]
+    }, {
+      "target": "react-transform-catch-errors",
+      "imports": ["react", "redbox-react"]
+    }]
+  }
 }

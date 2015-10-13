@@ -1,30 +1,26 @@
 import React, { Component, PropTypes } from 'react';
-import { select, css } from 'utils/dom';
-import './index.scss';
-import ctx from 'classnames';
+import BookmarkIcon from 'BookmarkIcon/';
+import styles from './Item.scss';
 
 export default class Item extends Component{
 
     /**
-     * Props
+     * State
      *
      */
-    static propTypes = {
-        item: PropTypes.object.isRequired,
-        bookmarkRelatedContent: PropTypes.func.isRequired,
-        visitRelatedContent: PropTypes.func.isRequired
-    }
-
-
-
-    /* ------------------------------------- */
+    state = {
+        hover: false
+    };
 
 
 
     /**
-     * Handle visited
+     * Hover
      *
+     * @return {string} type
+     * @return {func} setState()
      */
+<<<<<<< HEAD
     handleVisite(){
         this.props.visitRelatedContent(this.props.item.url);
 
@@ -52,55 +48,64 @@ export default class Item extends Component{
         webView.setAttribute('height', '100%');
         webView.setAttribute('frameborder', '0');
         document.querySelector('body').insertBefore(webView, document.querySelector('.Pumgrana__ac863f3'));
+=======
+    onHover(type) {
+        return this.setState({
+            hover: !this.state.hover
+        })
+>>>>>>> next
     }
 
 
 
     /**
-     * Handle bookmarked
+     * bookmarkRelatedContent()
+     *
      *
      */
-    handleBookmark(){
-        this.props.bookmarkRelatedContent(this.props.item.url);
+    bookmarkRelatedContent() {
+        return this.props.bookmarkRelatedContent(this.props._id);
     }
-
-
-
-    /* ------------------------------------- */
 
 
 
     /**
      * Render
      *
-     * @return JSX
+     * @return {JSX}
      */
-    render(){
-        let { visited, bookmarked, website, title, description, tags } = this.props.item;
+    render() {
+        let { title, description, domainName, tags, bookmarked, visited, _id } = this.props;
 
         return (
-            <div
-                className={ctx('Item', {
-                    'is-visited': visited
-                })}>
-                <svg onClick={ ::this.handleBookmark } className={
-                    ctx('Item_bookmark', {
-                        'is-active': bookmarked
-                    })
-                } width="15" height="20" viewBox="0 0 15 20" xmlns="http://www.w3.org/2000/svg">
-                    <title>View all your bookmarks</title>
-                    <path d="M3.437 1h8.126L14 3.45V19l-4.063-3.273L5.875 19V3.45L3.437 1 1 3.45V9.18h4.875" stroke="#DCDCDC" fill="#FFFFFF" strokeLinecap="round" strokeLinejoin="round" fillRule="evenodd"/>
-                </svg>
-                <div onClick={ ::this.handleVisite }>
-                    <span className="Item_url">{ website }</span>
-                    <h2 className="Item_title">{ title }</h2>
-                    <p className="Item_description">{ description }</p>
+            <div onMouseOver={ ::this.onHover }
+                 onMouseOut={ ::this.onHover }
+                 className={ styles.container }>
+                <BookmarkIcon
+                    action={ ::this.bookmarkRelatedContent }
+                    active={ bookmarked }
+                    show={ this.state.hover } />
+                <div onClick={ () => this.props.clickOnRelatedContent(_id) }>
+                    <span className={ styles.domainName }>{ domainName }</span>
+                    <h2 className={ styles.title }>{ title }</h2>
+                    <p className={ styles.description }>{ description } </p>
                     { tags.map((tag, i) => { return (
-                        <span className="Item_tag" key={ i }>{ tag }</span>
+                        <span className={ styles.tag } key={ i }>{ tag }</span>
                     ); }) }
                 </div>
             </div>
         );
     }
 
+}
+
+Item.PropTypes = {
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    domainName: PropTypes.string.isRequired,
+    tags: PropTypes.array.isRequired,
+    bookmarked: PropTypes.bool.isRequired,
+    visited: PropTypes.bool.isRequired,
+    bookmarkRelatedContent: PropTypes.func.isRequired
 }

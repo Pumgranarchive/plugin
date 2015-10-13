@@ -1,5 +1,4 @@
 import * as types from 'constants/ActionTypes';
-
 let WebAPI;
 if(__DEV__){
     WebAPI = require('utils/WebAPI.jsx');
@@ -8,55 +7,55 @@ else{
     WebAPI = require('utils/api.ts').WebAPI;
 }
 
-export function getRelatedContent(pageId, pageUrl) {
-    return {
+
+
+/**
+ * Get related content
+ *
+ * @param {object} params
+ * @return {object} promise
+ */
+export function getRelatedContent(
+    {
+        url = document.location.href,
+        start = 0,
+        limit = 12,
+        filter = ''
+    } = {}
+) {
+   return {
         types: [types.GET_RELATED_CONTENT_REQUEST, types.GET_RELATED_CONTENT_SUCCESS, types.GET_RELATED_CONTENT_ERROR],
-        promise: WebAPI.getRelatedContent(pageId, pageUrl)
+        promise: WebAPI.getRelatedContent({url, start, filter, limit}),
+        url
     };
 }
 
-export function loadMoreRelatedContent(pageId, pageUrl, searchFilter) {
-    return {
-        types: [types.LOAD_MORE_RELATED_CONTENT_REQUEST, types.LOAD_MORE_RELATED_CONTENT_SUCCESS, types.LOAD_MORE_RELATED_CONTENT_ERROR],
-        promise: WebAPI.loadMoreRelatedContent(pageId, pageUrl, searchFilter),
-        pageId
-    };
-}
 
-export function searchRelatedContent(pageId, pageUrl, searchFilter) {
-    return {
-        types: [types.SEARCH_RELATED_CONTENT_REQUEST, types.SEARCH_RELATED_CONTENT_SUCCESS, types.SEARCH_RELATED_CONTENT_ERROR],
-        promise: WebAPI.searchRelatedContent(pageId, pageUrl, searchFilter),
-        pageId,
-        searchFilter
-    };
-}
 
-export function resetSearchRelatedContent(pageId) {
-    return {
-        type: types.RESET_SEARCH_RELATED_CONTENT,
-        pageId
-    };
-}
-
-export function getTitle(pageTitle, pageId) {
-    return {
-        type: types.GET_TITLE,
-        pageTitle,
-        pageId
-    };
-}
-
-export function bookmarkRelatedContent(url) {
+/**
+ * Bookmark a related content
+ *
+ * @param {integer} relatedContentId
+ * @return {object}
+ */
+export function bookmarkRelatedContent(relatedContentId) {
     return {
         type: types.BOOKMARK_RELATED_CONTENT,
-        url
-    };
+        relatedContentId
+    }
 }
 
-export function visitRelatedContent(url) {
+
+
+/**
+ * Set page selected
+ *
+ * @param {string} pageId
+ * @return {object}
+ */
+export function setPageSelected(pageId) {
     return {
-        type: types.VISIT_RELATED_CONTENT,
-        url
-    };
+        type: types.SET_PAGE_SELECTED,
+        pageId
+    }
 }

@@ -1,0 +1,27 @@
+/**
+ * View bookmarks component style
+ *
+ * @extend .View
+ */
+
+ @import 'core';
+
+.commonContainer {
+    transition: transform ease .3s;
+    position: absolute;
+    height: 100%;
+    background: $background-color;
+    z-index: $zIndex-max;
+}
+
+.disabledContainer {
+    composes: commonContainer;
+    transform: translateY(100%) translateZ(0) scale(.82);
+    opacity: .9;
+}
+
+.enableContainer {
+    composes: commonContainer;
+    transform: translateY(0) translateZ(0) scale(1);
+    opacity: 1;
+}

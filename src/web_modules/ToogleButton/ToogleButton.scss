@@ -1,0 +1,40 @@
+/**
+ * Toogle Button style component
+ *
+ */
+
+@import 'core';
+
+.commonButton {
+    $size: 55px;
+
+    display: block;
+    position: absolute;
+    width: $size;  height: $size;
+    cursor: pointer;
+    margin-left: $size / -2 - $container-borderLeft;
+    top: 50%;    margin-top: $size / -2;
+    background: image-url('toogle.svg') no-repeat, image-url('toogle.svg') no-repeat;
+    background-position: 30% center, 70% center;
+    z-index: 0;
+    border-radius: 50%;
+    box-shadow: inherit;
+    border: 0;
+    transition: transform ease .3s;
+}
+
+.openButton {
+    composes: commonButton;
+    background-color: $primaryColor;
+    transform: rotate(180deg);
+}
+
+.closedButton {
+    composes: commonButton;
+    background-color: $primaryColor;
+}
+
+.disabledButton {
+    composes: commonButton;
+    background-color: $secondaryColor-medium;
+}
