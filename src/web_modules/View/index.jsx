@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Header from 'Header/';
 import LoadMoreButton from './LoadMoreButton/';
+import SearchBar from 'SearchBar/';
 import styles from './View.scss';
 import ctx from 'classnames';
 
@@ -31,6 +32,9 @@ export default class View extends Component{
                     <h2 className={ styles.title }>{
                         (type == 'bookmarks') ? 'Bookmarked contents' : 'Related content'
                     }</h2>
+                    { type == 'page' &&
+                        <SearchBar />
+                    }
                     { isFetching && nrbOfRelatedContent == 0 &&
                         <div className={ styles.noResultat }>
                             Loading ...
