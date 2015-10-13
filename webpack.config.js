@@ -41,6 +41,10 @@ module.exports = {
             include: path.join(__dirname, 'src')
         },
         {
+            test: /\.ts$/,
+            loader: 'awesome-typescript-loader'
+        },
+        {
             test: /\.json?$/,
             loaders: ['json']
         },
