@@ -18,7 +18,7 @@ $secondaryColor-black   : #323232;
  * Default text theme
  *
  */
-$background-color       : $secondaryColor-white;
+$default-backgroundColor       : $secondaryColor-white;
 
 
 
@@ -26,5 +26,5 @@ $background-color       : $secondaryColor-white;
  * Default text theme
  *
  */
-$text-color             : $secondaryColor-dark;
-$text-fontFamily        : 'PT Sans';
+$default-textColor             : $secondaryColor-dark;
+$default-fontFamily        : 'PT Sans';

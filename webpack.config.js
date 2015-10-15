@@ -21,7 +21,7 @@ module.exports = {
     output: {
         path: chrome ? path.join(__dirname, 'chrome_extension') : path.join(__dirname, '__build__'),
         filename: 'app.js',
-        publicPath: (dev ? '/__build__/' : 'chrome-extension://__MSG_@@extension_id__/')
+        publicPath: (chrome ? 'chrome-extension://__MSG_@@extension_id__/' : '/__build__/')
     },
     resolve: {
         extensions: ['', '.js', '.jsx', '.scss'],

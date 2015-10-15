@@ -10,7 +10,7 @@
     transition: transform ease .3s;
     position: absolute;
     height: 100%;
-    background: $background-color;
+    background: $default-backgroundColor;
     z-index: $zIndex-max;
 }
 

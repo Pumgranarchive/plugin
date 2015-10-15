@@ -13,13 +13,13 @@
     background: linear-gradient(to top, white, $secondaryColor-white);
     border: 1px solid $secondaryColor-light;
     border-radius: 4px;
-    font-family: $text-fontFamily;
+    font-family: $default-fontFamily;
     font-size: 14px;
     box-shadow: 0 0 0 black;
     height: inherit;
 
     &::placeholder {
-        color: lighten($text-color, 20%);
+        color: lighten($default-textColor, 20%);
     }
 
     &:focus {
