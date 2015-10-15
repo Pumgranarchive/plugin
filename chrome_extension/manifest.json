@@ -8,7 +8,7 @@
 	},
 	"content_scripts": [{
         "matches": ["http://*/*", "https://*/*"],
-        "exclude_matches": ["*://mail.google.com/*", "https://*.google.com/"],
+        "exclude_matches": ["*://mail.google.com/*", "https://*.google.com/", "http://localhost/*"],
         "css": ["style.css"],
         "js": ["app.js"],
 		"run_at": "document_idle"
