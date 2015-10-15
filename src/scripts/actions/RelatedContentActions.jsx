@@ -18,8 +18,7 @@ else{
 export function getRelatedContent(
     {
         url = document.location.href,
-        start = 0,
-        limit = 12,
+        offset = 0,
         filter = ''
     } = {}
 ) {
