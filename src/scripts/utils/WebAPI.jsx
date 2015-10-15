@@ -24,14 +24,6 @@ export default {
 					tags: ['tag 1', 'tag2', 'tag3'],
 					bookmarked: true,
 					visited: false
-				},
-				'http://localhost:8000/': {
-					title: 'Title 3',
-					description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue consectetur ante hendrerit ...',
-					domainName: 'localhost.com',
-					tags: ['tag 1', 'tag2', 'tag3'],
-					bookmarked: false,
-					visited: false
 				}
 			});
 		});

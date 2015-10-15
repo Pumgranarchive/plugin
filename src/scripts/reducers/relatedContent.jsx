@@ -6,7 +6,16 @@ import {
     BOOKMARK_RELATED_CONTENT
 } from 'constants/ActionTypes';
 
-var initialState = Immutable.fromJS({});
+var initialState = Immutable.fromJS({
+    [location.href]: {
+        title: document.title,
+        description: '',
+        domainName: location.hostname,
+        tags: [],
+        bookmarked: false,
+        visited: false
+    }
+});
 
 export default function relatedContent(state = initialState, action) {
     switch(action.type) {
