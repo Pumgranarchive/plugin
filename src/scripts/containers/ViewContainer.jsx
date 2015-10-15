@@ -101,7 +101,7 @@ export default class ViewContainer extends Component {
     loadMoreRelatedContent() {
         return this.props.dispatch(getRelatedContent({
             url: this.props.pageUrl,
-            start: (this.getRelatedContent().length + 1)
+            offset: (this.getRelatedContent().length + 1)
         }));
     }
 

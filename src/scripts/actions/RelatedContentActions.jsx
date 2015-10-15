@@ -24,7 +24,7 @@ export function getRelatedContent(
 ) {
    return {
         types: [types.GET_RELATED_CONTENT_REQUEST, types.GET_RELATED_CONTENT_SUCCESS, types.GET_RELATED_CONTENT_ERROR],
-        promise: WebAPI.getRelatedContent({url, start, filter, limit}),
+        promise: WebAPI.getRelatedContent({url, offset, filter}),
         url
     };
 }
