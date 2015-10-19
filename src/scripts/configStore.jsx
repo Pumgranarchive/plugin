@@ -6,17 +6,17 @@ let cs = createStore;
 if(__DEBUG__){
     cs = compose(require('redux-devtools').devTools())(createStore);
 }
+
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(cs);
 
 export default function configureStore() {
     const store = createStoreWithMiddleware(combineReducers(reducers));
 
     if (module.hot) {
-        module.hot.accept('./reducers/index', () => {
-            const nextRootReducer = require('./reducers/index');
-            store.replaceReducer(nextRootReducer);
-        });
+        module.hot.accept('./reducers/index', () =>
+            store.replaceReducer(require('./reducers/index'))
+        );
     }
 
-  return store;
+    return store;
 }
