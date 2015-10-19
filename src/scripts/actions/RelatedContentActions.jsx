@@ -25,7 +25,9 @@ export function getRelatedContent(
    return {
         types: [types.GET_RELATED_CONTENT_REQUEST, types.GET_RELATED_CONTENT_SUCCESS, types.GET_RELATED_CONTENT_ERROR],
         promise: WebAPI.getRelatedContent({url, offset, filter}),
-        url
+        url,
+        offset,
+        filter
     };
 }
 
@@ -49,12 +51,28 @@ export function bookmarkRelatedContent(relatedContentId) {
 /**
  * Set page selected
  *
- * @param {string} pageId
+ * @param {string} pageUrl
  * @return {object}
  */
-export function setPageSelected(pageId) {
+export function setPageSelected(pageUrl) {
     return {
         type: types.SET_PAGE_SELECTED,
-        pageId
+        pageUrl
+    }
+}
+
+
+
+/**
+ * Set page filter
+ *
+ * @param {string} pageUrl
+ * @return {object}
+ */
+export function setPageFilter(pageUrl, filter) {
+    return {
+        type: types.SET_PAGE_FILTER,
+        pageUrl,
+        filter
     }
 }

@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bookmarkRelatedContent, getRelatedContent, setPageSelected } from 'actions/RelatedContentActions';
+import { bookmarkRelatedContent, getRelatedContent, setPageSelected, setPageFilter } from 'actions/RelatedContentActions';
 import View from 'View/';
 import Item from 'Item/';
+var timer;
 
 @connect(state => ({
     pages: state.pages,
@@ -52,20 +53,47 @@ export default class ViewContainer extends Component {
             let page = this.props.pages.get(this.props.pageUrl);
 
             if(page.get('relatedContent') !== undefined) {
-                page.get('relatedContent').map(relatedContent => {
+                page.get('relatedContent').get(page.get('filter')).map(relatedContent => {
                     response = [
                         ...response,
                         {
                             _id: relatedContent,
                             ...this.props.relatedContent.get(relatedContent).toJS()
                         }
-                    ]
+                    ];
                 });
             }
         }
 
 
         return response;
+    }
+
+
+    /**
+     * Search related content
+     *
+     * @param {string} filter
+     * @return {func} dispatch getRelatedContent()
+     */
+    searchRelatedContent(filter) {
+        clearTimeout(timer);
+        if(filter != this.props.pages.get(this.props.pageUrl).get('filter')) {
+            if(filter != '' && this.props.pages.get(this.props.pageUrl).get('relatedContent').get(filter) == undefined) {
+                timer = setTimeout(() => {
+                    return this.props.dispatch(getRelatedContent({
+                        filter,
+                        url: this.props.pageUrl,
+                        offset: (this.getRelatedContent().length + 1)
+                    }));
+                }, 1300);
+            }
+            else {
+                return this.props.dispatch(setPageFilter(this.props.pageUrl, filter));
+            }
+        }
+
+        return false;
     }
 
 
@@ -261,6 +289,7 @@ export default class ViewContainer extends Component {
 
         return (
             <View
+                searchRelatedContent={ ::this.searchRelatedContent }
                 goTo={ ::this.goTo }
                 bookmarkPage={ ::this.bookmarkPage }
                 loadMoreRelatedContent={ ::this.loadMoreRelatedContent }

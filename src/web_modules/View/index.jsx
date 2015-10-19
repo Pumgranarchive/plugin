@@ -33,7 +33,8 @@ export default class View extends Component{
                         (type == 'bookmarks') ? 'Bookmarked contents' : 'Related content'
                     }</h2>
                     { type == 'page' &&
-                        <SearchBar />
+                        <SearchBar
+                            searchRelatedContent={ ::this.props.searchRelatedContent } />
                     }
                     { isFetching && nrbOfRelatedContent == 0 &&
                         <div className={ styles.noResultat }>

@@ -3,7 +3,8 @@ import {
     GET_RELATED_CONTENT_REQUEST,
     GET_RELATED_CONTENT_SUCCESS,
     GET_RELATED_CONTENT_ERROR,
-    SET_PAGE_SELECTED
+    SET_PAGE_SELECTED,
+    SET_PAGE_FILTER
 } from 'constants/ActionTypes';
 
 var initialState = Immutable.fromJS({});
@@ -27,12 +28,14 @@ export default function views(state = initialState, action) {
         case GET_RELATED_CONTENT_SUCCESS:
             state = state.mergeIn([action.url], {
                 isFetching: false,
+                filter: action.filter
             });
 
-            let listOfRelatedContent = state.getIn([action.url, 'relatedContent']),
+            let listOfRelatedContent = state.getIn([action.url, 'relatedContent', action.filter]),
                 response = [];
+
             if(listOfRelatedContent != undefined) {
-                response = [...listOfRelatedContent];
+                response = listOfRelatedContent;
             }
             for(let key in action.response) {
                 response = [
@@ -40,7 +43,8 @@ export default function views(state = initialState, action) {
                     key
                 ]
             };
-            state = state.setIn([action.url, 'relatedContent'], response);
+
+            state = state.setIn([action.url, 'relatedContent', action.filter], response);
 
             break;
 
@@ -53,10 +57,13 @@ export default function views(state = initialState, action) {
 
         case SET_PAGE_SELECTED :
             state.map(page => state = state.mergeIn([page.get('_id')], { current: false }));
-            state = state.mergeIn([action.pageId], {
+            state = state.mergeIn([action.pageUrl], {
                 current: true
             });
+            break;
 
+        case SET_PAGE_FILTER :
+            state = state.mergeIn([action.pageUrl, 'filter'], action.filter)
             break;
 
         default: state = state;
