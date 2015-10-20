@@ -132,13 +132,11 @@ export default class App extends Component{
      * @return {string}
      */
     getCurrentWebsite() {
-        let response = null;
-
-        this.props.pages.map(page => {
-            response = page.get('_id');
-        });
-
-        return response;
+        if(this.props.pages.size > 0) {
+            return this.props.pages.filter(
+                page => page.get('current')
+            ).first().get('_id');
+        }
     }
 
 
