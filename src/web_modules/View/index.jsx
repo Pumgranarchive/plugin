@@ -15,9 +15,9 @@ export default class View extends Component{
         let { type } = this.props, title;
 
         if(type == 'bookmarks') {
-            tite = 'Bookmarks contents';
+            title = 'Bookmarks contents';
         }
-        if(type == 'page' && this.props.searchFilter != '') {
+        else if(type == 'page' && this.props.searchFilter != '') {
             title = `Search "${this.props.searchFilter}"`;
         }
         else {
