@@ -8,12 +8,35 @@ import ctx from 'classnames';
 export default class View extends Component{
 
     /**
+     * getTitle()
+     *
+     */
+    getTitle() {
+        let { type } = this.props, title;
+
+        if(type == 'bookmarks') {
+            tite = 'Bookmarks contents';
+        }
+        if(type == 'page' && this.props.searchFilter != '') {
+            title = `Search "${this.props.searchFilter}"`;
+        }
+        else {
+            title = 'Related content';
+        }
+
+        return title;
+    }
+
+
+
+    /**
      * Render
      *
      * @return {JSX}
      */
     render(){
-        let { type, isFetching, nrbOfRelatedContent, pageInformations, current, insideWrapper } = this.props;
+        let { type, isFetching, nrbOfRelatedContent, pageInformations, current, insideWrapper } = this.props,
+            title = this.getTitle();
 
         return (
             <div className={ ctx({
@@ -29,9 +52,7 @@ export default class View extends Component{
                         { ...pageInformations } />
                 }
                 <div className={ styles.wrapper }>
-                    <h2 className={ styles.title }>{
-                        (type == 'bookmarks') ? 'Bookmarked contents' : 'Related content'
-                    }</h2>
+                    <h2 className={ styles.title }>{ title }</h2>
                     { type == 'page' &&
                         <SearchBar
                             searchRelatedContent={ ::this.props.searchRelatedContent } />
@@ -79,5 +100,6 @@ View.PropTypes = {
     current: PropTypes.bool.isRequired,
     insideWrapper: PropTypes.bool.isRequired,
     children: PropTypes.object.isRequired,
+    searchFilter: PropTypes.string.isRequired,
     pageInformations: PropTypes.object.isRequired
 }

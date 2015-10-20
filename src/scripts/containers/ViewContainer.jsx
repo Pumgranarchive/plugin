@@ -296,6 +296,7 @@ export default class ViewContainer extends Component {
                 type={ this.props.type }
                 insideWrapper={ isInsideWrapper }
                 pageInformations={ getPageInformations }
+                searchFilter={ (this.props.type == 'bookmarks' ? null : this.props.pages.get(this.props.pageUrl).get('filter')) }
                 current={ (this.props.type == 'bookmarks' ? false : this.props.pages.get(this.props.pageUrl).get('current')) }
                 hasAncestors={ hasAncestors }
                 hasParents={ hasParents }
