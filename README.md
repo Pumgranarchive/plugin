@@ -1,5 +1,14 @@
 # Pumgrana Plugin
 
+## Requirements
+- Node.js (4.0 or newer.)
+
+## Stack
+- [React.js](http://facebook.github.io/react/) for building webapps using react
+- [Redux](http://rackt.github.io/redux/index.html), a great flux implementation
+- [Babel](http://babeljs.io/) for ES6+ support
+- [Webpack](https://webpack.github.io/) module loader and bundler
+
 ## Install
 
 Just [clone](github-windows://openRepo/https://github.com/Pumgrana/plugin.git) the repo
