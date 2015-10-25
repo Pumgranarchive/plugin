@@ -14,6 +14,7 @@ const Header = ({ title, domainName, bookmarked, bookmarkPage, goTo, hasAncestor
         <span className={ styles.title }>{ title }</span>
         <div className={ styles.bookmarkIcon }>
             <BookmarkIcon
+                reverseColor={ true }
                 show={ true }
                 active={ bookmarked }
                 action={ () => bookmarkPage() } />
