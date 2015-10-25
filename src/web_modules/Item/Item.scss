@@ -35,6 +35,32 @@
         margin-left: -10%;
         position: absolute;
     }
+
+    &:nth-child(2n+1):after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 342px;    height: 10px;
+        margin-top: 34px;
+        margin-left: -30px;
+        background-color: $default-backgroundColor;
+        border: 1px solid $secondaryColor-light;
+        border-left: none;
+        border-right: none;
+        box-shadow: 0 -1px 0 $secondaryColor-light;
+    }
+
+    &:nth-child(2n+2) {
+        margin-top: 48px;
+    }
+
+    &:nth-child(4) {
+        margin-top: 0;
+    }
+
+    &:last-child::after {
+        display: none;
+    }
 }
 
 .domainName {

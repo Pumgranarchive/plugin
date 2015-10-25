@@ -301,16 +301,15 @@ export default class ViewContainer extends Component {
                 hasAncestors={ hasAncestors }
                 hasParents={ hasParents }
                 nrbOfRelatedContent={ relatedContent.length }
-                isFetching={ isFetching } >
-            {
-                relatedContent.map((item, index) => (
-                    <Item
-                        key={ index }
-                        { ...item }
-                        clickOnRelatedContent={ ::this.clickOnRelatedContent }
-                        bookmarkRelatedContent={ ::this.bookmarkRelatedContent } />
-                ))
-            } </View>
+                isFetching={ isFetching } > {
+                    relatedContent.map((item, index) => (
+                        <Item
+                            key={ index }
+                            { ...item }
+                            clickOnRelatedContent={ ::this.clickOnRelatedContent }
+                            bookmarkRelatedContent={ ::this.bookmarkRelatedContent } />
+                    ))}
+            </View>
         );
     }
 
