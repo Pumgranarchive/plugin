@@ -1,22 +1,11 @@
 import React, { Component } from 'react';
 import styles from './LoadMoreButton';
 
-export default class LoadMoreButton extends Component {
+const LoadMoreButton = ({ action, status }) => (
+    <div onClick={ () => action() }
+         className={ styles.button }>
+         { status == 'loading' ? 'Loading ...' : 'Load more' }
+    </div>
+);
 
-    /**
-     * Render
-     *
-     * @return {JSX}
-     */
-    render() {
-        let { status } = this.props;
-
-        return (
-            <div onClick={ () => this.props.action() }
-                 className={ styles.button }>
-                 { status == 'loading' ? 'Loading ...' : 'Load more' }
-            </div>
-        )
-    }
-
-}
+export default LoadMoreButton;
