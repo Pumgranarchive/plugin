@@ -11,7 +11,6 @@ var initialState = Immutable.fromJS({
         title: document.title,
         description: '',
         domainName: location.hostname,
-        tags: [],
         bookmarked: false,
         visited: false
     }

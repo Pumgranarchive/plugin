@@ -45,7 +45,7 @@ export default class Item extends Component{
      * @return {JSX}
      */
     render() {
-        let { title, description, domainName, tags, bookmarked, visited, _id } = this.props;
+        let { title, description, domainName, bookmarked, visited, _id } = this.props;
 
         return (
             <div onMouseOver={ ::this.onHover }
@@ -59,9 +59,6 @@ export default class Item extends Component{
                     <span className={ styles.domainName }>{ domainName }</span>
                     <h2 className={ styles.title }>{ title }</h2>
                     <p className={ styles.description }>{ description } </p>
-                    { tags.map((tag, i) => { return (
-                        <span className={ styles.tag } key={ i }>{ tag }</span>
-                    ); }) }
                 </div>
             </div>
         );
