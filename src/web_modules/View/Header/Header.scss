@@ -16,7 +16,7 @@
 	position: absolute;
 	top: 12px;
 	width: 11px;	height: 20px;
-	background-image: image-url('back.svg');
+	background-image: image-url('back.svg', '../');
 	cursor: pointer;
 	z-index: $zIndex-max;
 

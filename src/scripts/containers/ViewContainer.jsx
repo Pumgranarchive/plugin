@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bookmarkRelatedContent, getRelatedContent, setPageSelected, setPageFilter } from 'actions/RelatedContentActions';
 import View from 'View/';
-import Item from 'Item/';
+import Item from 'View/Item/';
 var timer;
 
 @connect(state => ({

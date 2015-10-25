@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import Header from 'Header/';
+import Header from './Header/';
 import LoadMoreButton from './LoadMoreButton/';
-import SearchBar from 'SearchBar/';
+import SearchBar from './SearchBar/';
 import styles from './View.scss';
 import ctx from 'classnames';
 
