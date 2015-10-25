@@ -10,14 +10,14 @@ export default class ToogleButton extends Component{
      * @return {JSX}
      */
     render(){
-        let { state } = this.props;
+        let { state, noResultats } = this.props;
 
         return (
             <button
                 className={ ctx({
-                    [styles.openButton]: (state == 'open'),
-                    [styles.closedButton]: (state == 'close'),
-                    [styles.disabledButton]: (state == 'disabled')
+                    [styles.openButton]: state == 'open',
+                    [styles.closedButton]: state == 'close',
+                    [styles.disabledButton]: !noResultats
                 }) }
                 onClick={ () => this.props.action() }>
             </button>

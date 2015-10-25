@@ -35,6 +35,5 @@
 }
 
 .disabledButton {
-    composes: commonButton;
     background-color: $secondaryColor-medium;
 }

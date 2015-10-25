@@ -10,7 +10,7 @@ export default class Wrapper extends Component {
      * @return {jsx}
      */
     render() {
-        let { state } = this.props;
+        let { state, noResultats } = this.props;
         let zIndex = {};
         if(__DEBUG__){
             zIndex = {
@@ -20,8 +20,9 @@ export default class Wrapper extends Component {
 
         return (
             <div className={ ctx({
-                [styles.enabledWrapper]: (state == 'open'),
-                [styles.disabledWrapper]: (state == 'close')
+                [styles.openedWrapper]: state == 'open',
+                [styles.closedWrapper]: state == 'close',
+                [styles.disabledWrapper]: !noResultats
             }) } style={ zIndex }>
                 { this.props.children }
             </div>

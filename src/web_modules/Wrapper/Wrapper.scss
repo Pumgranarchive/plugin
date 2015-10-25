@@ -18,12 +18,16 @@
     transition: right ease .3s;
 }
 
-.enabledWrapper {
+.openedWrapper {
     composes: commonWrapper;
     right: 0;
 }
 
-.disabledWrapper {
+.closedWrapper {
     composes: commonWrapper;
     right: ($container-width * -1) + 5px;
+}
+
+.disabledWrapper {
+    border-color: $secondaryColor-medium;
 }

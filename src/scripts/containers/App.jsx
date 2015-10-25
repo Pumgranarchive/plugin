@@ -140,6 +140,16 @@ export default class App extends Component{
     }
 
 
+    /**
+     * getNbreOfRelatedContent()
+     *
+     * @return {integer}
+     */
+    getNbreOfRelatedContent() {
+        return this.props.relatedContent.size - 1;
+    }
+
+
 
     /**
      * Render <Wrapper /> component
@@ -150,7 +160,8 @@ export default class App extends Component{
         let pages = this.getPages(),
             currentWebsite = this.getCurrentWebsite(),
             stateViewBookmarks = this.getStateViewBookmarks(),
-            nbreOfBookmarkedRelatedContent = this.getNbreOfBookmarkedRelatedContent();
+            nbreOfBookmarkedRelatedContent = this.getNbreOfBookmarkedRelatedContent(),
+            getNbreOfRelatedContent = this.getNbreOfRelatedContent();
 
         return (
             <div>
@@ -160,8 +171,9 @@ export default class App extends Component{
                 <Overlay
                     state={ this.state.stateToogle }
                     toogleAction={ ::this.toogleAction } />
-                <Wrapper state={ this.state.stateToogle }>
+                <Wrapper state={ this.state.stateToogle } noResultats={ getNbreOfRelatedContent } >
                     <ToogleButton
+                        noResultats={ getNbreOfRelatedContent }
                         state={ this.state.stateToogle }
                         action={ ::this.toogleAction } />
                     <Views>
