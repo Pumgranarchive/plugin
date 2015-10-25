@@ -1,19 +1,10 @@
 import React, { Component } from 'react';
 import styles from './Views';
 
-export default class Views extends Component{
+const Views = (props) => (
+    <div className={ styles.container }>
+        { props.children }
+    </div>
+);
 
-    /**
-     * Render
-     *
-     * @return {JSX}
-     */
-    render(){
-        return (
-            <div className={ styles.container }>
-                { this.props.children }
-            </div>
-        );
-    }
-
-}
+export default Views;
