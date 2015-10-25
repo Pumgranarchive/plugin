@@ -2,31 +2,15 @@ import React, {Component, PropTypes} from 'react';
 import ctx from 'classnames';
 import styles from './ToogleButton.scss';
 
-export default class ToogleButton extends Component{
+const ToogleButton = ({ state, noResultats }) => (
+    <button
+        className={ ctx({
+            [styles.openButton]: state == 'open',
+            [styles.closedButton]: state == 'close',
+            [styles.disabledButton]: !noResultats
+        }) }
+        onClick={ () => this.props.action() }>
+    </button>
+);
 
-    /**
-     * Render
-     *
-     * @return {JSX}
-     */
-    render(){
-        let { state, noResultats } = this.props;
-
-        return (
-            <button
-                className={ ctx({
-                    [styles.openButton]: state == 'open',
-                    [styles.closedButton]: state == 'close',
-                    [styles.disabledButton]: !noResultats
-                }) }
-                onClick={ () => this.props.action() }>
-            </button>
-        );
-    }
-
-}
-
-ToogleButton.PropTypes = {
-    action: PropTypes.func.isRequired,
-    show: PropTypes.bool.isRequired
-};
+export default ToogleButton;
