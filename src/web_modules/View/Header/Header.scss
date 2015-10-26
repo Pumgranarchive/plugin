@@ -9,6 +9,10 @@
 	position: relative;
 	top: -3px;
 	margin-bottom: 29px;
+
+    &:not(*:root) {
+        top: -5px;
+    }
 }
 
 .back, .next{
@@ -48,6 +52,10 @@
 	top: -2px;
 	font-size: 15px;
 	color: $secondaryColor-medium;
+
+    &:not(*:root) {
+        top: 1px;
+    }
 }
 
 .bookmarkIcon {
