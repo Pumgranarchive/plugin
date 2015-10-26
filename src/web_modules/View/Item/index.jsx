@@ -48,8 +48,8 @@ export default class Item extends Component{
         let { title, description, domainName, bookmarked, visited, _id } = this.props;
 
         return (
-            <div onMouseOver={ ::this.onHover }
-                 onMouseOut={ ::this.onHover }
+            <div onMouseEnter={ ::this.onHover }
+                 onMouseLeave={ ::this.onHover }
                  className={ styles.container }>
                 <BookmarkIcon
                     action={ ::this.bookmarkRelatedContent }
