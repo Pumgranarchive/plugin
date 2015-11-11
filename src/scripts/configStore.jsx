@@ -4,18 +4,22 @@ import * as reducers from 'reducers/';
 
 let cs = createStore;
 if(__DEBUG__){
-    cs = compose(require('redux-devtools').devTools())(createStore);
+    cs = compose(
+        require('DevTools').instrument(),
+    )(createStore);
 }
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(cs);
+const store = createStoreWithMiddleware(combineReducers({
+    ...reducers
+}));
 
 export default function configureStore() {
-    const store = createStoreWithMiddleware(combineReducers(reducers));
-
-    if (module.hot) {
-        module.hot.accept('./reducers/index', () =>
-            store.replaceReducer(require('./reducers/index'))
-        );
+    if (__DEV__) {
+        module.hot.accept('./reducers/index', () => {
+            const nextRootReducer = require('./reducers/index');
+            store.replaceReducer(nextRootReducer);
+        });
     }
 
     return store;

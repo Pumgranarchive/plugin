@@ -1,42 +1,39 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import configureStore from 'configStore';
 import App from 'App';
+import configureStore from 'configStore';
 const store = configureStore();
 
 export default class Root extends Component{
 
     /**
-     * Render redux-devtools
+     * _renderDevTools()
      *
-     * @return {JSX} Render <DebugPanel />
+     * @return {jsx}
      */
-    renderDevTools(){
+    _renderDevTools(){
         if(__DEBUG__){
-            const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
-
-            return (
-                <DebugPanel top left bottom>
-                    <DevTools store={ store } monitor={ LogMonitor } />
-                </DebugPanel>
-            );
+            const DevTools = require('./DevTools');
+            return ( <DevTools /> );
         }
     }
 
 
 
     /**
-     * Render
+     * render()
      *
-     * @return {JSX} Render <Provider /> component
+     * @return {jsx}t
      */
     render(){
         return (
             <div>
                 <Provider store={ store }>
-                    <App />
+                    <div>
+                        <App />
+                        { this._renderDevTools() }
+                    </div>
                 </Provider>
-                { this.renderDevTools() }
             </div>
         );
     }
