@@ -15,10 +15,6 @@
 .enabledContainer {
     composes: commonContainer;
     opacity: 1;
-
-    &:hover {
-
-    }
 }
 
 .disabledContainer {

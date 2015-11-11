@@ -9,23 +9,24 @@
     position: fixed;
     z-index: $zIndex-max;
     top: 0;
+    right: ($container-width * -1) + 5px;
     height: 100%;
     width: $container-width;
     box-sizing: border-box;
     background: $default-backgroundColor;
     border-left: 5px solid $primaryColor;
     color: $default-textColor;
-    transition: right ease .3s;
+    transition: transform ease .3s;
 }
 
 .openedWrapper {
     composes: commonWrapper;
-    right: 0;
+    transform: translateX($container-width * -1 + 5px);
 }
 
 .closedWrapper {
     composes: commonWrapper;
-    right: ($container-width * -1) + 5px;
+    transform: translateX(0);
 }
 
 .disabledWrapper {
