@@ -178,8 +178,7 @@ export default class App extends Component{
                         action={ ::this.toogleAction } />
                     <Views>
                         <ViewBookmarks state={ ( this.state.showViewBookmarks ? 'enable' : 'disabled' ) }>
-                            <ViewContainer
-                                type='bookmarks' />
+                            <ViewContainer type='bookmarks' />
                         </ViewBookmarks>
                     {
                         pages.map((page, index) => (

@@ -1,25 +1,17 @@
 import React, { Component, PropTypes } from 'react';
+import cx from 'classnames';
 import BookmarkIcon from 'BookmarkIcon/';
 import styles from './Item.scss';
 
 export default class Item extends Component{
 
     /**
-     * State
-     *
-     */
-    state = {
-        hover: false
-    };
-
-
-
-    /**
-     * Hover
+     * onHover()
      *
      * @return {string} type
      * @return {func} setState()
      */
+    state = { hover: false };
     onHover(type) {
         return this.setState({
             hover: !this.state.hover
@@ -31,7 +23,7 @@ export default class Item extends Component{
     /**
      * bookmarkRelatedContent()
      *
-     *
+     * @return {func} bookmarkRelatedContent()
      */
     bookmarkRelatedContent() {
         return this.props.bookmarkRelatedContent(this.props._id);
@@ -40,17 +32,20 @@ export default class Item extends Component{
 
 
     /**
-     * Render
+     * render()
      *
-     * @return {JSX}
+     * @return {jsx}
      */
     render() {
-        let { title, description, domainName, bookmarked, visited, _id } = this.props;
+        let { title, description, domainName, bookmarked, visited, _id, paginated } = this.props;
 
         return (
             <div onMouseEnter={ ::this.onHover }
                  onMouseLeave={ ::this.onHover }
-                 className={ styles.container }>
+                 className={ cx({
+                     [styles.paginatedContainer]: paginated,
+                     [styles.notPaginatedContainer]: !paginated
+                 }) }>
                 <BookmarkIcon
                     action={ ::this.bookmarkRelatedContent }
                     active={ bookmarked }
@@ -73,6 +68,7 @@ Item.PropTypes = {
     domainName: PropTypes.string.isRequired,
     tags: PropTypes.array.isRequired,
     bookmarked: PropTypes.bool.isRequired,
+    paginated: PropTypes.bool.isRequired,
     visited: PropTypes.bool.isRequired,
     bookmarkRelatedContent: PropTypes.func.isRequired
 }

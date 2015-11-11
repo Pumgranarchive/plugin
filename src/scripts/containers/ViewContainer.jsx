@@ -306,6 +306,7 @@ export default class ViewContainer extends Component {
                         <Item
                             key={ index }
                             { ...item }
+                            paginated={( this.props.type == 'bookmarks' ? false : true )}
                             clickOnRelatedContent={ ::this.clickOnRelatedContent }
                             bookmarkRelatedContent={ ::this.bookmarkRelatedContent } />
                     ))}

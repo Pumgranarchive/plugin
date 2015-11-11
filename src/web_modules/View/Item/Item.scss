@@ -5,7 +5,7 @@
 
 @import 'core';
 
-.container{
+.commonContainer {
     $extraSize: 6%;
 
     display: block;
@@ -35,6 +35,10 @@
         margin-left: -10%;
         position: absolute;
     }
+}
+
+.paginatedContainer {
+    composes: commonContainer;
 
     &:nth-child(2n+1):after {
         content: '';
@@ -61,6 +65,10 @@
     &:last-child::after {
         display: none;
     }
+}
+
+.notPaginatedContainer {
+    composes: commonContainer;
 }
 
 .domainName {
