@@ -16,6 +16,8 @@
     height: calc(100% - #{$footer-height});
     padding: $container-padding $container-padding 0;
     background: $default-backgroundColor;
+    -webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .disabledContainer {
