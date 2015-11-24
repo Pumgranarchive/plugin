@@ -10,15 +10,19 @@ export default class View extends Component{
     /**
      * getTitle()
      *
+     * @return {string} title
      */
     getTitle() {
-        let { type } = this.props, title;
+        let { type, searchFilter } = this.props, title;
 
         if(type == 'bookmarks') {
             title = 'Bookmarks contents';
         }
-        else if(type == 'page' && this.props.searchFilter != '') {
-            title = `Search "${this.props.searchFilter}"`;
+        else if(type == 'page' &&
+                this.props.searchFilter !== null &&
+                this.props.searchFilter !== undefined &&
+                this.props.searchFilter != '') {
+            title = `Search "${searchFilter}"`;
         }
         else {
             title = 'Related content';
@@ -32,7 +36,7 @@ export default class View extends Component{
     /**
      * Render
      *
-     * @return {JSX}
+     * @return {jsx}
      */
     render(){
         let { type, isFetching, nrbOfRelatedContent, pageInformations, current, insideWrapper } = this.props,
