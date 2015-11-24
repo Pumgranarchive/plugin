@@ -144,9 +144,14 @@ export default class ViewContainer extends Component {
         let page = this.props.pages.get(relatedContentId);
 
         if(page === undefined) {
-            return this.props.dispatch(getRelatedContent({
-                url: relatedContentId
-            }));
+            if(window.location.protocol == relatedContentId.substring(0, 5)) {
+                return this.props.dispatch(getRelatedContent({
+                    url: relatedContentId
+                }));
+            }
+            else {
+                window.location.href = relatedContentId;
+            }
         }
         else {
             return this.props.dispatch(setPageSelected(relatedContentId));
