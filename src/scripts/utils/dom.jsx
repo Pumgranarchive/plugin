@@ -1,30 +1,23 @@
 /**
-  * DOM (a jQuery like library)
-  * Inspired by the code of bloodyowl (https://gist.github.com/bloodyowl/144804438bf5bce8120a#file-core-js)
+  * A jQuery like library
   *
+  * @return {object}
   */
+export default {
 
-// Select an element
-export function select(value : []){
-    let selector = [];
+    // Select an element
+    select: (...elements) => {
+        elements.map(element => document.querySelector(element))
+    },
 
-    for(let element of value.split(',')){
-        selector = [
-            ...document.querySelector(element.replace(/\s+/g, '')),
-            element
-        ];
+    // Style an element
+    css: (styles) => {
+        this.map(element => {
+            for(let key in styles) {
+                element.style[key] = styles[key];
+            }
+        });
+        return this;
     }
 
-    return selector;
-}
-
-// Handle css
-export function css(object){
-    this.forEach((element) => {
-        for(let key in object) {
-            element.style[key] = object[key];
-        }
-    });
-
-    return this;
 }
