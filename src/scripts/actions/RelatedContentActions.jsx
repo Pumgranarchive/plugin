@@ -1,11 +1,5 @@
 import * as types from 'constants/ActionTypes';
-let WebAPI;
-if(__DEV__){
-    WebAPI = require('utils/WebAPI.jsx');
-}
-else{
-    WebAPI = require('utils/api.ts').WebAPI;
-}
+import WebAPI from 'utils/WebAPI';
 
 
 
@@ -13,7 +7,7 @@ else{
  * Get related content
  *
  * @param {object} params
- * @return {object} promise
+ * @return {object}
  */
 export function getRelatedContent(
     {
