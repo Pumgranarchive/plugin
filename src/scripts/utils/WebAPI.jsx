@@ -7,16 +7,15 @@ export default {
 	/**
 	 * Get related contet
 	 *
-	 * @params {object} params
-	 * @return Promise
+	 * @param {object}
+	 * @return {promise}
 	 */
 	getRelatedContent: ({url, offset, filter}) => {
 		return new Promise((resolve, reject) => {
-			fetch(`${protocol}${api}linkedcontent/${filter == '' ? 'from_content' : 'search'}/${encodeURIComponent(url)}${filter == '' ? filter : ''}`).then(response => {
-				return response.json();
-			}).then(response => {
-				resolve(response);
-			}).catch(error => reject(error));
+			fetch(`${protocol}${api}linkedcontent/${filter == '' ? 'from_content' : 'search'}/${encodeURIComponent(url)}${filter == '' ? filter : ''}`)
+			  .then(response => response.json())
+			  .then(data => resolve(data.links))
+			  .catch(errors => reject(errors));
 		});
 	}
 
