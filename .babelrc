@@ -2,7 +2,7 @@
   "stage": 0,
   "env": {
     "production": {
-      "optional": ["runtime", "optimisation.react.constantElements", "optimisation.react.inlineElements"]
+      "optional": ["runtime", "optimisation.react.constantElements"]
     },
     "development": {
       "plugins": ["react-transform"],
