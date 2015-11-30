@@ -31,7 +31,7 @@ export default function relatedContent(state = initialState, action) {
                     }
                 };
             });
-            state = state.merge(action.response);
+            state = state.merge(Immutable.fromJS(data));
             break;
 
         case BOOKMARK_RELATED_CONTENT:

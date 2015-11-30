@@ -37,10 +37,10 @@ export default function views(state = initialState, action) {
             if(listOfRelatedContent != undefined) {
                 response = listOfRelatedContent;
             }
-            for(let key in action.response) {
+            for(let item of action.response) {
                 response = [
                     ...response,
-                    key
+                    item.content_uri
                 ]
             };
 
