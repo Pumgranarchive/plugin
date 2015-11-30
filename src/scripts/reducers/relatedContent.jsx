@@ -19,6 +19,18 @@ var initialState = Immutable.fromJS({
 export default function relatedContent(state = initialState, action) {
     switch(action.type) {
         case GET_RELATED_CONTENT_SUCCESS:
+            let data = {};
+            action.response.map(relatedContent => {
+                data = {...data,
+                    [relatedContent.content_uri]: {
+                        title: relatedContent.content_title,
+                        description: relatedContent.content_summary,
+                        domainName: relatedContent.content_uri,
+                        bookmarked: false,
+                        visited: false
+                    }
+                };
+            });
             state = state.merge(action.response);
             break;
 
