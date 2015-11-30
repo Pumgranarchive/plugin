@@ -1,23 +1,26 @@
-/**
-  * A jQuery like library
-  *
-  * @return {object}
-  */
-export default {
+/*
+ * Select a DOM element
+ *
+ * @params {array} elements
+ * @return {array}
+ */
+export function select (...elements) {
+    return elements.map(element => document.querySelector(element))
+};
 
-    // Select an element
-    select: (...elements) => {
-        elements.map(element => document.querySelector(element))
-    },
 
-    // Style an element
-    css: (styles) => {
-        this.map(element => {
-            for(let key in styles) {
-                element.style[key] = styles[key];
-            }
-        });
-        return this;
-    }
 
+/*
+ * Stylize an element
+ *
+ * @params {object} styles
+ * @return {array}
+ */
+export function css (styles) {
+    this.map(element => {
+        for(let key in styles) {
+            element.style[key] = styles[key];
+        }
+    });
+    return this;
 }
