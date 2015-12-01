@@ -5,6 +5,7 @@ import {
     GET_RELATED_CONTENT_ERROR,
     BOOKMARK_RELATED_CONTENT
 } from 'constants/ActionTypes';
+import { getDomainName } from 'utils/url';
 
 var initialState = Immutable.fromJS({
     [location.href]: {
@@ -25,7 +26,7 @@ export default function relatedContent(state = initialState, action) {
                     [relatedContent.content_uri]: {
                         title: relatedContent.content_title,
                         description: relatedContent.content_summary,
-                        domainName: relatedContent.content_uri,
+                        domainName: getDomainName(relatedContent.content_uri),
                         bookmarked: false,
                         visited: false
                     }
