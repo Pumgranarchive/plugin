@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getRelatedContent } from 'actions/RelatedContentActions';
+import { select, css } from 'utils/dom';
 import Wrapper from 'Wrapper/';
 import Footer from 'Footer/';
 import ToogleButton from 'ToogleButton/';
@@ -68,6 +69,21 @@ export default class App extends Component{
      * @return {func} setState
      */
     toogleAction() {
+        if(this.props.pages.size < 2) {
+            if(this.state.stateToogle == 'open') {
+                select('html, body')::css({
+                    height: 'inherit',
+                    overflow: 'auto'
+                });
+            }
+            else {
+                select('html, body')::css({
+                    height: '100vh',
+                    overflow: 'hidden'
+                });
+            }
+        }
+
         return this.setState({
             stateToogle: (this.state.stateToogle == 'open' ? 'close' : 'open')
         });
