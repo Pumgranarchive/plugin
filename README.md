@@ -1,7 +1,7 @@
 # Pumgrana Plugin
 
 ## Requirements
-- Node.js (4.0 or newer.)
+- Node.js (5.0 or newer.)
 
 ## Stack
 - [React.js](http://facebook.github.io/react/) for building webapps using react
