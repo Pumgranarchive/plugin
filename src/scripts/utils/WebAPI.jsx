@@ -12,7 +12,7 @@ export default {
 	 */
 	getRelatedContent: ({url, offset, filter}) => {
 		return new Promise((resolve, reject) => {
-			fetch(`${protocol}${api}linkedcontent/${filter == '' ? 'from_content' : 'search'}/${encodeURIComponent(url)}${filter == '' ? filter : ''}`)
+			fetch(`${protocol}${api}linkedcontent/${filter == '' ? 'from_content' : 'search'}/${encodeURIComponent(url)}${filter != '' ? `/${filter}` : ``}`)
 			  .then(response => response.json())
 			  .then(data => resolve((data.links !== null ? data.links : [])))
 			  .catch(errors => reject(errors));
