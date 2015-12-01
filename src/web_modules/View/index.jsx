@@ -83,9 +83,10 @@ export default class View extends Component{
                 </div>
                 { type == 'page' && nrbOfRelatedContent != 0 &&
                     <footer className={ styles.footer }>
-                        <LoadMoreButton
-                            status={ (isFetching ? 'loading' : 'loaded') }
-                            action={ ::this.props.loadMoreRelatedContent } />
+                        { //<LoadMoreButton
+                          // status={ (isFetching ? 'loading' : 'loaded') }
+                          // action={ ::this.props.loadMoreRelatedContent } />
+                        }
                     </footer>
                 }
             </div>
