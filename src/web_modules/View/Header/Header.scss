@@ -52,6 +52,7 @@
 	top: -2px;
 	font-size: 15px;
 	color: $secondaryColor-medium;
+	font-family: $default-fontFamily;
 
     &:not(*:root) {
         top: 1px;
