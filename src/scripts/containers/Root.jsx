@@ -13,7 +13,7 @@ export default class Root extends Component{
      */
     _renderDevTools(){
         if(__DEBUG__){
-            const DevTools = require('./DevTools');
+            const DevTools = require('./DevTools').default;
             return ( <DevTools /> );
         }
     }

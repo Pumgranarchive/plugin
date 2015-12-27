@@ -11,11 +11,7 @@ import ViewBookmarks from 'ViewBookmarks/';
 import Overlay from 'Overlay/';
 import Iframe from 'Iframe/';
 
-@connect(state => ({
-    pages: state.pages,
-    relatedContent: state.relatedContent
-}))
-export default class App extends Component{
+class App extends Component{
 
     /**
      * State
@@ -213,3 +209,8 @@ export default class App extends Component{
     }
 
 }
+
+export default connect(state => ({
+    pages: state.pages,
+    relatedContent: state.relatedContent
+}))(App);

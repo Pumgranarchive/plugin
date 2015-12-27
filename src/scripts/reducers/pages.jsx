@@ -1,11 +1,13 @@
 import Immutable from 'immutable';
-import {
+import types from 'constants/ActionTypes';
+
+const {
     GET_RELATED_CONTENT_REQUEST,
     GET_RELATED_CONTENT_SUCCESS,
     GET_RELATED_CONTENT_ERROR,
     SET_PAGE_SELECTED,
     SET_PAGE_FILTER
-} from 'constants/ActionTypes';
+} = types;
 
 var initialState = Immutable.fromJS({});
 

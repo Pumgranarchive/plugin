@@ -5,11 +5,7 @@ import View from 'View/';
 import Item from 'View/Item/';
 var timer;
 
-@connect(state => ({
-    pages: state.pages,
-    relatedContent: state.relatedContent
-}))
-export default class ViewContainer extends Component {
+class ViewContainer extends Component {
 
     /**
      * getPageInformations
@@ -325,3 +321,8 @@ ViewContainer.PropTypes = {
     pageUrl: PropTypes.string,
     pages: PropTypes.object.isRequired
 };
+
+export default connect(state => ({
+    pages: state.pages,
+    relatedContent: state.relatedContent
+}))(ViewContainer);

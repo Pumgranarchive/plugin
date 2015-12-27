@@ -1,21 +1,19 @@
 {
-  "stage": 0,
+  "presets": ["es2015", "react", "stage-0"],
   "env": {
-    "production": {
-      "optional": ["runtime", "optimisation.react.constantElements"]
-    },
     "development": {
-      "plugins": ["react-transform"],
-        "extra": {
-          "react-transform": [{
-            "target": "react-transform-hmr",
+      "plugins": [
+        ["react-transform", {
+          "transforms": [{
+            "transform": "react-transform-hmr",
             "imports": ["react"],
             "locals": ["module"]
-        }, {
-          "target": "react-transform-catch-errors",
-          "imports": ["react", "redbox-react"]
+          }, {
+            "transform": "react-transform-catch-errors",
+            "imports": ["react", "redbox-react"]
+          }]
         }]
-      }
+      ]
     }
-  },
+  }
 }

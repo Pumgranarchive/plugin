@@ -1,11 +1,13 @@
 import Immutable from 'immutable';
-import {
+import types from 'constants/ActionTypes';
+import { getDomainName } from 'utils/url';
+
+const {
     GET_RELATED_CONTENT_REQUEST,
     GET_RELATED_CONTENT_SUCCESS,
     GET_RELATED_CONTENT_ERROR,
     BOOKMARK_RELATED_CONTENT
-} from 'constants/ActionTypes';
-import { getDomainName } from 'utils/url';
+} = types;
 
 var initialState = Immutable.fromJS({
     [location.href]: {

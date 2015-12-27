@@ -5,7 +5,7 @@ import * as reducers from 'reducers/';
 let cs = createStore;
 if(__DEBUG__){
     cs = compose(
-        require('DevTools').instrument(),
+        require('DevTools').default.instrument(),
     )(createStore);
 }
 
@@ -17,7 +17,7 @@ const store = createStoreWithMiddleware(combineReducers({
 export default function configureStore() {
     if (__DEV__) {
         module.hot.accept('./reducers/index', () => {
-            const nextRootReducer = require('./reducers/index');
+            const nextRootReducer = require('./reducers/index').default;
             store.replaceReducer(nextRootReducer);
         });
     }
