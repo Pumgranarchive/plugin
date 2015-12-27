@@ -6,7 +6,7 @@
 ## Stack
 - [React.js](http://facebook.github.io/react/) for building webapps using react
 - [Redux](http://rackt.github.io/redux/index.html), a great flux implementation
-- [Babel](http://babeljs.io/) for ES6+ support
+- [Babel](http://babeljs.io/) `6.x.x` for ES6+ support
 - [Webpack](https://webpack.github.io/) module loader and bundler
 
 ## Install
