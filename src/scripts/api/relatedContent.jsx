@@ -1,4 +1,4 @@
-import 'whatwg-fetch';
+import fetch from 'utils/fetch';
 import { api } from 'config';
 const protocol = window.location.protocol;
 
@@ -21,8 +21,7 @@ export default {
 			}
 			else {
 				fetch(`${protocol}${api}linkedcontent/${filter == '' ? 'from_content' : 'search'}/${encodeURIComponent(url)}${filter != '' ? `/${filter}` : ``}`)
-				  .then(response => response.json())
-				  .then(data => resolve((data.links !== null ? data.links : [])))
+				  .then(response => resolve((response.links !== null ? response.links : [])))
 				  .catch(errors => reject(errors));
 			}
 		});

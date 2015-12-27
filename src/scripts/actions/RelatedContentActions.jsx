@@ -1,5 +1,5 @@
 import types from 'constants/ActionTypes';
-import WebAPI from 'utils/WebAPI';
+import WebAPI from './../api/relatedContent';
 
 
 
