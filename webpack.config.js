@@ -3,10 +3,10 @@ var path = require('path'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     NyanProgressPlugin = require('nyan-progress-webpack-plugin');
 
-var dev = (process.env.NODE_ENV === 'DEV' ? true : false),
-    debug = (process.env.DEBUG === 'true' ? true : false),
-    chrome = (process.env.NODE_ENV === 'CHROME' ? true : false),
-    production = (chrome ? true : false);
+var dev = process.env.NODE_ENV === 'DEV' ? true : false,
+    debug = process.env.DEBUG === 'true' ? true : false,
+    chrome = process.env.NODE_ENV === 'CHROME' ? true : false,
+    production = chrome ? true : false;
 
 module.exports = {
     devTools: (dev ? 'eval-source-map' : ''),
@@ -16,11 +16,16 @@ module.exports = {
         hot: true,
         historyApiFallback: true
     },
-    entry: production ? ['./src/index'] :
-        ['webpack-hot-middleware/client', './src/index'],
+    entry: production ? {
+        'app.js': './src/app',
+        'popup.js': './src/popup'
+    } : {
+        'app.js': ['webpack-hot-middleware/client', './src/app'],
+        'popup.js': ['webpack-hot-middleware/client', './src/popup']
+    },
     output: {
         path: chrome ? path.join(__dirname, 'chrome_extension') : path.join(__dirname, '__build__'),
-        filename: 'app.js',
+        filename: '[name]',
         publicPath: (chrome ? 'chrome-extension://__MSG_@@extension_id__/' : '/__build__/')
     },
     resolve: {
