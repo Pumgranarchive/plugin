@@ -1,11 +1,13 @@
 import { getDomainName } from 'utils/url';
 
-export const blacklist = [
+const blacklist = [
     'google.com',
+    'www.google.fr',
     'mail.google.com',
     'netflix.com',
     'localhost'
 ];
+
 
 
 /*
