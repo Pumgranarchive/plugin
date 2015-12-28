@@ -69,11 +69,15 @@ module.exports = {
         {
             test: /.*\.(otf|ttf|woff)$/i,
             loader: 'url?limit=1500&name=[name].[ext]'
+        },
+        {
+            test: /\.html?$/,
+            loader: 'file?name=[name].[ext]'
         }]
     },
     plugins: [
         new NyanProgressPlugin(),
-        new ExtractTextPlugin('style.css', {disable: !production}),
+        new ExtractTextPlugin('[name].css', {disable: !production}),
         new webpack.DefinePlugin({
            __PROD__: production,
            __DEV__: dev,
@@ -97,5 +101,4 @@ module.exports = {
             require('postcss-initial')
         ];
     }
-
 };

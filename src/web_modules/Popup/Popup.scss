@@ -1,0 +1,27 @@
+/**
+ * Popup component style
+ *
+ */
+
+@import 'core';
+
+.container {
+    margin: 10px;
+}
+
+.button {
+    width: 199px;
+    padding: 13px 25px 12px;
+    margin: 6px 20px;
+    background: $primaryColor;
+    border: 0;
+    border-radius: 2px;
+    color: white;
+    font-size: 13px;
+    font-family: 'PT Sans';
+    cursor: pointer;
+
+    &:hover {
+        background: mix(white, $primaryColor, 60%);
+    }
+}

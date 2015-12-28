@@ -67,12 +67,10 @@ class App extends Component{
     toogleViewBookmarks() {
         let response;
 
-        if(this.state.showViewBookmarks || this.getNbreOfBookmarkedRelatedContent() == 0) {
+        if(this.state.showViewBookmarks || this.getNbreOfBookmarkedRelatedContent() == 0)
             response = false;
-        }
-        else {
+        else
             response = true;
-        }
 
         return this.setState({
             showViewBookmarks: response
