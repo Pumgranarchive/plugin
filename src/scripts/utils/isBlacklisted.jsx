@@ -1,4 +1,5 @@
 import { getDomainName } from 'utils/url';
+import types from 'constants/ActionTypes';
 
 const blacklist = [
     'google.com',
@@ -8,18 +9,18 @@ const blacklist = [
     'localhost'
 ];
 
-
-
 /*
  * isBlacklisted()
  *
  * @param {string} url
  * @return {bool}
  */
-const isBlacklisted = (url) => {
-    if(blacklist.indexOf(getDomainName(url)) >= 0) {
+export default (url) => {
+    const localBlacklist = localStorage.getItem('pumgrana');
+    if(localBlacklist &&
+      (localBlacklist === types.DISABLE_FOR_THIS_WEBSITE ||
+      (localBlacklist.split(';')[0] === types.DISABLE_FOR_THIS_PAGE) && localBlacklist.split(';')[1] == location.href)) {
         return true;
     }
-    return false;
+    return blacklist.includes(getDomainName(url))
 };
-export default isBlacklisted;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import types from 'constants/ActionTypes';
 import { getRelatedContent } from 'actions/RelatedContentActions';
 import { select, css } from 'utils/dom';
 import Wrapper from 'Wrapper/';
@@ -13,13 +14,34 @@ import Iframe from 'Iframe/';
 
 class App extends Component{
 
+    state = {
+        state: 'close',
+        showViewBookmarks: false
+    }
+
+
+
     /**
-     * State
+     * Connect app.js to popup.js
+     * with chrome.runtime.onMessage
      *
      */
-    state = {
-        stateToogle: 'close',
-        showViewBookmarks: false
+    componentDidMount() {
+        chrome.runtime.onMessage.addListener(action => {
+            switch (action.type) {
+                case types.DISABLE_FOR_THIS_PAGE: // Set localStorage
+                    localStorage.setItem('pumgrana', `${types.DISABLE_FOR_THIS_PAGE};${location.href}`);
+                    break;
+
+                case types.DISABLE_FOR_THIS_WEBSITE: // Set localStorage
+                    localStorage.setItem('pumgrana', types.DISABLE_FOR_THIS_WEBSITE);
+                    break;
+            }
+
+            return this.setState({
+                state: 'disabled'
+            })
+        });
     }
 
 
@@ -65,8 +87,8 @@ class App extends Component{
      * @return {func} setState
      */
     toogleAction() {
-        if(this.props.pages.size < 2) {
-            if(this.state.stateToogle == 'open') {
+        if(this.props.pages.size < 2) { // no iframe
+            if(this.state.state == 'open') {
                 select('html, body')::css({
                     height: 'inherit',
                     overflow: 'auto'
@@ -81,7 +103,7 @@ class App extends Component{
         }
 
         return this.setState({
-            stateToogle: (this.state.stateToogle == 'open' ? 'close' : 'open')
+            state: (this.state.state == 'open' ? 'close' : 'open')
         });
     }
 
@@ -181,29 +203,30 @@ class App extends Component{
                     <Iframe src={ currentWebsite } />
                 }
                 <Overlay
-                    state={ this.state.stateToogle }
+                    state={ this.state.state }
                     toogleAction={ ::this.toogleAction } />
-                <Wrapper state={ this.state.stateToogle } noResultats={ getNbreOfRelatedContent } >
-                    <ToogleButton
-                        noResultats={ getNbreOfRelatedContent }
-                        state={ this.state.stateToogle }
-                        action={ ::this.toogleAction } />
-                    <Views>
-                        <ViewBookmarks state={ ( this.state.showViewBookmarks ? 'enable' : 'disabled' ) }>
-                            <ViewContainer type='bookmarks' />
-                        </ViewBookmarks>
-                    {
-                        pages.map((page, index) => (
-                            <ViewContainer
-                                key={ index }
-                                type='page'
-                                pageUrl={ page } />
-                        ))
-                    } </Views>
-                    <Footer
-                        toogleViewBookmarks={ ::this.toogleViewBookmarks }
-                        stateViewBookmarks={ stateViewBookmarks } />
-                </Wrapper>
+                { this.state.state !== 'disabled' &&
+                    <Wrapper state={ this.state.state } noResultats={ getNbreOfRelatedContent } >
+                        <ToogleButton
+                            noResultats={ getNbreOfRelatedContent }
+                            state={ this.state.state }
+                            action={ ::this.toogleAction } />
+                        <Views>
+                            <ViewBookmarks state={ ( this.state.showViewBookmarks ? 'enable' : 'disabled' ) }>
+                                <ViewContainer type='bookmarks' />
+                            </ViewBookmarks>
+                            { pages.map((page, index) => (
+                                <ViewContainer
+                                  key={ index }
+                                  type='page'
+                                  pageUrl={ page } />
+                            )) }
+                        </Views>
+                        <Footer
+                          toogleViewBookmarks={ ::this.toogleViewBookmarks }
+                          stateViewBookmarks={ stateViewBookmarks } />
+                    </Wrapper>
+                }
             </div>
         );
     }
