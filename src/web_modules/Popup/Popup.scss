@@ -20,8 +20,9 @@
     font-size: 13px;
     font-family: 'PT Sans';
     cursor: pointer;
+    outline: none;
 
     &:hover {
-        background: mix(white, $primaryColor, 60%);
+        opacity: .8;
     }
 }
