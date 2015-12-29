@@ -85,11 +85,7 @@ module.exports = {
          })
     ].concat(
         production ? [
-            new webpack.optimize.UglifyJsPlugin({
-              compress: {
-                warnings: false
-              }
-            })
+            new webpack.optimize.UglifyJsPlugin()
         ] : [
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NoErrorsPlugin()
