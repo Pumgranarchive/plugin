@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import types from 'constants/ActionTypes';
 import { getRelatedContent } from 'actions/RelatedContentActions';
 import { select, css } from 'utils/dom';
+import isBlacklisted from 'utils/isBlacklisted'
 import Wrapper from 'Wrapper/';
 import Footer from 'Footer/';
 import ToogleButton from 'ToogleButton/';
@@ -15,7 +16,7 @@ import Iframe from 'Iframe/';
 class App extends Component{
 
     state = {
-        state: 'close',
+        state: (__DEV__ || (__PROD__ && !isBlacklisted(location.href))) ? 'close' : 'disabled',
         showViewBookmarks: false
     }
 
@@ -27,7 +28,7 @@ class App extends Component{
      *
      */
     componentDidMount() {
-        chrome.runtime.onMessage.addListener(action => {
+        chrome.runtime.onMessage.addListener((action, sender, sendResponse) => {
             switch (action.type) {
                 case types.DISABLE_FOR_THIS_PAGE: // Set localStorage
                     localStorage.setItem('pumgrana', `${types.DISABLE_FOR_THIS_PAGE};${location.href}`);
@@ -35,6 +36,17 @@ class App extends Component{
 
                 case types.DISABLE_FOR_THIS_WEBSITE: // Set localStorage
                     localStorage.setItem('pumgrana', types.DISABLE_FOR_THIS_WEBSITE);
+                    break;
+
+                case types.GET_DISABLED_STATE:
+                    const disable = !(__DEV__ || (__PROD__ && !isBlacklisted(location.href)));
+                    let type = null;
+                    if(disable) {
+                        const localBlacklist = localStorage.getItem('pumgrana');
+                        if(localBlacklist && localBlacklist === types.DISABLE_FOR_THIS_WEBSITE) type = types.DISABLE_FOR_THIS_WEBSITE;
+                        else type = types.DISABLE_FOR_THIS_PAGE;
+                    }
+                    sendResponse({ disable, type });
                     break;
             }
 

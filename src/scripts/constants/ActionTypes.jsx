@@ -3,6 +3,7 @@ import constants from 'react-constants';
 export default constants([
     'DISABLE_FOR_THIS_PAGE',
     'DISABLE_FOR_THIS_WEBSITE',
+    'GET_DISABLED_STATE',
     'BOOKMARK_RELATED_CONTENT',
     'SET_PAGE_SELECTED',
     'SET_PAGE_FILTER',

@@ -7,12 +7,21 @@
 
 .container {
     margin: 10px;
+    text-align: center;
+}
+
+.logo {
+    display: inline-block;
+    width: 100px;    height: 28px;
+    margin-bottom: 6px;
+    background-image: image-url('logo.svg');
+    opacity: 1;
 }
 
 .button {
-    width: 199px;
+    width: 200px;
     padding: 13px 25px 12px;
-    margin: 6px 20px;
+    margin: 6px 14px;
     background: $primaryColor;
     border: 0;
     border-radius: 2px;
