@@ -32,10 +32,12 @@ class App extends Component{
             switch (action.type) {
                 case types.DISABLE_FOR_THIS_PAGE: // Set localStorage
                     localStorage.setItem('pumgrana', `${types.DISABLE_FOR_THIS_PAGE};${location.href}`);
+                    return this.setState({ state: 'disabled' })
                     break;
 
                 case types.DISABLE_FOR_THIS_WEBSITE: // Set localStorage
                     localStorage.setItem('pumgrana', types.DISABLE_FOR_THIS_WEBSITE);
+                    return this.setState({ state: 'disabled' })
                     break;
 
                 case types.GET_DISABLED_STATE:
@@ -49,10 +51,6 @@ class App extends Component{
                     sendResponse({ disable, type });
                     break;
             }
-
-            return this.setState({
-                state: 'disabled'
-            })
         });
     }
 
