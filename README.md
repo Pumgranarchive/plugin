@@ -1,4 +1,6 @@
 # Pumgrana Plugin
+[![Dependency Status](https://david-dm.org/Pumgrana/plugin.svg?style=flat)](https://david-dm.org/Pumgrana/plugin)
+[![devDependency Status](https://david-dm.org/Pumgrana/plugin/dev-status.svg?style=flat)](https://david-dm.org/Pumgrana/plugin#info=devDependencies)
 
 ## Requirements
 - Node.js (5.0 or newer.)
