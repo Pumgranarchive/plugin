@@ -2,9 +2,9 @@ import Immutable from 'immutable';
 import types from 'constants/ActionTypes';
 
 const {
-    GET_RELATED_CONTENT_REQUEST,
-    GET_RELATED_CONTENT_SUCCESS,
-    GET_RELATED_CONTENT_ERROR,
+    REQUEST_RELATED_CONTENT,
+    RECEIVE_RELATED_CONTENT,
+    RECEIVE_RELATED_CONTENT_FAILURE,
     SET_PAGE_SELECTED,
     SET_PAGE_FILTER
 } = types;
@@ -13,7 +13,7 @@ var initialState = Immutable.fromJS({});
 
 export default function views(state = initialState, action) {
     switch(action.type) {
-        case GET_RELATED_CONTENT_REQUEST:
+        case REQUEST_RELATED_CONTENT:
 
             state.map(page => state = state.mergeIn([page.get('_id')], { current: false }))
 
@@ -27,7 +27,7 @@ export default function views(state = initialState, action) {
             break;
 
 
-        case GET_RELATED_CONTENT_SUCCESS:
+        case RECEIVE_RELATED_CONTENT:
             state = state.mergeIn([action.url], {
                 isFetching: false,
                 filter: action.filter
@@ -51,7 +51,7 @@ export default function views(state = initialState, action) {
             break;
 
 
-        case GET_RELATED_CONTENT_ERROR :
+        case RECEIVE_RELATED_CONTENT_FAILURE :
             state = state.mergeIn([action.url], {
                 isFetching: false
             });

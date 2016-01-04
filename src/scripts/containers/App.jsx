@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import types from 'constants/ActionTypes';
-import { getRelatedContent } from 'actions/RelatedContentActions';
+import { requestRelatedContent } from 'actions/RelatedContentActions';
 import { select, css } from 'utils/dom';
 import isBlacklisted from 'utils/isBlacklisted'
 import Wrapper from 'Wrapper/';
@@ -59,10 +59,10 @@ class App extends Component{
     /**
      * Component did mount
      *
-     * @return {func} Dispatch getRelatedContent()
+     * @return {func} Dispatch requestRelatedContent()
      */
     componentWillMount() {
-        return this.props.dispatch(getRelatedContent({
+        return this.props.dispatch(requestRelatedContent({
             url: document.location.href
         }));
     }

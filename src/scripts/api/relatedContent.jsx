@@ -10,7 +10,7 @@ export default {
 	 * @param {object}
 	 * @return {promise}
 	 */
-	getRelatedContent: ({url, offset, filter}) => {
+	getDRelatedContent: ({url, offset, filter}) => {
 		return new Promise((resolve, reject) => {
 			if(__DEV__) {
 				return resolve([{
@@ -28,3 +28,11 @@ export default {
 	}
 
 };
+
+
+function* getAllProducts() {
+  while( yield take(types.GET_ALL_PRODUCTS) ) {
+    const products = yield call(api.getProducts)
+    yield put(actions.receiveProducts(products))
+  }
+}

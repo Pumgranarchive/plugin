@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bookmarkRelatedContent, getRelatedContent, setPageSelected, setPageFilter } from 'actions/RelatedContentActions';
+import { bookmarkRelatedContent, requestRelatedContent, setPageSelected, setPageFilter } from 'actions/RelatedContentActions';
 import View from 'View/';
 import Item from 'View/Item/';
 var timer;
@@ -25,11 +25,11 @@ class ViewContainer extends Component {
 
 
     /**
-     * getRelatedContent()
+     * requestRelatedContent()
      *
      * @return {array} response
      */
-    getRelatedContent() {
+    requestRelatedContent() {
         let response = [];
 
         if(this.props.type == 'bookmarks') {
@@ -70,17 +70,17 @@ class ViewContainer extends Component {
      * Search related content
      *
      * @param {string} filter
-     * @return {func} dispatch getRelatedContent()
+     * @return {func} dispatch requestRelatedContent()
      */
     searchRelatedContent(filter) {
         clearTimeout(timer);
         if(filter != this.props.pages.get(this.props.pageUrl).get('filter')) {
             if(filter != '' && this.props.pages.get(this.props.pageUrl).get('relatedContent').get(filter) == undefined) {
                 timer = setTimeout(() => {
-                    return this.props.dispatch(getRelatedContent({
+                    return this.props.dispatch(requestRelatedContent({
                         filter,
                         url: this.props.pageUrl,
-                        offset: (this.getRelatedContent().length + 1)
+                        offset: (this.requestRelatedContent().length + 1)
                     }));
                 }, 1300);
             }
@@ -120,12 +120,12 @@ class ViewContainer extends Component {
     /**
      * loadMoreRelatedContent()
      *
-     * @return {func} getRelatedContent()
+     * @return {func} requestRelatedContent()
      */
     loadMoreRelatedContent() {
-        return this.props.dispatch(getRelatedContent({
+        return this.props.dispatch(requestRelatedContent({
             url: this.props.pageUrl,
-            offset: (this.getRelatedContent().length + 1)
+            offset: (this.requestRelatedContent().length + 1)
         }));
     }
 
@@ -141,7 +141,7 @@ class ViewContainer extends Component {
 
         if(page === undefined) {
             if(window.location.protocol == relatedContentId.substring(0, 5)) {
-                return this.props.dispatch(getRelatedContent({
+                return this.props.dispatch(requestRelatedContent({
                     url: relatedContentId
                 }));
             }
@@ -281,7 +281,7 @@ class ViewContainer extends Component {
      * @return {jsx}
      */
     render() {
-        let relatedContent = this.getRelatedContent(),
+        let relatedContent = this.requestRelatedContent(),
             isFetching = (this.props.type == 'bookmarks' ? false : this.props.pages.get(this.props.pageUrl).get('isFetching')),
             getPageInformations = this.getPageInformations(),
             hasAncestors = this.hasAncestors(),

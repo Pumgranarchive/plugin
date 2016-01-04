@@ -3,9 +3,9 @@ import types from 'constants/ActionTypes';
 import { getDomainName } from 'utils/url';
 
 const {
-    GET_RELATED_CONTENT_REQUEST,
-    GET_RELATED_CONTENT_SUCCESS,
-    GET_RELATED_CONTENT_ERROR,
+    REQUEST_RELATED_CONTENT,
+    RECEIVE_RELATED_CONTENT,
+    RECEIVE_RELATED_CONTENT_FAILURE,
     BOOKMARK_RELATED_CONTENT
 } = types;
 
@@ -21,7 +21,7 @@ var initialState = Immutable.fromJS({
 
 export default function relatedContent(state = initialState, action) {
     switch(action.type) {
-        case GET_RELATED_CONTENT_SUCCESS:
+        case RECEIVE_RELATED_CONTENT:
             let data = {};
             action.response.map(relatedContent => {
                 data = {...data,

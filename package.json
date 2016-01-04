@@ -59,6 +59,7 @@
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",
     "redux": "^3.0.2",
-    "redux-promise": "^0.5.0"
+    "redux-promise": "^0.5.0",
+    "redux-saga": "^0.3.3"
   }
 }
