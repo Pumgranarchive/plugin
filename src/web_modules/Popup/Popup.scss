@@ -6,22 +6,26 @@
 @import 'core';
 
 .container {
-    margin: 10px;
+    margin: 20px 0;
     text-align: center;
 }
 
 .logo {
     display: inline-block;
-    width: 100px;    height: 28px;
-    margin-bottom: 6px;
+    width: 90px;    height: 28px;
+    margin-bottom: 13px;
     background-image: image-url('logo.svg');
     opacity: 1;
+}
+
+.explain {
+    margin: 6px 0 13px;
 }
 
 .button {
     width: 200px;
     padding: 13px 25px 12px;
-    margin: 6px 14px;
+    margin: 5px 14px;
     background: $primaryColor;
     border: 0;
     border-radius: 2px;

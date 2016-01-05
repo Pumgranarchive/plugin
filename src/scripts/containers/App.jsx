@@ -40,6 +40,11 @@ class App extends Component{
                     return this.setState({ state: 'disabled' })
                     break;
 
+                case types.ENABLE:
+                    localStorage.removeItem('pumgrana');
+                    return this.setState({ state: 'close' })
+                    break;
+
                 case types.GET_DISABLED_STATE:
                     const disable = !(__DEV__ || (__PROD__ && !isBlacklisted(location.href)));
                     let type = null;

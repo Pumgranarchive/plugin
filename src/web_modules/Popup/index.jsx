@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import types from 'constants/ActionTypes';
 import styles from './Popup';
-import types from 'constants/ActionTypes';;
 
 export default class Popup extends Component {
+
+    state = { disabled: null }
 
     /*
      * Component will mount
@@ -10,7 +12,9 @@ export default class Popup extends Component {
      */
     componentWillMount() {
         chrome.tabs.sendMessage(this.props.tabs[0].id, { type: types.GET_DISABLED_STATE }, response => {
-            console.log(response);
+            return this.setState({
+                disabled: response.type
+            })
         });
     }
 
@@ -22,6 +26,13 @@ export default class Popup extends Component {
      * @param {string} type
      */
     onClick(type) {
+        if(type == this.state.disabled) {
+            type = types.ENABLE;
+        }
+
+        this.setState({
+            disabled: type == types.ENABLE ? null : type
+        })
         chrome.tabs.sendMessage(this.props.tabs[0].id, { type });
     }
 
@@ -36,6 +47,7 @@ export default class Popup extends Component {
         return (
             <div className={ styles.container }>
                 <div className={ styles.logo }></div>
+                <div className={ styles.explain }>{ this.state.disabled !== null ? 'Pumgrana est désactivé' : 'Pumgrana est activé'}</div>
                 <button className={ styles.button } onClick={ () => this.onClick(types.DISABLE_FOR_THIS_PAGE) }>Désactiver pour cette page</button>
                 <button className={ styles.button } onClick={ () => this.onClick(types.DISABLE_FOR_THIS_WEBSITE) }>Désactiver pour ce site</button>
             </div>
