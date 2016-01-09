@@ -4,7 +4,7 @@
   "description": "This extension allows you to add content to the Pumgrana website.",
   "scripts": {
     "start": "env UV_THREADPOOL_SIZE=100 DEBUG=true NODE_ENV=DEV node server.js",
-    "chrome": "env BABEL_ENV=production UV_THREADPOOL_SIZE=100 DEBUG=false NODE_ENV=CHROME webpack"
+    "chrome": "env BABEL_ENV=production UV_THREADPOOL_SIZE=100 DEBUG=false NODE_ENV=CHROME webpack && gulp fix-css"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,8 @@
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^1.0.0",
     "file-loader": "^0.8.5",
+    "gulp": "^3.9.0",
+    "gulp-postcss": "^6.0.1",
     "gulp-zip": "^3.0.2",
     "image-webpack-loader": "^1.6.1",
     "imagemin": "^4.0.0",

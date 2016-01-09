@@ -5,6 +5,24 @@
 
 @import 'core';
 
+div, article, footer, input,
+button, h2, p, span{
+    margin: 0;
+	padding: 0;
+	border: 0;
+    box-shadow: 0;
+    line-height: inherit;
+    background: inherit;
+    font-family: 'PT Sans';
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+}
+
 .commonWrapper {
     position: fixed;
     z-index: $zIndex-max;
