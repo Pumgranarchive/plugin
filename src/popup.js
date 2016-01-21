@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import isBlacklisted from 'utils/isBlacklisted';
 import Popup from 'Popup/';
 import './popup.html';
 
 chrome.tabs.query({active: true, currentWindow: true}, tabs => {
-    ReactDOM.render(<Popup tabs={ tabs } />, document.querySelector('.Popup'));
+    if(isBlacklisted(tabs[0].url)) window.close();
+    else ReactDOM.render(<Popup tabs={ tabs } />, document.querySelector('.Popup'));
 });
