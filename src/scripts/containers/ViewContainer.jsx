@@ -8,6 +8,44 @@ var timer;
 class ViewContainer extends Component {
 
     /**
+     * componentWillReceiveProps()
+     *
+     * Check if the fetch has failled
+     * or not :
+     *   - fail: fetch again
+     *   - success: do nothing
+     *
+     * @param {object} nextProps
+     */
+    state = { fetch: 0 }
+    componentWillReceiveProps(nextProps) {
+        const page = nextProps.pages.get(nextProps.pageUrl);
+        const limit = 4;
+
+        if(page !== undefined && // because of BookmarkView
+           !page.get('isFetching') &&
+           this.props.pages.get(this.props.pageUrl).get('isFetching') &&
+           page.get('relatedContent').get(page.get('filter')).length === 0)
+        {
+            if(this.state.fetch <= limit) {
+                setTimeout(() => {
+                    this.props.dispatch(getRelatedContent({
+                        filter: this.props.filter,
+                        url: this.props.pageUrl,
+                        offset: this.getRelatedContent().length
+                    }));
+
+                    return this.setState({
+                        fetch: this.state.fetch + 1
+                    })
+                }, 8000);
+            }
+        }
+    }
+
+
+
+    /**
      * getPageInformations
      *
      */
@@ -25,7 +63,7 @@ class ViewContainer extends Component {
 
 
     /**
-     * getRelatedContent()
+     * Return related content
      *
      * @return {array} response
      */
