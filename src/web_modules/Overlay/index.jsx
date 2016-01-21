@@ -8,7 +8,7 @@ const Overlay = ({ state, toogleAction }) => (
             [styles.openBox]: state == 'open',
             [styles.closedBox]: state == 'close' || state == 'disabled'
         })}
-        style={ ( __DEBUG__ ? { zIndex: 0 } : {} ) }
+        style={ __DEBUG__ ? { zIndex: 0 } : {} }
         onClick={ e => toogleAction(e) } >
     </div>
 );

@@ -28,35 +28,40 @@ class App extends Component{
      *
      */
     componentDidMount() {
-        chrome.runtime.onMessage.addListener((action, sender, sendResponse) => {
-            switch (action.type) {
-                case types.DISABLE_FOR_THIS_PAGE: // Set localStorage
-                    localStorage.setItem('pumgrana', `${types.DISABLE_FOR_THIS_PAGE};${location.href}`);
-                    return this.setState({ state: 'disabled' })
-                    break;
+        if(__DEV__) {
+            return this.setState({ state: 'close' })
+        }
+        else {
+            chrome.runtime.onMessage.addListener((action, sender, sendResponse) => {
+                switch (action.type) {
+                    case types.DISABLE_FOR_THIS_PAGE: // Set localStorage
+                        localStorage.setItem('pumgrana', `${types.DISABLE_FOR_THIS_PAGE};${location.href}`);
+                        return this.setState({ state: 'disabled' })
+                        break;
 
-                case types.DISABLE_FOR_THIS_WEBSITE: // Set localStorage
-                    localStorage.setItem('pumgrana', types.DISABLE_FOR_THIS_WEBSITE);
-                    return this.setState({ state: 'disabled' })
-                    break;
+                    case types.DISABLE_FOR_THIS_WEBSITE: // Set localStorage
+                        localStorage.setItem('pumgrana', types.DISABLE_FOR_THIS_WEBSITE);
+                        return this.setState({ state: 'disabled' })
+                        break;
 
-                case types.ENABLE:
-                    localStorage.removeItem('pumgrana');
-                    return this.setState({ state: 'close' })
-                    break;
+                    case types.ENABLE:
+                        localStorage.removeItem('pumgrana');
+                        return this.setState({ state: 'close' })
+                        break;
 
-                case types.GET_DISABLED_STATE:
-                    const disable = !(__DEV__ || (__PROD__ && !isBlacklisted(location.href)));
-                    let type = null;
-                    if(disable) {
-                        const localBlacklist = localStorage.getItem('pumgrana');
-                        if(localBlacklist && localBlacklist === types.DISABLE_FOR_THIS_WEBSITE) type = types.DISABLE_FOR_THIS_WEBSITE;
-                        else type = types.DISABLE_FOR_THIS_PAGE;
-                    }
-                    sendResponse({ disable, type });
-                    break;
-            }
-        });
+                    case types.GET_DISABLED_STATE:
+                        const disable = !(__DEV__ || (__PROD__ && !isBlacklisted(location.href)));
+                        let type = null;
+                        if(disable) {
+                            const localBlacklist = localStorage.getItem('pumgrana');
+                            if(localBlacklist && localBlacklist === types.DISABLE_FOR_THIS_WEBSITE) type = types.DISABLE_FOR_THIS_WEBSITE;
+                            else type = types.DISABLE_FOR_THIS_PAGE;
+                        }
+                        sendResponse({ disable, type });
+                        break;
+                }
+            });
+        }
     }
 
 
