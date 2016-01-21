@@ -81,7 +81,10 @@ module.exports = {
         new webpack.DefinePlugin({
            __PROD__: production,
            __DEV__: dev,
-           __DEBUG__: debug
+           __DEBUG__: debug,
+           'process.env': {
+               'NODE_ENV': JSON.stringify(production ? 'production' : 'dev')
+           }
          })
     ].concat(
         production ? [
