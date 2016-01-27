@@ -19,10 +19,8 @@ export default class Item extends Component{
        });
 
        // Set size of body / html
-       select('html')::css({
-           height: '100vh'
-       });
-       select('body')::css({
+       select('html', 'body')::css({
+           height: '100vh',
            overflow: 'hidden'
        });
 
