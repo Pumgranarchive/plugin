@@ -16,7 +16,7 @@ import Iframe from 'Iframe/';
 class App extends Component{
 
     state = {
-        state: (__DEV__ || (__PROD__ && !isBlacklisted(location.href))) ? 'close' : 'disabled',
+        state: __DEV__ || (__PROD__ && !isBlacklisted(location.href)) ? 'close' : 'disabled',
         showViewBookmarks: false
     }
 
