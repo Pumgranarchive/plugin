@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Provider } from 'react-redux';
 import App from 'App';
 import configureStore from 'configStore';
@@ -7,7 +7,8 @@ const store = configureStore();
 export default class Root extends Component{
 
     /**
-     * _renderDevTools()
+     * Render Redux DevTools
+     * component
      *
      * @return {jsx}
      */
@@ -21,9 +22,10 @@ export default class Root extends Component{
 
 
     /**
-     * render()
+     * Render the root component
+     * with <Provider /<
      *
-     * @return {jsx}t
+     * @return {jsx}
      */
     render(){
         return (
