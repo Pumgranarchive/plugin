@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bookmarkRelatedContent, getRelatedContent, setPageSelected, setPageFilter } from 'actions/RelatedContentActions';
+import { getDomainName } from 'utils/url';
 import View from 'View/';
 import Item from 'View/Item/';
 var timer;
@@ -178,13 +179,14 @@ class ViewContainer extends Component {
         let page = this.props.pages.get(relatedContentId);
 
         if(page === undefined) {
-            if(window.location.protocol == relatedContentId.substring(0, 5)) {
+            if(location.protocol == relatedContentId.substring(0, 5) &&
+               getDomainName(relatedContentId) != 'youtube.com' && getDomainName(relatedContentId) != 'www.youtube.com') { // YouTube case
                 return this.props.dispatch(getRelatedContent({
                     url: relatedContentId
                 }));
             }
             else {
-                window.location.href = relatedContentId;
+                location.href = relatedContentId;
             }
         }
         else {
