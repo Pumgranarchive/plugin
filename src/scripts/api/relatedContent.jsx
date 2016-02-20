@@ -16,7 +16,7 @@ export default {
 				return resolve([{
 					content_title: filter == '' ? 'Hello' : filter,
 					content_summary: 'Lorem ipsum dolor',
-					content_uri: 'http://hello.fr/' + filter
+					content_uri: 'http://example.com/' + filter
 				}])
 			}
 			else {

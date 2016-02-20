@@ -28,6 +28,7 @@ class App extends Component{
      *
      */
     componentDidMount() {
+
         if(__DEV__) {
             return this.setState({ state: 'close' })
         }

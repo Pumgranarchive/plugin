@@ -31,14 +31,13 @@ class ViewContainer extends Component {
             if(this.state.fetch <= limit) {
                 setTimeout(() => {
                     this.props.dispatch(getRelatedContent({
-                        filter: this.props.filter,
-                        url: this.props.pageUrl,
-                        offset: this.getRelatedContent().length
+                        filter: page.get('filter'),
+                        url: this.props.pageUrl
                     }));
 
                     return this.setState({
                         fetch: this.state.fetch + 1
-                    })
+                    });
                 }, 8000);
             }
         }
