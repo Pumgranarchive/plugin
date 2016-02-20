@@ -57,9 +57,9 @@ export default class View extends Component{
                 }
                 <div className={ styles.wrapper }>
                     <h2 className={ styles.title }>{ title }</h2>
-                    { type == 'page' &&
-                        <SearchBar
-                            searchRelatedContent={ ::this.props.searchRelatedContent } />
+                    { // type == 'page' &&
+                      //   <SearchBar
+                      //     searchRelatedContent={ ::this.props.searchRelatedContent } />
                     }
                     { isFetching && nrbOfRelatedContent == 0 &&
                         <div className={ styles.noResultat }>
@@ -83,9 +83,9 @@ export default class View extends Component{
                 </div>
                 { type == 'page' && nrbOfRelatedContent != 0 &&
                     <footer className={ styles.footer }>
-                        { //<LoadMoreButton
-                          // status={ (isFetching ? 'loading' : 'loaded') }
-                          // action={ ::this.props.loadMoreRelatedContent } />
+                        { // <LoadMoreButton
+                          //   status={ (isFetching ? 'loading' : 'loaded') }
+                          //   action={ ::this.props.loadMoreRelatedContent } />
                         }
                     </footer>
                 }
