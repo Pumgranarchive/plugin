@@ -4,6 +4,7 @@ import types from 'constants/ActionTypes';
 import { getRelatedContent } from 'actions/RelatedContentActions';
 import { select, css } from 'utils/dom';
 import isBlacklisted from 'utils/isBlacklisted'
+import { getScrollbarWidth, isScrollbarEnabled } from 'utils/scrollbar'
 import Wrapper from 'Wrapper/';
 import Footer from 'Footer/';
 import ToogleButton from 'ToogleButton/';
@@ -107,6 +108,21 @@ class App extends Component{
      */
     toogleAction() {
         if(this.props.pages.size < 2) { // no iframe
+
+            if(!document.querySelector('.Pumgrana__wrapper__ba121c9') && isScrollbarEnabled()) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'Pumgrana__wrapper__ba121c9';
+                wrapper.style = document.body.style;
+                // Set width
+                wrapper.style.width = `${window.innerWidth - getScrollbarWidth() * 2}px`;
+
+                // Wrap all divs
+                while (document.body.firstChild.className !== 'Pumgrana__ac863f3') {
+                    wrapper.appendChild(document.body.firstChild);
+                }
+                document.body.appendChild(wrapper);
+            }
+
             if(this.state.state == 'open') {
                 select('html, body')::css({
                     height: 'inherit',
