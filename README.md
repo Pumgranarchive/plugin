@@ -25,7 +25,7 @@ $ npm install                   # Install Node.js components listed in ./package
 #### How to start dev mode ?
 
 ```shell
-$ npm start                     # or: env UV_THREADPOOL_SIZE=100 DEBUG=false NODE_ENV=DEV node server.js
+$ npm start                     # or: env UV_THREADPOOL_SIZE=100 DEBUG=false NODE_ENV=DEV node bin/hot.js
 ```
 
 This will start a lightweight development server (webpack dev server) on **http://localhost:3000** with live hot reloading.

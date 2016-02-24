@@ -9,7 +9,7 @@ var dev = process.env.NODE_ENV === 'DEV' ? true : false,
     production = chrome ? true : false;
 
 module.exports = {
-    devTools: (dev ? 'eval-source-map' : ''),
+    devTools: dev ? 'eval-source-map' : '',
     server: {
         port: 8000,
         url: 'localhost',
@@ -26,7 +26,7 @@ module.exports = {
     output: {
         path: chrome ? path.join(__dirname, 'chrome_extension') : path.join(__dirname, '__build__'),
         filename: '[name]',
-        publicPath: (chrome ? 'chrome-extension://__MSG_@@extension_id__/' : '/__build__/')
+        publicPath: chrome ? 'chrome-extension://__MSG_@@extension_id__/' : '/__build__/'
     },
     resolve: {
         extensions: ['', '.js', '.jsx', '.scss'],
