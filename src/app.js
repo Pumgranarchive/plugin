@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './scripts/containers/Root';
+import './manifest.json'
+import '../static/icon.png';
 import 'stylesheets/main';
 
 let el = document.createElement('div');

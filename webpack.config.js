@@ -47,7 +47,7 @@ module.exports = {
         },
         {
             test: /\.json?$/,
-            loaders: ['json']
+            loader: 'file?name=[name].[ext]'
         },
         {
             test: /\.(scss|css)$/,
@@ -62,7 +62,7 @@ module.exports = {
         {
             test: /.*\.(gif|png|jpe?g|svg)$/i,
             loaders: [
-              'url?limit=10000&name=[name].[ext]',
+              'url?limit=1000&name=[name].[ext]',
               'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
             ]
         },

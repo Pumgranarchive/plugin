@@ -3,11 +3,3 @@ npm-debug.log
 .DS_Store
 node_modules/
 __build__/
-chrome_extension/app.js
-chrome_extension/app.js.css
-chrome_extension/popup.js
-chrome_extension/popup.js.css
-chrome_extension/popup.html
-chrome_extension/logo.svg
-chrome_extension/PT-Sans-Regular.woff
-chrome_extension/PT-Sans-Bold.woff
