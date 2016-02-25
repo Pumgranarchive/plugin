@@ -113,8 +113,10 @@ class App extends Component{
                 const wrapper = document.createElement('div');
                 wrapper.className = 'Pumgrana__wrapper__ba121c9';
                 wrapper.style = document.body.style;
-                // Set width
                 wrapper.style.width = `${window.innerWidth - getScrollbarWidth()}px`;
+                wrapper.style.position = 'absolute';
+                wrapper.style.top = 0;
+                wrapper.style.left = 0;
 
                 // Wrap all divs
                 while (document.body.firstChild.className !== 'Pumgrana__ac863f3') {
