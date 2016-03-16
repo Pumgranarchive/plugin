@@ -3,10 +3,14 @@ import types from 'constants/ActionTypes';
 
 const blacklist = [
     'google.com',
+    'www.google.com',
     'www.google.fr',
+    'google.fr',
     'mail.google.com',
     'netflix.com',
-    'localhost'
+    'www.netflix.com',
+    'localhost',
+    '127.0.0.1'
 ];
 
 /*
