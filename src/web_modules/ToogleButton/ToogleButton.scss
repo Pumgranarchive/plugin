@@ -22,19 +22,26 @@
     border: 0;
     transition: transform ease .3s;
     outline: none;
+    min-width: inherit;
+
+    &:active,
+    &:focus,
+    &:target { // Sorry :/
+      border: 0 !important;
+    }
 }
 
 .openButton {
     composes: commonButton;
-    background-color: $primaryColor;
+    background-color: $primaryColor !important; // FUCK ...
     transform: rotate(180deg);
 }
 
 .closedButton {
     composes: commonButton;
-    background-color: $primaryColor;
+    background-color: $primaryColor !important; // YOU ...
 }
 
 .disabledButton {
-    background-color: $secondaryColor-medium;
+    background-color: $secondaryColor-medium !important; // FLICKR !
 }
