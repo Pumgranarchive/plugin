@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Pumgrana",
-  "description": "This extension allows you to add content to the Pumgrana website",
+  "description": "This extension will change your browsing experience",
   "version": "0.4.1",
   "background": {
     "persistant": "true"
